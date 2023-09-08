@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Button, createTheme, ThemeProvider } from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const theme = createTheme({
   lightColors: {
@@ -13,20 +15,6 @@ const theme = createTheme({
   mode: 'dark',
 });
 
-export default function App() {
-  return (
-    <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <View style={styles.container}>
-          <Text>Notecard 3</Text>
-          <Button title="Button 3" />
-          <StatusBar style="auto" />
-        </View>
-      </ThemeProvider >
-    </SafeAreaProvider>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,3 +23,44 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
+      <Button title="Button" />
+      <StatusBar style="auto" />
+    </View>
+  )
+}
+
+function DetailsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Details Screen</Text>
+      <StatusBar style="auto" />
+    </View> 
+  )
+}
+
+const Stack = createNativeStackNavigator()
+
+function App() {
+  return (
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        {/*Navigation Container - manages our navigation tree
+        and contains the navigation state*/}
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }}/>
+            <Stack.Screen name="Details" component={DetailsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeProvider >
+    </SafeAreaProvider>
+  )
+}
+
+export default App;
