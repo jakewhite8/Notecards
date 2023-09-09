@@ -25,11 +25,13 @@ const styles = StyleSheet.create({
 });
 
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button title="Button" />
+      <Button
+        title="Details Page"
+        onPress={() => navigation.navigate('Details')} />
       <StatusBar style="auto" />
     </View>
   )
