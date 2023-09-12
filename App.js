@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
+// navigation prop is passed in to every screen component
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -32,15 +32,20 @@ function HomeScreen({ navigation }) {
       <Button
         title="Details Page"
         onPress={() => navigation.navigate('Details')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
       <StatusBar style="auto" />
     </View>
   )
 }
 
-function DetailsScreen() {
+function DetailsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Details Screen</Text>
+      <Button
+        title="Home Page"
+        onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
       <StatusBar style="auto" />
     </View> 
   )
