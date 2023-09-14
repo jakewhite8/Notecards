@@ -63,7 +63,17 @@ function App() {
         {/*Navigation Container - manages our navigation tree
         and contains the navigation state*/}
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}>
             <Stack.Screen
               name="Home"
               component={HomeScreen}
