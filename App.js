@@ -24,14 +24,16 @@ const styles = StyleSheet.create({
   },
 });
 
-// navigation prop is passed in to every screen component
+// navigation and route prop is passed in to every screen component
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Button
         title="Details Page"
-        onPress={() => navigation.navigate('Details')} />
+        onPress={() =>
+          navigation.navigate('Details', {name: 'Custom Details header'})
+        } />
       <Button title="Go back" onPress={() => navigation.goBack()} />
       <StatusBar style="auto" />
     </View>
@@ -46,6 +48,7 @@ function DetailsScreen({ navigation }) {
         title="Home Page"
         onPress={() => navigation.navigate('Home')} />
       <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button title="Update Header" onPress={() => navigation.setOptions({title:'Updated'})} />
       <StatusBar style="auto" />
     </View> 
   )
@@ -61,8 +64,14 @@ function App() {
         and contains the navigation state*/}
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }}/>
-            <Stack.Screen name="Details" component={DetailsScreen} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: 'Home' }}/>
+            <Stack.Screen
+              name="Details"
+              component={DetailsScreen}
+              options={({ route }) => ({ title: route.params.name })} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider >
