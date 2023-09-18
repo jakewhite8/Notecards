@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
 type RootStackParamList = {
   Home: undefined;
-  Details: {name: string}
+  Details: {name: string};
 }
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -62,7 +62,7 @@ function DetailsScreen({ navigation }: DetailsProps) {
   )
 }
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 function App() {
   return (
