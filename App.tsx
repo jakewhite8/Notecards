@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Button, createTheme, ThemeProvider } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const theme = createTheme({
   lightColors: {
@@ -24,8 +24,16 @@ const styles = StyleSheet.create({
   },
 });
 
+type RootStackParamList = {
+  Home: undefined;
+  Details: {name: string}
+}
+
+type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type DetailsProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
+
 // navigation and route prop is passed in to every screen component
-function HomeScreen({ navigation }) {
+function HomeScreen( { navigation }: HomeProps) {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
@@ -40,7 +48,7 @@ function HomeScreen({ navigation }) {
   )
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen({ navigation }: DetailsProps) {
   return (
     <View style={styles.container}>
       <Text>Details Screen</Text>
