@@ -24,13 +24,15 @@ const styles = StyleSheet.create({
   },
 });
 
-type RootStackParamList = {
+// Define a route and their params types
+type StackParamList = {
   Home: undefined;
   Details: {name: string};
 }
 
-type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-type DetailsProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
+// Used to type check the Screen components
+type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
+type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 
 // navigation and route prop is passed in to every screen component
 function HomeScreen( { navigation }: HomeProps) {
@@ -62,7 +64,9 @@ function DetailsScreen({ navigation }: DetailsProps) {
   )
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+// Initalize the Navigator. Pass in the StackParamList as a genertic in order
+// to provide type checking and intelliSense for props of the Navigator and Screen components
+const Stack = createNativeStackNavigator<StackParamList>()
 
 function App() {
   return (
