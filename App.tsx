@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Button, createTheme, ThemeProvider } from '@rneui/themed';
@@ -47,7 +46,6 @@ function HomeScreen( { navigation }: HomeProps) {
           navigation.navigate('Details', {name: 'Custom Details header'})
         } />
       <Button title="Go back" onPress={() => navigation.goBack()} />
-      <StatusBar style="auto" />
     </View>
   )
 }
@@ -61,7 +59,6 @@ function DetailsScreen({ navigation }: DetailsProps) {
         onPress={() => navigation.navigate('Home')} />
       <Button title="Go back" onPress={() => navigation.goBack()} />
       <Button title="Update Header" onPress={() => navigation.setOptions({title:'Updated'})} />
-      <StatusBar style="auto" />
     </View> 
   )
 }
