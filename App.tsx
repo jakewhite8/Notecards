@@ -30,7 +30,9 @@ type StackParamList = {
   Details: {name: string};
 }
 
-// Used to type check the Screen components
+// Used to type check the Screen components.
+// This allows us to type check route names and params used by
+// the navigate and push functions, etc.
 type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 
