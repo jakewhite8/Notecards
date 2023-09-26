@@ -14,7 +14,6 @@ export function UsernameReducer(
   }
 }
 
-// added null in the create context so that tsc issues are fixed. Refer https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript/54667477
 export const UsernameReducerContext = createContext({
   UsernameState: { username: 'jake' }
 });
