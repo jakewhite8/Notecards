@@ -1,7 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from '@rneui/themed';
-
+import { useContext } from 'react';
+import { UsernameReducerContext } from '../helpers/UsernameReducer';
 
 // Define a route and their params types
 type StackParamList = {
@@ -25,9 +26,13 @@ type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 
 // navigation and route prop is passed in to every screen component
 function Home( { navigation }: HomeProps) {
+
+  const { UsernameState } = useContext(UsernameReducerContext);
+
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
+      <Text>Username: {UsernameState.username}</Text>
       <Button
         title="Details Page"
         onPress={() =>
