@@ -12,7 +12,9 @@ import { UsernameReducerContext } from '../helpers/UsernameReducer';
 // Define a route and their params types
 type StackParamList = {
   Home: undefined;
-  Details: {name: string};
+  Details: {
+    name: string;
+  };
 }
 
 const styles = StyleSheet.create({
@@ -26,24 +28,29 @@ const styles = StyleSheet.create({
 
 type NotecardData = {
   name: string;
+  cardId: number;
   linearGradientColors: string[];
 };
 
 const notecards: Partial<NotecardData>[] = [
   {
     name: 'Computer Science',
+    cardId: 1234,
     linearGradientColors: ['#FF9800', '#F44336'],
   },
   {
     name: 'Carpentry',
+    cardId: 1235,
     linearGradientColors: ['#3F51B5', '#2196F3'],
   },
   {
     name: 'French',
+    cardId: 1236,
     linearGradientColors: ['#FFD600', '#FF9800'],
   },
   {
     name: 'CSL',
+    cardId: 1237,
     linearGradientColors: ['#4CAF50', '#8BC34A'],
   },
 ];
@@ -85,6 +92,9 @@ function Home( { navigation }: HomeProps) {
               marginVertical: 8,
               borderRadius: 8,
             }}
+            onPress={() =>
+              navigation.navigate('Details', {name: notecard.name + ' Notecards'})
+            }
           >
             <ListItem.Content>
               <ListItem.Title
