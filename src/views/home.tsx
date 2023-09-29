@@ -70,11 +70,6 @@ function Home( { navigation }: HomeProps) {
     <>
       <View style={styles.container}>
         <Text>Hello {UsernameState.username}</Text>
-        <Button
-          title="Details Page"
-          onPress={() =>
-            navigation.navigate('Details', {name: 'Custom Details header'})
-          } />
       </View>
       <View style={{ paddingVertical: 8 }}>
         {notecards.map((notecard, i) => (
