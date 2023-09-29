@@ -7,7 +7,14 @@ function RootNavigator() {
   // Define a route and their params types
   type StackParamList = {
     Home: undefined;
-    Details: {name: string};
+    Details: {
+      name: string;
+      card: {
+        name: string;
+        cardId: number;
+        linearGradientColors: string[];
+      };
+    };
   }
 
   // Initalize the Navigator. Pass in the StackParamList as a genertic in order

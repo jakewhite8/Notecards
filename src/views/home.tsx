@@ -9,11 +9,18 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { useContext } from 'react';
 import { UsernameReducerContext } from '../helpers/UsernameReducer';
 
+type NotecardData = {
+  name: string;
+  cardId: number;
+  linearGradientColors: string[];
+};
+
 // Define a route and their params types
 type StackParamList = {
   Home: undefined;
   Details: {
     name: string;
+    card: NotecardData;
   };
 }
 
@@ -26,13 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type NotecardData = {
-  name: string;
-  cardId: number;
-  linearGradientColors: string[];
-};
-
-const notecards: Partial<NotecardData>[] = [
+const notecards: Required<NotecardData>[] = [
   {
     name: 'Computer Science',
     cardId: 1234,
@@ -88,7 +89,7 @@ function Home( { navigation }: HomeProps) {
               borderRadius: 8,
             }}
             onPress={() =>
-              navigation.navigate('Details', {name: notecard.name + ' Notecards'})
+              navigation.navigate('Details', {name: notecard.name + ' Notecards', card: notecard})
             }
           >
             <ListItem.Content>

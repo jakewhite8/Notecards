@@ -14,7 +14,14 @@ const styles = StyleSheet.create({
 // Define a route and their params types
 type StackParamList = {
   Home: undefined;
-  Details: {name: string};
+  Details: {
+    name: string;
+    card: {
+      name: string;
+      cardId: number;
+      linearGradientColors: string[];
+    };
+  };
 }
 
 // Used to type check the Screen components.
@@ -23,10 +30,11 @@ type StackParamList = {
 type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 
 // navigation and route prop is passed in to every screen component
-function Details( { navigation }: DetailsProps) {
+function Details( { navigation, route }: DetailsProps) {
   return (
     <View style={styles.container}>
       <Text>Details Screen</Text>
+      <Text>{route.params.card.cardId}</Text>
       <Button
         title="Home Page"
         onPress={() => navigation.navigate('Home')} />
