@@ -8,21 +8,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'
 import { useContext } from 'react';
 import { UsernameReducerContext } from '../helpers/UsernameReducer';
-
-type NotecardData = {
-  name: string;
-  cardId: number;
-  linearGradientColors: string[];
-};
-
-// Define a route and their params types
-type StackParamList = {
-  Home: undefined;
-  Details: {
-    name: string;
-    card: NotecardData;
-  };
-}
+import { StackParamList, NotecardData } from '../types/DataTypes';
 
 const styles = StyleSheet.create({
   container: {

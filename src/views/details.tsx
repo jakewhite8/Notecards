@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from '@rneui/themed';
+import { StackParamList } from '../types/DataTypes'
 
 const styles = StyleSheet.create({
   container: {
@@ -10,19 +11,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-// Define a route and their params types
-type StackParamList = {
-  Home: undefined;
-  Details: {
-    name: string;
-    card: {
-      name: string;
-      cardId: number;
-      linearGradientColors: string[];
-    };
-  };
-}
 
 // Used to type check the Screen components.
 // This allows us to type check route names and params used by

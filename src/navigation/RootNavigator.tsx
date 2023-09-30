@@ -3,21 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../views/home';
 import Details from '../views/details';
 import AddButton from '../components/addButton';
+import { StackParamList } from '../types/DataTypes'
 
 function RootNavigator() {
-  // Define a route and their params types
-  type StackParamList = {
-    Home: undefined;
-    Details: {
-      name: string;
-      card: {
-        name: string;
-        cardId: number;
-        linearGradientColors: string[];
-      };
-    };
-  }
-
   // Initalize the Navigator. Pass in the StackParamList as a genertic in order
   // to provide type checking and intelliSense for props of the Navigator and Screen components
   const Stack = createNativeStackNavigator<StackParamList>()
