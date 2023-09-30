@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { 
   Button,
   ListItem,
@@ -10,15 +10,9 @@ import { useContext } from 'react';
 import { UsernameReducerContext } from '../helpers/UsernameReducer';
 import { StackParamList } from '../types/DataTypes';
 import SampleNotecards from '../helpers/SampleNotecards';
+import GlobalStyles from '../styles/GlobalStyles';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = GlobalStyles;
 
 const notecards = SampleNotecards; 
 

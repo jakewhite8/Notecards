@@ -1,16 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Button } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
+import GlobalStyles from '../styles/GlobalStyles';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = GlobalStyles;
 
 // Used to type check the Screen components.
 // This allows us to type check route names and params used by
