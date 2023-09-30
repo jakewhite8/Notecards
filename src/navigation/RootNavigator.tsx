@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../views/home';
 import Details from '../views/details';
-import { AddButton } from '../components/addButton';
+import AddButton from '../components/addButton';
 
 function RootNavigator() {
   // Define a route and their params types

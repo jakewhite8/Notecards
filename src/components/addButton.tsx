@@ -19,4 +19,4 @@ const AddButton: React.FunctionComponent<AddButtonComponentProps> = (props) => {
   )
 }
 
-export { AddButton };
+export default AddButton;
