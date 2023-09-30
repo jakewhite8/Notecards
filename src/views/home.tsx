@@ -8,7 +8,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'
 import { useContext } from 'react';
 import { UsernameReducerContext } from '../helpers/UsernameReducer';
-import { StackParamList, NotecardData } from '../types/DataTypes';
+import { StackParamList } from '../types/DataTypes';
+import SampleNotecards from '../helpers/SampleNotecards';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,28 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const notecards: Required<NotecardData>[] = [
-  {
-    name: 'Computer Science',
-    cardId: 1234,
-    linearGradientColors: ['#FF9800', '#F44336'],
-  },
-  {
-    name: 'Carpentry',
-    cardId: 1235,
-    linearGradientColors: ['#3F51B5', '#2196F3'],
-  },
-  {
-    name: 'French',
-    cardId: 1236,
-    linearGradientColors: ['#FFD600', '#FF9800'],
-  },
-  {
-    name: 'CSL',
-    cardId: 1237,
-    linearGradientColors: ['#4CAF50', '#8BC34A'],
-  },
-];
+const notecards = SampleNotecards; 
 
 // Used to type check the Screen components.
 // This allows us to type check route names and params used by
