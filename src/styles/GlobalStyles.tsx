@@ -7,6 +7,10 @@ const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputFieldsStyle: {
+    borderWidth: 0,
+    color: '#000'
+  },
 });
 
 export default GlobalStyles
