@@ -1,7 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View } from 'react-native';
-import { 
-  Button,
+import {
   ListItem,
   ListItemProps,
 } from '@rneui/themed';
