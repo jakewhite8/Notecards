@@ -7,6 +7,7 @@ import {
   Card,
   Input,
   InputProps,
+  Button
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
 
@@ -36,12 +37,14 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
           containerStyle={{ width: '90%' }}
           style={styles.inputFieldsStyle}
           onChangeText={setFrontNotecard}
+          value={frontNotecardString}
         />
       </Card>
       <Card>
         <Card.Title>Back of Notecard</Card.Title>
         <Card.Divider />
         <Input
+          value={backNotecardString}
           {...(inputProps as WrappedInputProps)}
           containerStyle={{ width: '90%' }}
           style={styles.inputFieldsStyle}
@@ -50,6 +53,15 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
       </Card>
       {frontNotecardString.length > 0 && (<Text>Front: {frontNotecardString}</Text>)}
       {backNotecardString.length > 0 && (<Text>Back: {backNotecardString}</Text>)}
+      <Button
+        title="Review Set"
+        onPress={() => navigation.navigate('ReviewSet')}/>
+      <Button
+        title="Next Card"
+        onPress={() => {
+          setFrontNotecard('');
+          setBackNotecard('');
+        } } />
     </View>
   )
 }

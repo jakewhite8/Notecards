@@ -15,6 +15,7 @@ type StackParamList = {
     card: NotecardData
   };
   Home: undefined;
+  ReviewSet: undefined;
 }
 
 export type { StackParamList, NotecardData };

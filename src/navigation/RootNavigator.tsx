@@ -2,8 +2,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateTitle from '../views/createTitle';
 import CreateCard from '../views/createCard';
-import Home from '../views/home';
 import Details from '../views/details';
+import Home from '../views/home';
+import ReviewSet from '../views/reviewSet';
 import AddButton from '../components/addButton';
 import { StackParamList } from '../types/DataTypes'
 
@@ -63,6 +64,13 @@ function RootNavigator() {
           component={Details}
           options={ ({ route }) => ({ 
             title: route.params.name,
+          }) }
+        />
+        <Stack.Screen
+          name="ReviewSet"
+          component={ReviewSet}
+          options={ ({ route }) => ({ 
+            title: "Review New Notecard Set",
           }) }
         />
       </Stack.Navigator>
