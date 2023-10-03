@@ -1,11 +1,12 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useContext, useState } from 'react';
 import { Text, View } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ListItem,
   ListItemProps,
+  SearchBar
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
-import { useContext } from 'react';
 import { UsernameReducerContext } from '../helpers/UsernameReducer';
 import { StackParamList } from '../types/DataTypes';
 import SampleNotecards from '../helpers/SampleNotecards';
@@ -13,7 +14,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 
 const styles = GlobalStyles;
 
-const notecards = SampleNotecards; 
+const notecards = SampleNotecards;
 
 // Used to type check the Screen components.
 // This allows us to type check route names and params used by
@@ -24,14 +25,21 @@ type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 function Home( { navigation }: HomeProps) {
 
   const { UsernameState } = useContext(UsernameReducerContext);
+  const [filterString, setFilterString] = useState('');
   const listItemProps = {};
 
   return (
     <>
       <View style={styles.container}>
         <Text>Hello {UsernameState.username}</Text>
+        <Text>Current filter: {filterString}</Text>
       </View>
       <View style={{ paddingVertical: 8 }}>
+        <SearchBar
+          value={filterString}
+          onChangeText={setFilterString}
+          placeholder="Filter by title"
+        />
         {notecards.map((notecard, i) => (
           <ListItem
             {...(listItemProps as ListItemProps)}
