@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View, TextInput } from 'react-native';
 import { useContext } from 'react';
@@ -9,15 +9,17 @@ import { Input as BaseInput } from '@rneui/base';
 import {
   Input,
   InputProps,
-  Icon
+  Icon,
+  Button
 } from '@rneui/themed';
 
-type CreateProps = NativeStackScreenProps<StackParamList, 'Create'>
+type CreateProps = NativeStackScreenProps<StackParamList, 'CreateTitle'>
 
 const styles = GlobalStyles;
 
-function Create ({ navigation }: CreateProps) {
+function CreateTitle ({ navigation }: CreateProps) {
   const { UsernameState } = useContext(UsernameReducerContext);
+  const [newTitle, setTitle] = useState('');
 
   interface WrappedInputProps extends InputProps {
     ref?: React.RefObject<TextInput & BaseInput>;
@@ -26,6 +28,7 @@ function Create ({ navigation }: CreateProps) {
 
   return (
     <View style={styles.container}>
+      <Text>{newTitle}</Text>
       <Input
         {...(inputProps as WrappedInputProps)}
         rightIcon={
@@ -41,9 +44,10 @@ function Create ({ navigation }: CreateProps) {
         containerStyle={{ width: '90%' }}
         placeholder="Name"
         style={styles.inputFieldsStyle}
+        onChangeText={(title) => setTitle(title)}
       />
     </View>
   )
 }
 
-export default Create;
+export default CreateTitle;

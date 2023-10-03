@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Create from '../views/create';
+import CreateTitle from '../views/createTitle';
 import Home from '../views/home';
 import Details from '../views/details';
 import AddButton from '../components/addButton';
@@ -39,13 +39,13 @@ function RootNavigator() {
             title: 'Home',
             headerRight: () => (
               <AddButton 
-                onClick={() => navigation.navigate('Create')}
+                onClick={() => navigation.navigate('CreateTitle')}
               />
             )
           }) } />
         <Stack.Screen
-          name="Create"
-          component={Create}
+          name="CreateTitle"
+          component={CreateTitle}
           options={{
               title: "New Notecard",
             }}
