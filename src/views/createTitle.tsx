@@ -37,7 +37,7 @@ function CreateTitle ({ navigation }: CreateProps) {
             type="entypo"
             color="#86939e"
             size={25}
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('CreateCard', {cardTitle: newTitle})}
           />
         }
         label="New Notecard Set"

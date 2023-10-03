@@ -7,6 +7,9 @@ type NotecardData = {
 // Define a route and their params types
 type StackParamList = {
   CreateTitle: undefined;
+  CreateCard: {
+    cardTitle: string;
+  }
   Details: {
     name: string;
     card: NotecardData
