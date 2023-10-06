@@ -10,6 +10,7 @@ import {
   Icon,
   Button
 } from '@rneui/themed';
+import { useAppState } from '../context/GlobalState';
 
 type CreateProps = NativeStackScreenProps<StackParamList, 'CreateTitle'>
 
@@ -17,11 +18,23 @@ const styles = GlobalStyles;
 
 function CreateTitle ({ navigation }: CreateProps) {
   const [newTitle, setTitle] = useState('');
+  const { state, dispatch } = useAppState();
 
   interface WrappedInputProps extends InputProps {
     ref?: React.RefObject<TextInput & BaseInput>;
   }
   const inputProps = {}
+
+  const submitNotecardSetTitle = () => {
+    dispatch({
+      type: 'UPDATE_NEW_NOTECARDSET',
+      payload: {
+        title: newTitle,
+        notecards: state.newNotecardSet.notecards
+      }
+    })
+    navigation.navigate('CreateCard', {cardTitle: newTitle})
+  }
 
   return (
     <View style={styles.container}>
@@ -34,7 +47,7 @@ function CreateTitle ({ navigation }: CreateProps) {
             type="entypo"
             color="#86939e"
             size={25}
-            onPress={() => navigation.navigate('CreateCard', {cardTitle: newTitle})}
+            onPress={submitNotecardSetTitle}
           />
         }
         label="New Notecard Set"

@@ -10,6 +10,7 @@ import {
   Button
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
+import { useAppState } from '../context/GlobalState';
 
 type CreateCardProps = NativeStackScreenProps<StackParamList, 'CreateCard'>;
 
@@ -23,12 +24,14 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   const inputProps = {}
   const [frontNotecardString, setFrontNotecard] = useState('');
   const [backNotecardString, setBackNotecard] = useState('');
-
+  const { state, dispatch } = useAppState();
 
   return (
     <View style={styles.container}>
       <Text>Create Card</Text>
       <Text>{notecardTitle}</Text>
+      <Text>State Title</Text>
+      <Text>{state.newNotecardSet.title}</Text>
       <Card>
         <Card.Title>Front of Notecard</Card.Title>
         <Card.Divider />
