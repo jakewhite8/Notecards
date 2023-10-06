@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View, TextInput } from 'react-native';
-import { useContext } from 'react';
-import { UsernameReducerContext } from '../helpers/UsernameReducer';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
 import { Input as BaseInput } from '@rneui/base';
@@ -18,7 +16,6 @@ type CreateProps = NativeStackScreenProps<StackParamList, 'CreateTitle'>
 const styles = GlobalStyles;
 
 function CreateTitle ({ navigation }: CreateProps) {
-  const { UsernameState } = useContext(UsernameReducerContext);
   const [newTitle, setTitle] = useState('');
 
   interface WrappedInputProps extends InputProps {

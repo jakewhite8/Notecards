@@ -1,16 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ListItem,
   ListItemProps,
-  SearchBar
+  SearchBar,
+  Button
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
-import { UsernameReducerContext } from '../helpers/UsernameReducer';
 import { StackParamList } from '../types/DataTypes';
 import SampleNotecards from '../helpers/SampleNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
+import { useAppState } from '../context/GlobalState';
 
 const styles = GlobalStyles;
 
@@ -24,14 +25,32 @@ type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 // navigation and route prop is passed in to every screen component
 function Home( { navigation }: HomeProps) {
 
-  const { UsernameState } = useContext(UsernameReducerContext);
   const [filterString, setFilterString] = useState('');
   const listItemProps = {};
 
+  const { state, dispatch } = useAppState();
+
+  const handleLogout = () => {
+    // Dispatch an action to update the user state
+    dispatch({ type: 'LOGOUT' });
+  };
+  const logJakeIn = () => {
+    dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
+  }
+
+
   return (
     <>
+      <View>
+        {state.user ? (
+          <Text>Welcome, {state.user.name}!</Text>
+        ) : (
+          <Text>Please log in</Text>
+        )}
+        <Button title="LogIn" onPress={logJakeIn} />
+        <Button title="Logout" onPress={handleLogout} />
+      </View>
       <View style={styles.container}>
-        <Text>Hello {UsernameState.username}</Text>
         <Text>Current filter: {filterString}</Text>
       </View>
       <View style={{ paddingVertical: 8 }}>
