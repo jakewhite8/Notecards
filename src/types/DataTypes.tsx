@@ -1,7 +1,7 @@
 type NotecardData = {
   name: string;
   cardId: number;
-  linearGradientColors: string[];
+  linearGradientColors: [string, string];
 };
 
 // Define a route and their params types
@@ -12,9 +12,12 @@ type StackParamList = {
   }
   Details: {
     name: string;
-    card: NotecardData
+    card: NotecardData;
   };
   Home: undefined;
+  Notecard: {
+    cardId: number
+  };
   ReviewSet: undefined;
 }
 

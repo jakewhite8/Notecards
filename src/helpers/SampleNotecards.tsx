@@ -21,6 +21,11 @@ const SampleNotecards: Required<NotecardData>[] = [
     cardId: 1237,
     linearGradientColors: ['#4CAF50', '#8BC34A'],
   },
+  {
+    name: 'TypeScript',
+    cardId: 1238,
+    linearGradientColors: ['#FF9800', '#F44336'],
+  },
 ];
 
 export default SampleNotecards;

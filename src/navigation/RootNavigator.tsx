@@ -4,6 +4,7 @@ import CreateTitle from '../views/createTitle';
 import CreateCard from '../views/createCard';
 import Details from '../views/details';
 import Home from '../views/home';
+import Notecard from '../views/notecard'
 import ReviewSet from '../views/reviewSet';
 import AddButton from '../components/addButton';
 import { StackParamList } from '../types/DataTypes'
@@ -64,6 +65,13 @@ function RootNavigator() {
           component={Details}
           options={ ({ route }) => ({ 
             title: route.params.name,
+          }) }
+        />
+        <Stack.Screen
+          name="Notecard"
+          component={Notecard}
+          options={ ({ route }) => ({ 
+            title: "Notecard",
           }) }
         />
         <Stack.Screen

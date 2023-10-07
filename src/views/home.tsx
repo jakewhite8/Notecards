@@ -8,7 +8,7 @@ import {
   Button
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
-import { StackParamList } from '../types/DataTypes';
+import { StackParamList, NotecardData } from '../types/DataTypes';
 import SampleNotecards from '../helpers/SampleNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
@@ -38,6 +38,9 @@ function Home( { navigation }: HomeProps) {
     dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
   }
 
+  const loadDetailsPage = (notecard: NotecardData) => {
+    navigation.navigate('Details', {name: `${notecard.name} Notecard`, card: notecard})
+  }
 
   return (
     <>
@@ -74,9 +77,7 @@ function Home( { navigation }: HomeProps) {
               marginVertical: 8,
               borderRadius: 8,
             }}
-            onPress={() =>
-              navigation.navigate('Details', {name: notecard.name + ' Notecards', card: notecard})
-            }
+            onPress={() => loadDetailsPage(notecard)}
           >
             <ListItem.Content>
               <ListItem.Title
