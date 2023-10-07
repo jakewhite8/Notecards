@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { Button } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
+import { useAppState } from '../context/GlobalState';
 
 const styles = GlobalStyles;
 
@@ -13,6 +14,9 @@ type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 
 // navigation and route prop is passed in to every screen component
 function Details( { navigation, route }: DetailsProps) {
+  const { state, dispatch } = useAppState();
+  console.log('state.currentNotecardSet.notecards')
+  console.log(state.currentNotecardSet.notecards)
 
   const startNotecard = () => {
     navigation.navigate('Notecard', {cardId: route.params.card.cardId})

@@ -3,7 +3,8 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 // Define the state shape using TypeScript interfaces
 interface AppState {
   user: User | null;
-  newNotecardSet: NewNotecardSet | {title: '', notecards: [] };
+  newNotecardSet: NotecardSet | {title: '', notecards: [] };
+  currentNotecardSet: NotecardSet | {title: '', notecards: [] };
   // Other global state properties
 }
 
@@ -13,7 +14,7 @@ interface User {
   // Other user properties
 }
 
-interface NewNotecardSet {
+interface NotecardSet {
   title: string;
   notecards: Array<[string, string]>;
 }
@@ -22,7 +23,8 @@ interface NewNotecardSet {
 type AppAction =
   | { type: 'SET_USER'; payload: User }
   | { type: 'LOGOUT' }
-  | { type: 'UPDATE_NEW_NOTECARDSET'; payload: NewNotecardSet }
+  | { type: 'UPDATE_NEW_NOTECARDSET'; payload: NotecardSet }
+  | { type: 'UPDATE_CURRENT_NOTECARDSET'; payload: NotecardSet }
   // Add more action types as needed
 
 interface AppStateContextTypes {
@@ -39,6 +41,10 @@ const initialState: AppState = {
   newNotecardSet: {
     title: '',
     notecards: []
+  },
+  currentNotecardSet: {
+    title: '',
+    notecards: []
   }
   // Initialize other global state properties
 };
@@ -52,6 +58,8 @@ const appStateReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, user: null };
     case 'UPDATE_NEW_NOTECARDSET':
       return {...state, newNotecardSet: action.payload };
+    case 'UPDATE_CURRENT_NOTECARDSET':
+      return {...state, currentNotecardSet: action.payload };
     // Handle other state updates
     default:
       return state;

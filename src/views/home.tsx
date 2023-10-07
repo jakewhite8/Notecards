@@ -10,6 +10,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'
 import { StackParamList, NotecardData } from '../types/DataTypes';
 import SampleNotecards from '../helpers/SampleNotecards';
+import TypeScriptNotecards from '../helpers/TypeScriptNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 
@@ -39,6 +40,16 @@ function Home( { navigation }: HomeProps) {
   }
 
   const loadDetailsPage = (notecard: NotecardData) => {
+    // Retrieve selected notecards - temporarily using TypeScriptNotecards
+
+    // load selected notecard into Global State
+    dispatch({
+      type: 'UPDATE_CURRENT_NOTECARDSET',
+      payload: {
+        title: notecard.name,
+        notecards: TypeScriptNotecards.notecards
+      }
+    })
     navigation.navigate('Details', {name: `${notecard.name} Notecard`, card: notecard})
   }
 
