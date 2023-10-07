@@ -26,6 +26,27 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   const [backNotecardString, setBackNotecard] = useState('');
   const { state, dispatch } = useAppState();
 
+  const addCard = () => {
+    const existingTitle = state.newNotecardSet.title
+    let newNotecards: Array<[string, string]> = []
+    // Make deep copy of New Notecards
+    for (let i = 0; i < state.newNotecardSet.notecards.length; i++) {
+      newNotecards[i] = state.newNotecardSet.notecards[i]
+    }
+    newNotecards.push([frontNotecardString, backNotecardString])
+    dispatch({
+      type: 'UPDATE_NEW_NOTECARDSET',
+      payload: {
+        title: existingTitle,
+        notecards: newNotecards
+      }
+    })
+
+    // Reset input fields
+    setFrontNotecard('');
+    setBackNotecard('');
+  }
+
   return (
     <View style={styles.container}>
       <Text>Create Card</Text>
@@ -61,10 +82,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
         onPress={() => navigation.navigate('ReviewSet')}/>
       <Button
         title="Next Card"
-        onPress={() => {
-          setFrontNotecard('');
-          setBackNotecard('');
-        } } />
+        onPress={addCard} />
     </View>
   )
 }
