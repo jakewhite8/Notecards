@@ -8,7 +8,6 @@ import {
   Input,
   InputProps,
   Icon,
-  Button
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
 

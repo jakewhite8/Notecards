@@ -11,6 +11,15 @@ const GlobalStyles = StyleSheet.create({
     borderWidth: 0,
     color: '#000'
   },
+  button: {
+    width: 150,
+    marginHorizontal: 50,
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    justifyContent: 'space-evenly',
+    flexDirection: 'row'
+  }
 });
 
 export default GlobalStyles

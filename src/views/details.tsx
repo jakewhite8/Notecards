@@ -28,6 +28,7 @@ function Details( { navigation, route }: DetailsProps) {
       <Text>{notecardSet.title}</Text>
       <Button
         title="Start"
+        containerStyle={styles.button}
         onPress={startNotecard} />
     </View> 
   )

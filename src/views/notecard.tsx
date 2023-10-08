@@ -56,29 +56,35 @@ function Notecard( {navigation, route }: NotecardProps) {
         <Card.Divider />
         <Text>{shuffledNotecards[count][1]}</Text>
       </Card>
-      {count < (notecards.length - 1) ? (
-        <Button
-          title="Next Card"
-          onPress={() => setCount(count + 1)}>
-        </Button>
-      ) : (
-        <View>
+      <View style={styles.buttonContainer}>
+        {count > 0 && (
           <Button
-            title="Home"
-            onPress={() => navigation.navigate('Home')}>
+            title="Previous Card"
+            containerStyle={styles.button}
+            onPress={() => setCount(count - 1)}>
           </Button>
+        )}
+        {count < (notecards.length - 1) ? (
+          <Button
+            title="Next Card"
+            containerStyle={styles.button}
+            onPress={() => setCount(count + 1)}>
+          </Button>
+        ) : (
           <Button
             title="Restart"
+            containerStyle={styles.button}
             onPress={() => reset()}>
           </Button>
-        </View>
-      )}
-      {count > 0 && (
+        )}
+      </View>
+      <View>
         <Button
-          title="Previous Card"
-          onPress={() => setCount(count - 1)}>
+          title="Home"
+          containerStyle={styles.button}
+          onPress={() => navigation.navigate('Home')}>
         </Button>
-      )}
+      </View>
     </View>
   )
 }

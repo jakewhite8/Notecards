@@ -79,9 +79,11 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
       {backNotecardString.length > 0 && (<Text>Back: {backNotecardString}</Text>)}
       <Button
         title="Review Set"
+        containerStyle={styles.button}
         onPress={() => navigation.navigate('ReviewSet')}/>
       <Button
         title="Next Card"
+        containerStyle={styles.button}
         onPress={addCard} />
     </View>
   )
