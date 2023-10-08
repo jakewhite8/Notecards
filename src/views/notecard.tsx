@@ -2,15 +2,75 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
 import { View, Text } from 'react-native';
+import { Button } from '@rneui/themed';
+import { useAppState } from '../context/GlobalState';
+import { useState } from 'react';
 
 const styles = GlobalStyles;
 
 type NotecardProps = NativeStackScreenProps<StackParamList, 'Notecard'>;
 
 function Notecard( {navigation, route }: NotecardProps) {
+  const [count, setCount] = useState(0)
+  const { state, dispatch } = useAppState();
+  const notecardTitle = state.currentNotecardSet.title
+  const notecards = state.currentNotecardSet.notecards
+
+  function shuffleNotecards(arr: Array<[string, string]>) {
+    const result = [];
+    // Clone the input array
+    const clone = arr.slice();
+
+    while (clone.length > 0) {
+      // Generate a random index
+      const randomIndex = Math.floor(Math.random() * clone.length);
+      // Remove notecard from clone and set that notecard equal to randomNotecard
+      const randomNotecard = clone.splice(randomIndex, 1)[0];
+      // Add the random notecard to the result array
+      result.push(randomNotecard);
+    }
+    return result;
+  }
+
+  // Initialize shuffledNotecards
+  const [shuffledNotecards, setShuffledNotecards] = useState<Array<[string, string]>>(
+    shuffleNotecards(notecards)
+  );
+
+  const reset = () => {
+    setCount(0);
+    setShuffledNotecards(shuffleNotecards(notecards))
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Notecard: {route.params.cardId} Page</Text>
+      <Text>Notecard Set: {notecardTitle}</Text>
+      <Text>Notecard {count + 1 }/{notecards.length}</Text>
+      <Text>Front: {shuffledNotecards[count][0]}</Text>
+      <Text>Back: {shuffledNotecards[count][1]}</Text>
+      {count < (notecards.length - 1) ? (
+        <Button
+          title="Next Card"
+          onPress={() => setCount(count + 1)}>
+        </Button>
+      ) : (
+        <View>
+          <Button
+            title="Home"
+            onPress={() => navigation.navigate('Home')}>
+          </Button>
+          <Button
+            title="Restart"
+            onPress={() => reset()}>
+          </Button>
+        </View>
+      )}
+      {count > 0 && (
+        <Button
+          title="Previous Card"
+          onPress={() => setCount(count - 1)}>
+        </Button>
+      )}
     </View>
   )
 }

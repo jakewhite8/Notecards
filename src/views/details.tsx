@@ -15,8 +15,8 @@ type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 // navigation and route prop is passed in to every screen component
 function Details( { navigation, route }: DetailsProps) {
   const { state, dispatch } = useAppState();
-  console.log('state.currentNotecardSet.notecards')
-  console.log(state.currentNotecardSet.notecards)
+
+  const notecardSet = state.currentNotecardSet
 
   const startNotecard = () => {
     navigation.navigate('Notecard', {cardId: route.params.card.cardId})
@@ -25,8 +25,7 @@ function Details( { navigation, route }: DetailsProps) {
   return (
     <View style={styles.container}>
       <Text>Details Screen</Text>
-      <Text>{route.params.card.cardId}</Text>
-      <Text>{route.params.card.name}</Text>
+      <Text>{notecardSet.title}</Text>
       <Button
         title="Start"
         onPress={startNotecard} />
