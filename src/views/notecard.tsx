@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
 import { View, Text } from 'react-native';
-import { Button } from '@rneui/themed';
+import { Button, Card } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 
@@ -46,8 +46,16 @@ function Notecard( {navigation, route }: NotecardProps) {
     <View style={styles.container}>
       <Text>Notecard Set: {notecardTitle}</Text>
       <Text>Notecard {count + 1 }/{notecards.length}</Text>
-      <Text>Front: {shuffledNotecards[count][0]}</Text>
-      <Text>Back: {shuffledNotecards[count][1]}</Text>
+      <Card containerStyle={{backgroundColor: 'white'}}>
+        <Card.Title>Front</Card.Title>
+        <Card.Divider />
+        <Text>{shuffledNotecards[count][0]}</Text>
+      </Card>
+      <Card containerStyle={{backgroundColor: 'white'}}>
+        <Card.Title>Back</Card.Title>
+        <Card.Divider />
+        <Text>{shuffledNotecards[count][1]}</Text>
+      </Card>
       {count < (notecards.length - 1) ? (
         <Button
           title="Next Card"
