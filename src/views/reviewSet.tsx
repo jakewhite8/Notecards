@@ -5,8 +5,9 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 import {
-  Button,
-  Dialog
+  Card,
+  Dialog,
+  Icon
 } from '@rneui/themed';
 import NotecardDialog from '../components/notecardDialog'
 
@@ -32,13 +33,28 @@ function ReviewSet( { navigation }: ReviewSetProps) {
       <Text>Title: {title}</Text>
       {notecards.map((notecard, i) => (
         <View key={i}>
-          <Button
-            buttonStyle={{backgroundColor: 'white'}}
-            onPress={() => toggleDialog(i)}>
-            <Text>Card: {i + 1}</Text>
-            <Text>Front: {notecard[0]}</Text>
-            <Text>Back: {notecard[1]}</Text>
-          </Button>
+          <Card
+            containerStyle={{
+              backgroundColor: 'white',
+              width: 350,
+            }}>
+            <Card.Title>
+              <Text>Cards: {i + 1}</Text>
+              <Icon
+                name="edit"
+                type="entypo"
+                color="blue"
+                size={20}
+                onPress={() => toggleDialog(i)}
+              />
+            </Card.Title>
+            <Card.Divider />
+            <Text>Front:</Text>
+            <Text>{notecard[0]}</Text>
+            <Card.Divider />
+            <Text>Back:</Text>
+            <Text>{notecard[1]}</Text>
+          </Card>
           <NotecardDialog
             notecard={notecard}
             notecardIndex={i}
