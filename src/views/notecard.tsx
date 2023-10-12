@@ -46,12 +46,12 @@ function Notecard( {navigation, route }: NotecardProps) {
     <View style={styles.container}>
       <Text>Notecard Set: {notecardTitle}</Text>
       <Text>Notecard {count + 1 }/{notecards.length}</Text>
-      <Card containerStyle={{backgroundColor: 'white'}}>
+      <Card containerStyle={styles.card}>
         <Card.Title>Front</Card.Title>
         <Card.Divider />
         <Text>{shuffledNotecards[count][0]}</Text>
       </Card>
-      <Card containerStyle={{backgroundColor: 'white'}}>
+      <Card containerStyle={styles.card}>
         <Card.Title>Back</Card.Title>
         <Card.Divider />
         <Text>{shuffledNotecards[count][1]}</Text>

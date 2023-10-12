@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
@@ -34,9 +34,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
       {notecards.map((notecard, i) => (
         <View key={i}>
           <Card
-            containerStyle={reviewSetStyles.card}>
+            containerStyle={styles.card}>
             <Card.Title>
-              <Text>Cards: {i + 1}</Text>
+              <Text>Card: {i + 1}</Text>
               <Icon
                 name="edit"
                 type="entypo"
@@ -63,10 +63,4 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   )
 }
 
-const reviewSetStyles = StyleSheet.create({
-  card: {
-    backgroundColor: 'white',
-    width: 350,
-  }
-})
 export default ReviewSet

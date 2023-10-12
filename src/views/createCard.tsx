@@ -53,7 +53,8 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
       <Text>{notecardTitle}</Text>
       <Text>State Title</Text>
       <Text>{state.newNotecardSet.title}</Text>
-      <Card>
+      <Card
+        containerStyle={styles.card}>
         <Card.Title>Front of Notecard</Card.Title>
         <Card.Divider />
         <Input
@@ -64,7 +65,8 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
           value={frontNotecardString}
         />
       </Card>
-      <Card>
+      <Card
+        containerStyle={styles.card}>
         <Card.Title>Back of Notecard</Card.Title>
         <Card.Divider />
         <Input

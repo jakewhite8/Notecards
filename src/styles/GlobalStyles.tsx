@@ -19,6 +19,10 @@ const GlobalStyles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'space-evenly',
     flexDirection: 'row'
+  },
+  card: {
+    backgroundColor: '#fff',
+    width: 350,
   }
 });
 
