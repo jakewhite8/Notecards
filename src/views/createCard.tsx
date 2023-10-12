@@ -58,6 +58,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
         <Card.Title>Front of Notecard</Card.Title>
         <Card.Divider />
         <Input
+          multiline
           {...(inputProps as WrappedInputProps)}
           containerStyle={{ width: '90%' }}
           style={styles.inputFieldsStyle}
@@ -70,6 +71,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
         <Card.Title>Back of Notecard</Card.Title>
         <Card.Divider />
         <Input
+          multiline
           value={backNotecardString}
           {...(inputProps as WrappedInputProps)}
           containerStyle={{ width: '90%' }}
