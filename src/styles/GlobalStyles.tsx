@@ -9,7 +9,8 @@ const GlobalStyles = StyleSheet.create({
   },
   inputFieldsStyle: {
     borderWidth: 0,
-    color: '#000'
+    color: '#000',
+    width: '100%'
   },
   button: {
     width: 150,
