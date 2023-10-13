@@ -23,6 +23,8 @@ const GlobalStyles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     width: 350,
+    marginTop: 10,
+    marginBottom: 10
   }
 });
 
