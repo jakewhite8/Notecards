@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { Input as BaseInput } from '@rneui/base';
 import {
+  Button,
   Dialog,
   Input,
   InputProps
@@ -21,6 +22,9 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
 
   const [frontNotecardString, setFrontNotecard] = useState(props.notecard[0])
   const [backNotecardString, setBackNotecard] = useState(props.notecard[1])
+  const [updateFrontNotecard, setUpdateFrontNotecard] = useState(false);
+  const [updateBackNotecard, setUpdateBackNotecard] = useState(false);
+  const [displaySaveButton, setDisplaySaveButton] = useState(false);
 
   interface WrappedInputProps extends InputProps {
     ref?: React.RefObject<TextInput & BaseInput>;
@@ -28,6 +32,28 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
   const inputProps = {}
 
   const dialogTitle = `Notecard ${props.notecardIndex + 1}`;
+  const notecardChange = (value: string, notecardSide: string) => {
+    if (notecardSide === 'front') {
+      setFrontNotecard(value)
+      // Compare input value to inital notecard value
+      if (value === props.notecard[0]) {
+        setUpdateFrontNotecard(false)
+        setDisplaySaveButton(updateBackNotecard)
+      } else {
+        setUpdateFrontNotecard(true)
+        setDisplaySaveButton(true)
+      }
+    } else {
+      setBackNotecard(value)
+      if (value === props.notecard[1]) {
+        setUpdateBackNotecard(false)
+        setDisplaySaveButton(updateFrontNotecard);
+      } else {
+        setUpdateBackNotecard(true)
+        setDisplaySaveButton(true);
+      }
+    }
+  }
 
   return ( 
     <Dialog
@@ -39,7 +65,7 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
         multiline
         {...(inputProps as WrappedInputProps)}
         containerStyle={styles.inputFieldsStyle}
-        onChangeText={setFrontNotecard}
+        onChangeText={(value) => {notecardChange(value, 'front')}}
         value={frontNotecardString}
       />
       <Text>Back:</Text>
@@ -47,9 +73,22 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
         multiline
         {...(inputProps as WrappedInputProps)}
         containerStyle={styles.inputFieldsStyle}
-        onChangeText={setBackNotecard}
+        onChangeText={(value) => {notecardChange(value, 'back')}}
         value={backNotecardString}
       />
+      { displaySaveButton &&
+        <View>
+          <Button
+            title="Save"
+            onPress={() => console.log('Save')}>
+          </Button>
+          <Button
+            title="Cancel"
+            onPress={() => console.log('Cancel')}>
+          </Button>
+        </View>
+      }
+
     </Dialog>
   )
 }
