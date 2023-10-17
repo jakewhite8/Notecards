@@ -17,7 +17,7 @@ type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 
 function ReviewSet( { navigation }: ReviewSetProps) {
   const { state, dispatch } = useAppState();
-  const notecards = state.newNotecardSet.notecards;
+  const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
   const title = state.newNotecardSet.title;
 
   const [dialogVisibilities, setDialogVisibilities] = useState(Array(notecards.length).fill(false));
@@ -26,6 +26,19 @@ function ReviewSet( { navigation }: ReviewSetProps) {
     updatedVisibilities[index] = !updatedVisibilities[index];
     setDialogVisibilities(updatedVisibilities);
   };
+
+  const updateNotecards = (index: number, notecard: [string, string]) => {
+    const updatedNotecards = [...notecards];
+    updatedNotecards[index] = notecard
+    setNotecards(updatedNotecards)
+    dispatch({
+      type: 'UPDATE_NEW_NOTECARDSET',
+      payload: {
+        title: title,
+        notecards: updatedNotecards
+      }
+    })
+  }
 
   return (
     <ScrollView>
@@ -57,7 +70,8 @@ function ReviewSet( { navigation }: ReviewSetProps) {
               notecard={notecard}
               notecardIndex={i}
               isVisible={dialogVisibilities[i]}
-              toggleDialog={() => toggleDialog(i)}/>
+              toggleDialog={() => toggleDialog(i)}
+              updateNotecardsFunction={(updatedNotecard: [string, string]) => updateNotecards(i, updatedNotecard)}/>
           </View>
         ))}
       </View>

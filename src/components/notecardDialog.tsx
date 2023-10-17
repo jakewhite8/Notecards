@@ -15,6 +15,7 @@ type NotecardDialogComponentProps = {
   notecard: [string, string];
   notecardIndex: number;
   isVisible: boolean;
+  updateNotecardsFunction: (notecard: [string, string]) => void;
 };
 
 const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (props) => {
@@ -55,6 +56,11 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
     }
   }
 
+  const saveAndCloseDialog = () => {
+    props.updateNotecardsFunction([frontNotecardString, backNotecardString])
+    props.toggleDialog()
+  }
+
   return ( 
     <Dialog
       isVisible={props.isVisible}
@@ -80,7 +86,7 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
         <View>
           <Button
             title="Save"
-            onPress={() => console.log('Save')}>
+            onPress={saveAndCloseDialog}>
           </Button>
           <Button
             title="Cancel"
