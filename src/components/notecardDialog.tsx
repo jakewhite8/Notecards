@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View, ScrollView } from 'react-native';
 import { Input as BaseInput } from '@rneui/base';
 import {
   Button,
@@ -65,36 +65,37 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
     <Dialog
       isVisible={props.isVisible}
       onBackdropPress={props.toggleDialog}>
-      <Dialog.Title title={dialogTitle} />
-      <Text>Front:</Text>
-      <Input
-        multiline
-        {...(inputProps as WrappedInputProps)}
-        containerStyle={styles.inputFieldsStyle}
-        onChangeText={(value) => {notecardChange(value, 'front')}}
-        value={frontNotecardString}
-      />
-      <Text>Back:</Text>
-      <Input
-        multiline
-        {...(inputProps as WrappedInputProps)}
-        containerStyle={styles.inputFieldsStyle}
-        onChangeText={(value) => {notecardChange(value, 'back')}}
-        value={backNotecardString}
-      />
-      { displaySaveButton &&
-        <View>
-          <Button
-            title="Save"
-            onPress={saveAndCloseDialog}>
-          </Button>
-          <Button
-            title="Cancel"
-            onPress={() => console.log('Cancel')}>
-          </Button>
-        </View>
-      }
-
+      <ScrollView>
+        <Dialog.Title title={dialogTitle} />
+        <Text>Front:</Text>
+        <Input
+          multiline
+          {...(inputProps as WrappedInputProps)}
+          containerStyle={styles.inputFieldsStyle}
+          onChangeText={(value) => {notecardChange(value, 'front')}}
+          value={frontNotecardString}
+        />
+        <Text>Back:</Text>
+        <Input
+          multiline
+          {...(inputProps as WrappedInputProps)}
+          containerStyle={styles.inputFieldsStyle}
+          onChangeText={(value) => {notecardChange(value, 'back')}}
+          value={backNotecardString}
+        />
+        { displaySaveButton &&
+          <View>
+            <Button
+              title="Save"
+              onPress={saveAndCloseDialog}>
+            </Button>
+            <Button
+              title="Cancel"
+              onPress={() => props.toggleDialog()}>
+            </Button>
+          </View>
+        }
+      </ScrollView>
     </Dialog>
   )
 }
