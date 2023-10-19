@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, ScrollView } from 'react-native';
+import { Text,
+  TextInput,
+  View,
+  ScrollView,
+  StyleSheet } from 'react-native';
 import { Input as BaseInput } from '@rneui/base';
 import {
   Button,
   Dialog,
+  Icon,
   Input,
   InputProps
 } from '@rneui/themed';
@@ -63,6 +68,7 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
 
   return ( 
     <Dialog
+      overlayStyle={dialogStyles.dialog}
       isVisible={props.isVisible}
       onBackdropPress={props.toggleDialog}>
       <ScrollView>
@@ -71,7 +77,7 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
         <Input
           multiline
           {...(inputProps as WrappedInputProps)}
-          containerStyle={styles.inputFieldsStyle}
+          inputStyle={styles.inputFieldsStyle}
           onChangeText={(value) => {notecardChange(value, 'front')}}
           value={frontNotecardString}
         />
@@ -79,19 +85,27 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
         <Input
           multiline
           {...(inputProps as WrappedInputProps)}
-          containerStyle={styles.inputFieldsStyle}
+          inputStyle={styles.inputFieldsStyle}
           onChangeText={(value) => {notecardChange(value, 'back')}}
           value={backNotecardString}
         />
         { displaySaveButton &&
           <View>
             <Button
-              title="Save"
-              onPress={saveAndCloseDialog}>
+              containerStyle={styles.button}
+              onPress={saveAndCloseDialog}>{'Save '} 
+              <Icon
+                type="entypo"
+                size={25}
+                name="save"/>
             </Button>
             <Button
-              title="Cancel"
-              onPress={() => props.toggleDialog()}>
+              containerStyle={styles.button}
+              onPress={() => props.toggleDialog()}>{'Cancel '}
+              <Icon
+                type="foundation"
+                size={25}
+                name="prohibited"/>
             </Button>
           </View>
         }
@@ -99,5 +113,11 @@ const NotecardDialog: React.FunctionComponent<NotecardDialogComponentProps> = (p
     </Dialog>
   )
 }
+
+const dialogStyles = StyleSheet.create({
+  dialog: {
+    backgroundColor: '#fff'
+  }
+})
 
 export default NotecardDialog;
