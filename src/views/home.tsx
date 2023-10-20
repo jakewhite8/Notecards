@@ -13,6 +13,7 @@ import SampleNotecards from '../helpers/SampleNotecards';
 import TypeScriptNotecards from '../helpers/TypeScriptNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
+import { useTranslation } from 'react-i18next';
 
 const styles = GlobalStyles;
 
@@ -30,6 +31,7 @@ function Home( { navigation }: HomeProps) {
   const listItemProps = {};
 
   const { state, dispatch } = useAppState();
+  const {t, i18n} = useTranslation();
 
   const handleLogout = () => {
     // Dispatch an action to update the user state
@@ -66,6 +68,16 @@ function Home( { navigation }: HomeProps) {
       </View>
       <View style={styles.container}>
         <Text>Current filter: {filterString}</Text>
+      </View>
+      <View style={styles.container}>
+        <Text style={{fontSize: 20, marginBottom: 20}}>{t('hello')}</Text>
+        <Button
+          title={t('change')}
+          containerStyle={styles.button}
+          onPress={() =>
+            i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')
+          }>
+        </Button>
       </View>
       <View style={{ paddingVertical: 8 }}>
         <SearchBar

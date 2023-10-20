@@ -1,7 +1,8 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createTheme, ThemeProvider } from '@rneui/themed';
 import RootNavigator from './src/navigation/RootNavigator';
-import { AppStateProvider } from './src/context/GlobalState'
+import { AppStateProvider } from './src/context/GlobalState';
+import './i18n/config';
 
 const theme = createTheme({
   lightColors: {
