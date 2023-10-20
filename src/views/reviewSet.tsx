@@ -41,41 +41,43 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text>Review Set</Text>
-        <Text>Title: {title}</Text>
-        {notecards.map((notecard, i) => (
-          <View key={i}>
-            <Card
-              containerStyle={styles.card}>
-              <Card.Title>
-                <Text>Card: {i + 1}</Text>
-                <Icon
-                  name="edit"
-                  type="entypo"
-                  color="blue"
-                  size={20}
-                  onPress={() => toggleDialog(i)}
-                />
-              </Card.Title>
-              <Card.Divider />
-              <Text>Front:</Text>
-              <Text>{notecard[0]}</Text>
-              <Card.Divider />
-              <Text>Back:</Text>
-              <Text>{notecard[1]}</Text>
-            </Card>
-            <NotecardDialog
-              notecard={notecard}
-              notecardIndex={i}
-              isVisible={dialogVisibilities[i]}
-              toggleDialog={() => toggleDialog(i)}
-              updateNotecardsFunction={(updatedNotecard: [string, string]) => updateNotecards(i, updatedNotecard)}/>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text>Review Set</Text>
+          <Text>Title: {title}</Text>
+          {notecards.map((notecard, i) => (
+            <View key={i}>
+              <Card
+                containerStyle={styles.card}>
+                <Card.Title>
+                  <Text>Card: {i + 1}</Text>
+                  <Icon
+                    name="edit"
+                    type="entypo"
+                    color="blue"
+                    size={20}
+                    onPress={() => toggleDialog(i)}
+                  />
+                </Card.Title>
+                <Card.Divider />
+                <Text>Front:</Text>
+                <Text>{notecard[0]}</Text>
+                <Card.Divider />
+                <Text>Back:</Text>
+                <Text>{notecard[1]}</Text>
+              </Card>
+              <NotecardDialog
+                notecard={notecard}
+                notecardIndex={i}
+                isVisible={dialogVisibilities[i]}
+                toggleDialog={() => toggleDialog(i)}
+                updateNotecardsFunction={(updatedNotecard: [string, string]) => updateNotecards(i, updatedNotecard)}/>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 

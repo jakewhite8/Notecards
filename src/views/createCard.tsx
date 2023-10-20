@@ -48,50 +48,52 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text>Create Card</Text>
-        <Text>{notecardTitle}</Text>
-        <Text>State Title</Text>
-        <Text>{state.newNotecardSet.title}</Text>
-        <Card
-          containerStyle={styles.card}>
-          <Card.Title>Front of Notecard</Card.Title>
-          <Card.Divider />
-          <Input
-            multiline
-            {...(inputProps as WrappedInputProps)}
-            containerStyle={{ width: '90%' }}
-            style={styles.inputFieldsStyle}
-            onChangeText={setFrontNotecard}
-            value={frontNotecardString}
-          />
-        </Card>
-        <Card
-          containerStyle={styles.card}>
-          <Card.Title>Back of Notecard</Card.Title>
-          <Card.Divider />
-          <Input
-            multiline
-            value={backNotecardString}
-            {...(inputProps as WrappedInputProps)}
-            containerStyle={{ width: '90%' }}
-            style={styles.inputFieldsStyle}
-            onChangeText={setBackNotecard}
-          />
-        </Card>
-        {frontNotecardString.length > 0 && (<Text>Front: {frontNotecardString}</Text>)}
-        {backNotecardString.length > 0 && (<Text>Back: {backNotecardString}</Text>)}
-        <Button
-          title="Review Set"
-          containerStyle={styles.button}
-          onPress={() => navigation.navigate('ReviewSet')}/>
-        <Button
-          title="Next Card"
-          containerStyle={styles.button}
-          onPress={addCard} />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text>Create Card</Text>
+          <Text>{notecardTitle}</Text>
+          <Text>State Title</Text>
+          <Text>{state.newNotecardSet.title}</Text>
+          <Card
+            containerStyle={styles.card}>
+            <Card.Title>Front of Notecard</Card.Title>
+            <Card.Divider />
+            <Input
+              multiline
+              {...(inputProps as WrappedInputProps)}
+              containerStyle={{ width: '90%' }}
+              style={styles.inputFieldsStyle}
+              onChangeText={setFrontNotecard}
+              value={frontNotecardString}
+            />
+          </Card>
+          <Card
+            containerStyle={styles.card}>
+            <Card.Title>Back of Notecard</Card.Title>
+            <Card.Divider />
+            <Input
+              multiline
+              value={backNotecardString}
+              {...(inputProps as WrappedInputProps)}
+              containerStyle={{ width: '90%' }}
+              style={styles.inputFieldsStyle}
+              onChangeText={setBackNotecard}
+            />
+          </Card>
+          {frontNotecardString.length > 0 && (<Text>Front: {frontNotecardString}</Text>)}
+          {backNotecardString.length > 0 && (<Text>Back: {backNotecardString}</Text>)}
+          <Button
+            title="Review Set"
+            containerStyle={styles.button}
+            onPress={() => navigation.navigate('ReviewSet')}/>
+          <Button
+            title="Next Card"
+            containerStyle={styles.button}
+            onPress={addCard} />
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
