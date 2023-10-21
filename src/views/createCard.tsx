@@ -11,6 +11,7 @@ import {
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
+import Toast from 'react-native-toast-message';
 
 type CreateCardProps = NativeStackScreenProps<StackParamList, 'CreateCard'>;
 
@@ -45,6 +46,12 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
     // Reset input fields
     setFrontNotecard('');
     setBackNotecard('');
+
+    Toast.show({
+      type: 'success',
+      text1: 'Notecard Added Successfully',
+      visibilityTime: 1500
+    });
   }
 
   return (
@@ -92,6 +99,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
             containerStyle={styles.button}
             onPress={addCard} />
         </View>
+        <Toast />
       </ScrollView>
     </View>
   )
