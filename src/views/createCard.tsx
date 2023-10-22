@@ -26,8 +26,11 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   const [frontNotecardString, setFrontNotecard] = useState('');
   const [backNotecardString, setBackNotecard] = useState('');
   const { state, dispatch } = useAppState();
+  const [nextButtonLoading, setNextButtonLoading] = useState(false)
 
   const addCard = () => {
+    setNextButtonLoading(true)
+
     const existingTitle = state.newNotecardSet.title
     let newNotecards: Array<[string, string]> = []
     // Make deep copy of New Notecards
@@ -52,6 +55,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
       text1: 'Notecard Added Successfully',
       visibilityTime: 1500
     });
+    setNextButtonLoading(false)
   }
 
   return (
@@ -97,6 +101,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
           <Button
             title="Next Card"
             containerStyle={styles.button}
+            loading={nextButtonLoading}
             onPress={addCard} />
         </View>
         <Toast />
