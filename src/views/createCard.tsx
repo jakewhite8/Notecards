@@ -32,12 +32,11 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
     setNextButtonLoading(true)
 
     const existingTitle = state.newNotecardSet.title
-    let newNotecards: Array<[string, string]> = []
     // Make deep copy of New Notecards
-    for (let i = 0; i < state.newNotecardSet.notecards.length; i++) {
-      newNotecards[i] = state.newNotecardSet.notecards[i]
-    }
+    let newNotecards = [...state.newNotecardSet.notecards]
+
     newNotecards.push([frontNotecardString, backNotecardString])
+
     dispatch({
       type: 'UPDATE_NEW_NOTECARDSET',
       payload: {
