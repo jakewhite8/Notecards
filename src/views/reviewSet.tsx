@@ -5,6 +5,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 import {
+  Button,
   Card,
   Dialog,
   Icon
@@ -18,6 +19,9 @@ type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 function ReviewSet( { navigation }: ReviewSetProps) {
   const { state, dispatch } = useAppState();
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
+  const [character, setCharacter] = useState('none')
+  const [characterCount, setCharacterCount] = useState(0)
+  const [submitLoading, setSubmitLoading] = useState(false)
   const title = state.newNotecardSet.title;
 
   const [dialogVisibilities, setDialogVisibilities] = useState(Array(notecards.length).fill(false));
@@ -40,10 +44,27 @@ function ReviewSet( { navigation }: ReviewSetProps) {
     })
   }
 
+  const getCharacter = async () => {
+    setSubmitLoading(true)
+    try {
+      const response = await         
+      fetch(`https://www.anapioficeandfire.com/api/characters?page=${characterCount}&pageSize=1`);
+      const json = await response.json();
+      setCharacterCount(characterCount + 1)
+      setCharacter(json[0].aliases);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
+          <Text>Character loaded:</Text>
+          <Text>{character}</Text>
           <Text>Review Set</Text>
           <Text>Title: {title}</Text>
           {notecards.map((notecard, i) => (
@@ -75,6 +96,26 @@ function ReviewSet( { navigation }: ReviewSetProps) {
                 updateNotecardsFunction={(updatedNotecard: [string, string]) => updateNotecards(i, updatedNotecard)}/>
             </View>
           ))}
+          <Button
+            title="Submit"
+            containerStyle={styles.button}
+            loading={submitLoading}
+            onPress={() => getCharacter()}>
+            {'Submit '}
+            <Icon
+              type="antdesign"
+              size={25}
+              name="enter"/>
+          </Button>
+          <Button
+            containerStyle={styles.button}
+            onPress={() => navigation.navigate('Home')} >
+            {'Cancel '}
+            <Icon
+              type="foundation"
+              size={25}
+              name="prohibited"/>
+          </Button>
         </View>
       </ScrollView>
     </View>
