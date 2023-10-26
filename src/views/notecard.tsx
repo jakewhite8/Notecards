@@ -2,7 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
 import { View, Text, ScrollView } from 'react-native';
-import { Button, Card } from '@rneui/themed';
+import {
+  Button,
+  Card,
+  Icon
+} from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 
@@ -12,6 +16,7 @@ type NotecardProps = NativeStackScreenProps<StackParamList, 'Notecard'>;
 
 function Notecard( {navigation, route }: NotecardProps) {
   const [count, setCount] = useState(0)
+  const [displayFrontNotecard, setDisplayFrontNotecard] = useState(true)
   const { state, dispatch } = useAppState();
   const notecardTitle = state.currentNotecardSet.title
   const notecards = state.currentNotecardSet.notecards
@@ -42,35 +47,57 @@ function Notecard( {navigation, route }: NotecardProps) {
     setShuffledNotecards(shuffleNotecards(notecards))
   };
 
+  const changeCard = (card: number) => {
+    setDisplayFrontNotecard(true)
+    setCount(card)
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
           <Text>Notecard Set: {notecardTitle}</Text>
           <Text>Notecard {count + 1 }/{notecards.length}</Text>
+          <View>
+          { displayFrontNotecard ? 
           <Card containerStyle={styles.card}>
             <Card.Title>Front</Card.Title>
             <Card.Divider />
             <Text>{shuffledNotecards[count][0]}</Text>
+            <Icon
+              type="fontawesome"
+              size={25}
+              color={'#f4511e'}
+              onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
+              name="rotate-right"/>
           </Card>
+          :
           <Card containerStyle={styles.card}>
             <Card.Title>Back</Card.Title>
             <Card.Divider />
             <Text>{shuffledNotecards[count][1]}</Text>
+              <Icon
+                type="fontawesome"
+                size={25}
+                color={'#f4511e'}
+                onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
+                name="rotate-left"/>
           </Card>
+          }
+          </View>
           <View style={styles.buttonContainer}>
             {count > 0 && (
               <Button
                 title="Previous Card"
                 containerStyle={styles.button}
-                onPress={() => setCount(count - 1)}>
+                onPress={() => changeCard(count - 1)}>
               </Button>
             )}
             {count < (notecards.length - 1) ? (
               <Button
                 title="Next Card"
                 containerStyle={styles.button}
-                onPress={() => setCount(count + 1)}>
+                onPress={() => changeCard(count + 1)}>
               </Button>
             ) : (
               <Button
