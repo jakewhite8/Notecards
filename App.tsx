@@ -7,9 +7,11 @@ import './i18n/config';
 const theme = createTheme({
   lightColors: {
     primary: '#e7e7e8',
+    tertiary: '#124789',
   },
   darkColors: {
     primary: '#000',
+    tertiary: '#f1330a',
   },
   mode: 'dark',
 });

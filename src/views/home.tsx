@@ -5,7 +5,8 @@ import {
   ListItem,
   ListItemProps,
   SearchBar,
-  Button
+  Button,
+  useTheme,
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
 import { StackParamList, NotecardData } from '../types/DataTypes';
@@ -26,6 +27,7 @@ type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 
 // navigation and route prop is passed in to every screen component
 function Home( { navigation }: HomeProps) {
+  const { theme, updateTheme } = useTheme();
 
   const [filterString, setFilterString] = useState('');
   const listItemProps = {};
@@ -39,6 +41,11 @@ function Home( { navigation }: HomeProps) {
   };
   const logJakeIn = () => {
     dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
+  }
+
+  const toggleTheme = () => {
+    const newMode = theme.mode == 'dark' ? 'light' : 'dark'
+    updateTheme({ mode: newMode })    
   }
 
   const loadDetailsPage = (notecard: NotecardData) => {
@@ -57,14 +64,17 @@ function Home( { navigation }: HomeProps) {
 
   return (
     <>
-      <View>
+      <View style={[styles.container, {backgroundColor: theme.colors.tertiary}]}>
         {state.user ? (
           <Text>Welcome, {state.user.name}!</Text>
         ) : (
           <Text>Please log in</Text>
         )}
-        <Button title="LogIn" onPress={logJakeIn} />
-        <Button title="Logout" onPress={handleLogout} />
+        <View style={styles.buttonContainer}>
+          <Button title="LogIn" containerStyle={styles.button} onPress={logJakeIn} />
+          <Button title="Logout" containerStyle={styles.button} onPress={handleLogout} />
+          <Button title="Theme" containerStyle={styles.button} onPress={() => toggleTheme()} />
+        </View>
       </View>
       <View style={styles.container}>
         <Text>Current filter: {filterString}</Text>
