@@ -19,6 +19,7 @@ type StackParamList = {
     cardId: number
   };
   ReviewSet: undefined;
+  Settings: undefined;
 }
 
 export type { StackParamList, NotecardData };

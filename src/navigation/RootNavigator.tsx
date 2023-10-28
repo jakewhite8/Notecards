@@ -6,6 +6,7 @@ import Details from '../views/details';
 import Home from '../views/home';
 import Notecard from '../views/notecard'
 import ReviewSet from '../views/reviewSet';
+import Settings from '../views/settings';
 import AddButton from '../components/addButton';
 import { StackParamList } from '../types/DataTypes'
 
@@ -80,6 +81,13 @@ function RootNavigator() {
           options={ ({ route }) => ({ 
             title: "Review New Notecard Set",
           }) }
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            title: "New Notecard",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

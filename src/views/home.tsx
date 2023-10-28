@@ -75,6 +75,7 @@ function Home( { navigation }: HomeProps) {
           <Button title="Logout" containerStyle={styles.button} onPress={handleLogout} />
           <Button title="Theme" containerStyle={styles.button} onPress={() => toggleTheme()} />
         </View>
+        <Button title="Settings" containerStyle={styles.button} onPress={() => navigation.navigate('Settings')} />
       </View>
       <View style={styles.container}>
         <Text>Current filter: {filterString}</Text>
