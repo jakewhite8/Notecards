@@ -43,11 +43,6 @@ function Home( { navigation }: HomeProps) {
     dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
   }
 
-  const toggleTheme = () => {
-    const newMode = theme.mode == 'dark' ? 'light' : 'dark'
-    updateTheme({ mode: newMode })    
-  }
-
   const loadDetailsPage = (notecard: NotecardData) => {
     // Retrieve selected notecards - temporarily using TypeScriptNotecards
 
@@ -73,7 +68,6 @@ function Home( { navigation }: HomeProps) {
         <View style={styles.buttonContainer}>
           <Button title="LogIn" containerStyle={styles.button} onPress={logJakeIn} />
           <Button title="Logout" containerStyle={styles.button} onPress={handleLogout} />
-          <Button title="Theme" containerStyle={styles.button} onPress={() => toggleTheme()} />
         </View>
         <Button title="Settings" containerStyle={styles.button} onPress={() => navigation.navigate('Settings')} />
       </View>
