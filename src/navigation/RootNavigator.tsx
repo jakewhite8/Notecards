@@ -76,7 +76,7 @@ function RootNavigator() {
           name="Notecard"
           component={Notecard}
           options={ ({ route }) => ({ 
-            title: "Notecard",
+            title: route.params.name,
           }) }
         />
         <Stack.Screen

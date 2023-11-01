@@ -18,8 +18,17 @@ function Details( { navigation, route }: DetailsProps) {
 
   const notecardSet = state.currentNotecardSet
 
-  const startNotecard = () => {
-    navigation.navigate('Notecard', {cardId: route.params.card.cardId})
+  interface NotecardSet {
+    title: string;
+    notecards: Array<[string, string]>;
+  }
+
+  const startNotecard = (notecardSet: NotecardSet) => {
+    let notecardPageTitle = `${notecardSet.title} Notecard`
+    if (notecardSet.notecards.length > 1) {
+      notecardPageTitle = notecardPageTitle + 's';
+    }
+    navigation.navigate('Notecard', {name: notecardPageTitle, cardId: route.params.card.cardId})
   }
 
   return (
@@ -29,7 +38,7 @@ function Details( { navigation, route }: DetailsProps) {
       <Button
         title="Start"
         containerStyle={styles.button}
-        onPress={startNotecard} />
+        onPress={() => startNotecard(notecardSet)} />
     </View> 
   )
 }

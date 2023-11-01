@@ -18,7 +18,6 @@ function Notecard( {navigation, route }: NotecardProps) {
   const [count, setCount] = useState(0)
   const [displayFrontNotecard, setDisplayFrontNotecard] = useState(true)
   const { state, dispatch } = useAppState();
-  const notecardTitle = state.currentNotecardSet.title
   const notecards = state.currentNotecardSet.notecards
 
   function shuffleNotecards(arr: Array<[string, string]>) {
@@ -56,7 +55,6 @@ function Notecard( {navigation, route }: NotecardProps) {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Notecard Set: {notecardTitle}</Text>
           <Text>Notecard {count + 1 }/{notecards.length}</Text>
           <View>
           { displayFrontNotecard ? 

@@ -16,7 +16,8 @@ type StackParamList = {
   };
   Home: undefined;
   Notecard: {
-    cardId: number
+    name: string;
+    cardId: number;
   };
   ReviewSet: undefined;
   Settings: undefined;

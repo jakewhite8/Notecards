@@ -54,7 +54,7 @@ function Home( { navigation }: HomeProps) {
         notecards: TypeScriptNotecards.notecards
       }
     })
-    navigation.navigate('Details', {name: `${notecard.name} Notecard`, card: notecard})
+    navigation.navigate('Details', {name: `${notecard.name} Notecards`, card: notecard})
   }
 
   return (
