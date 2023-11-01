@@ -9,6 +9,7 @@ import ReviewSet from '../views/reviewSet';
 import Settings from '../views/settings';
 import AddButton from '../components/addButton';
 import { StackParamList } from '../types/DataTypes'
+import { useTheme } from '@rneui/themed';
 
 function RootNavigator() {
   // Initalize the Navigator. Pass in the StackParamList as a genertic in order
@@ -21,6 +22,8 @@ function RootNavigator() {
     linearGradientColors: ['#FF9800', '#F44336']
   }
 
+  const { theme, updateTheme } = useTheme();
+
     /*Navigation Container - manages our navigation tree
     and contains the navigation state*/
   return (
@@ -29,11 +32,12 @@ function RootNavigator() {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: theme.colors.background,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
+            color: theme.colors.header
           },
         }}>
         <Stack.Screen

@@ -8,10 +8,14 @@ const theme = createTheme({
   lightColors: {
     primary: '#e7e7e8',
     tertiary: '#124789',
+    background: '#faebd7',
+    header: '#3b444b'
   },
   darkColors: {
     primary: '#000',
     tertiary: '#f1330a',
+    background: '#3b444b',
+    header: '#faebd7'
   },
   mode: 'dark',
 });
