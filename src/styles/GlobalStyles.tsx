@@ -33,7 +33,8 @@ const GlobalStyles = StyleSheet.create({
     alignItems: 'center'
   },
   cardTitle: {
-    flex: 0.05
+    flex: 0.05,
+    width: '100%'
   },
   cardBody: {
     flex: 0.9

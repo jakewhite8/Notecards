@@ -9,6 +9,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
+import NotecardDisplay from '../components/notecardDisplay';
 import { useState } from 'react';
 
 const styles = GlobalStyles;
@@ -62,45 +63,15 @@ function Notecard( {navigation, route }: NotecardProps) {
           </View>
           <ScrollView>
             { displayFrontNotecard ? 
-            <Card
-              containerStyle={styles.card}
-              wrapperStyle={styles.cardWrapper}>
-              <View style={styles.cardTitle}>
-                <Card.Title>Front</Card.Title>
-                <Card.Divider />
-              </View>
-              <View style={styles.cardBody}>
-                <Text>{shuffledNotecards[count][0]}</Text>
-              </View>
-              <View style={styles.cardIcon}>
-                <Icon
-                  type="fontawesome"
-                  size={25}
-                  color={theme.colors.icon}
-                  onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
-                  name="rotate-right"/>
-              </View>
-            </Card>
+            <NotecardDisplay 
+              notecardSide='Front'
+              body={shuffledNotecards[count][0]}
+              flipNotecardFunction={() => setDisplayFrontNotecard(!displayFrontNotecard)} />
             :
-            <Card
-              containerStyle={styles.card}
-              wrapperStyle={styles.cardWrapper}>
-              <View style={styles.cardTitle}>
-                <Card.Title>Back</Card.Title>
-                <Card.Divider />
-              </View>
-              <View style={styles.cardBody}>
-                <Text>{shuffledNotecards[count][1]}</Text>
-              </View>
-              <View style={styles.cardIcon}>
-                <Icon
-                  type="fontawesome"
-                  size={25}
-                  color={theme.colors.icon}
-                  onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
-                  name="rotate-left"/>
-              </View>
-            </Card>
+            <NotecardDisplay 
+              notecardSide='Back'
+              body={shuffledNotecards[count][1]}
+              flipNotecardFunction={() => setDisplayFrontNotecard(!displayFrontNotecard)} />
             }
           </ScrollView>
           <View style={styles.buttonContainer}>
