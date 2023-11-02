@@ -4,8 +4,9 @@ import '@rneui/themed';
 declare module '@rneui/themed' {
   export interface Colors {
     tertiary: string;
-    background: string;
-    header: string;
+    primaryBackground: string;
+    secondaryBackground: string;
+    primaryText: string;
     icon: string;
   }
 }

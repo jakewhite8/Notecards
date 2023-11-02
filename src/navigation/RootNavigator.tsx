@@ -32,12 +32,12 @@ function RootNavigator() {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: theme.colors.background,
+            backgroundColor: theme.colors.primaryBackground,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color: theme.colors.header
+            color: theme.colors.primaryText
           },
         }}>
         <Stack.Screen

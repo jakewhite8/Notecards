@@ -20,14 +20,14 @@ const NotecardDisplay: React.FunctionComponent<NotecardDisplayComponentProps> = 
   
   return (
     <Card
-      containerStyle={styles.card}
+      containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground}]}
       wrapperStyle={styles.cardWrapper}>
       <View style={styles.cardTitle}>
-        <Card.Title>{props.notecardSide}</Card.Title>
+        <Card.Title style={{color: theme.colors.primaryText}}>{props.notecardSide}</Card.Title>
         <Card.Divider />
       </View>
       <View style={styles.cardBody}>
-        <Text>{props.body}</Text>
+        <Text style={{color: theme.colors.primaryText}}>{props.body}</Text>
       </View>
       <View style={styles.cardIcon}>
         <Icon

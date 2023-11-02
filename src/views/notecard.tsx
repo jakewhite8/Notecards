@@ -4,8 +4,6 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { View, Text, ScrollView } from 'react-native';
 import {
   Button,
-  Card,
-  Icon,
   useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
@@ -55,11 +53,11 @@ function Notecard( {navigation, route }: NotecardProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <ScrollView>
         <View style={styles.container}>
           <View style={{padding: 10}}>
-            <Text>Notecard {count + 1 }/{notecards.length}</Text>
+            <Text style={{color: theme.colors.primaryText}}>Notecard {count + 1 }/{notecards.length}</Text>
           </View>
           <ScrollView>
             { displayFrontNotecard ? 
