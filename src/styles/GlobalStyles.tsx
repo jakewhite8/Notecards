@@ -27,6 +27,19 @@ const GlobalStyles = StyleSheet.create({
     width: 350,
     marginTop: 10,
     marginBottom: 10
+  },
+  cardWrapper: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  cardTitle: {
+    flex: 0.05
+  },
+  cardBody: {
+    flex: 0.9
+  },
+  cardIcon: {
+    flex: 0.05
   }
 });
 

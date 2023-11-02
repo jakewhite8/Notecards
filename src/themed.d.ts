@@ -6,5 +6,6 @@ declare module '@rneui/themed' {
     tertiary: string;
     background: string;
     header: string;
+    icon: string;
   }
 }

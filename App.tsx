@@ -9,13 +9,15 @@ const theme = createTheme({
     primary: '#e7e7e8',
     tertiary: '#124789',
     background: '#faebd7',
-    header: '#3b444b'
+    header: '#3b444b',
+    icon: '#3b444b'
   },
   darkColors: {
     primary: '#000',
     tertiary: '#f1330a',
     background: '#3b444b',
-    header: '#faebd7'
+    header: '#faebd7',
+    icon: '#faebd7'
   },
   mode: 'dark',
 });

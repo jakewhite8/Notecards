@@ -5,7 +5,8 @@ import { View, Text, ScrollView } from 'react-native';
 import {
   Button,
   Card,
-  Icon
+  Icon,
+  useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
@@ -19,6 +20,7 @@ function Notecard( {navigation, route }: NotecardProps) {
   const [displayFrontNotecard, setDisplayFrontNotecard] = useState(true)
   const { state, dispatch } = useAppState();
   const notecards = state.currentNotecardSet.notecards
+  const { theme } = useTheme();
 
   function shuffleNotecards(arr: Array<[string, string]>) {
     const result = [];
@@ -55,34 +57,52 @@ function Notecard( {navigation, route }: NotecardProps) {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Notecard {count + 1 }/{notecards.length}</Text>
-          <View>
-          { displayFrontNotecard ? 
-          <Card containerStyle={styles.card}>
-            <Card.Title>Front</Card.Title>
-            <Card.Divider />
-            <Text>{shuffledNotecards[count][0]}</Text>
-            <Icon
-              type="fontawesome"
-              size={25}
-              color={'#f4511e'}
-              onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
-              name="rotate-right"/>
-          </Card>
-          :
-          <Card containerStyle={styles.card}>
-            <Card.Title>Back</Card.Title>
-            <Card.Divider />
-            <Text>{shuffledNotecards[count][1]}</Text>
-              <Icon
-                type="fontawesome"
-                size={25}
-                color={'#f4511e'}
-                onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
-                name="rotate-left"/>
-          </Card>
-          }
+          <View style={{padding: 10}}>
+            <Text>Notecard {count + 1 }/{notecards.length}</Text>
           </View>
+          <ScrollView>
+            { displayFrontNotecard ? 
+            <Card
+              containerStyle={styles.card}
+              wrapperStyle={styles.cardWrapper}>
+              <View style={styles.cardTitle}>
+                <Card.Title>Front</Card.Title>
+                <Card.Divider />
+              </View>
+              <View style={styles.cardBody}>
+                <Text>{shuffledNotecards[count][0]}</Text>
+              </View>
+              <View style={styles.cardIcon}>
+                <Icon
+                  type="fontawesome"
+                  size={25}
+                  color={theme.colors.icon}
+                  onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
+                  name="rotate-right"/>
+              </View>
+            </Card>
+            :
+            <Card
+              containerStyle={styles.card}
+              wrapperStyle={styles.cardWrapper}>
+              <View style={styles.cardTitle}>
+                <Card.Title>Back</Card.Title>
+                <Card.Divider />
+              </View>
+              <View style={styles.cardBody}>
+                <Text>{shuffledNotecards[count][1]}</Text>
+              </View>
+              <View style={styles.cardIcon}>
+                <Icon
+                  type="fontawesome"
+                  size={25}
+                  color={theme.colors.icon}
+                  onPress={()=> setDisplayFrontNotecard(!displayFrontNotecard)}
+                  name="rotate-left"/>
+              </View>
+            </Card>
+            }
+          </ScrollView>
           <View style={styles.buttonContainer}>
             {count > 0 && (
               <Button
