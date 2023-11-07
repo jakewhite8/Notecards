@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import {
   Card,
   Icon,
@@ -19,25 +19,30 @@ const NotecardDisplay: React.FunctionComponent<NotecardDisplayComponentProps> = 
   const { theme } = useTheme();
   
   return (
-    <Card
-      containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground}]}
-      wrapperStyle={styles.cardWrapper}>
-      <View style={styles.cardTitle}>
-        <Card.Title style={{color: theme.colors.primaryText}}>{props.notecardSide}</Card.Title>
-        <Card.Divider />
-      </View>
-      <View style={styles.cardBody}>
-        <Text style={{color: theme.colors.primaryText}}>{props.body}</Text>
-      </View>
-      <View style={styles.cardIcon}>
-        <Icon
-          type="fontawesome"
-          size={25}
-          color={theme.colors.icon}
-          onPress={props.flipNotecardFunction}
-          name={props.notecardSide == 'Front' ? 'rotate-right' : 'rotate-left'}/>
-      </View>
-    </Card>
+    <TouchableOpacity
+      onPress={props.flipNotecardFunction}
+      >
+      <Card
+        containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground}]}
+        wrapperStyle={styles.cardWrapper}>
+        <View style={styles.cardTitle}>
+          <Card.Title style={{color: theme.colors.primaryText}}>{props.notecardSide}</Card.Title>
+          <Card.Divider />
+        </View>
+        <View style={styles.cardBody}>
+          <TouchableOpacity activeOpacity={1}>
+            <Text style={{color: theme.colors.primaryText}}>{props.body}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardIcon}>
+          <Icon
+            type="fontawesome"
+            size={25}
+            color={theme.colors.icon}
+            name={props.notecardSide == 'Front' ? 'rotate-right' : 'rotate-left'}/>
+        </View>
+      </Card>
+    </TouchableOpacity>
   )
 }
 
