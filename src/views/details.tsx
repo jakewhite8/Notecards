@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View } from 'react-native';
-import { Button } from '@rneui/themed';
+import { Button, useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
+import PrimaryButton from '../components/primaryButton'
 
 const styles = GlobalStyles;
 
@@ -14,6 +15,7 @@ type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 
 // navigation and route prop is passed in to every screen component
 function Details( { navigation, route }: DetailsProps) {
+  const { theme } = useTheme();
   const { state, dispatch } = useAppState();
 
   const notecardSet = state.currentNotecardSet
@@ -32,13 +34,11 @@ function Details( { navigation, route }: DetailsProps) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Details Screen</Text>
-      <Text>{notecardSet.title}</Text>
-      <Button
+    <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
+      <PrimaryButton
         title="Start"
-        containerStyle={styles.button}
-        onPress={() => startNotecard(notecardSet)} />
+        onPressFunction={() => startNotecard(notecardSet)} >
+      </PrimaryButton>
     </View> 
   )
 }
