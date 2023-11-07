@@ -8,13 +8,13 @@ import GlobalStyles from '../styles/GlobalStyles';
 
 const styles = GlobalStyles;
 
-type UniversalButtonProps = {
+type PrimaryButtonProps = {
   title: string;
   children: React.ReactNode | undefined;
   onPressFunction: () => void;
 };
 
-const UniversalButton: React.FunctionComponent<UniversalButtonProps> = (props) => {
+const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props) => {
   const { theme } = useTheme();
   
   return (
@@ -35,4 +35,4 @@ const UniversalButton: React.FunctionComponent<UniversalButtonProps> = (props) =
   )
 }
 
-export default UniversalButton;
+export default PrimaryButton;

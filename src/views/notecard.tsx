@@ -8,7 +8,7 @@ import {
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
 import NotecardDisplay from '../components/notecardDisplay';
-import UniversalButton from '../components/universalButton';
+import PrimaryButton from '../components/primaryButton';
 import { useState } from 'react';
 
 const styles = GlobalStyles;
@@ -75,28 +75,28 @@ function Notecard( {navigation, route }: NotecardProps) {
           </ScrollView>
           <View style={styles.buttonContainer}>
             {count > 0 && (
-              <UniversalButton
+              <PrimaryButton
                 title="Previous Card"
                 onPressFunction={() => changeCard(count - 1)} >
-              </UniversalButton>
+              </PrimaryButton>
             )}
             {count < (notecards.length - 1) ? (
-              <UniversalButton
+              <PrimaryButton
                 title="Next Card"
                 onPressFunction={() => changeCard(count + 1)} >
-              </UniversalButton>
+              </PrimaryButton>
             ) : (
-              <UniversalButton
+              <PrimaryButton
                 title="Restart"
                 onPressFunction={() => reset()} >
-              </UniversalButton>
+              </PrimaryButton>
             )}
           </View>
           <View>
-            <UniversalButton
+            <PrimaryButton
               title="Home"
               onPressFunction={() => navigation.navigate('Home')} >
-            </UniversalButton>
+            </PrimaryButton>
           </View>
         </View>
       </ScrollView>
