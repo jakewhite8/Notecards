@@ -20,6 +20,10 @@ const GlobalStyles = StyleSheet.create({
     justifyContent: 'space-evenly',
     flexDirection: 'row'
   },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 15
+  },
   card: {
     minHeight: 300,
     width: 350,

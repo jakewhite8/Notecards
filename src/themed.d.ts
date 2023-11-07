@@ -7,6 +7,7 @@ declare module '@rneui/themed' {
     primaryBackground: string;
     secondaryBackground: string;
     primaryText: string;
+    primaryButton: string;
     icon: string;
   }
 }

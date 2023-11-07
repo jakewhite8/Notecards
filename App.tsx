@@ -11,6 +11,7 @@ const theme = createTheme({
     primaryBackground: '#faebd7',
     secondaryBackground: '#ffcd94',
     primaryText: '#3b444b',
+    primaryButton: '#f7a583',
     icon: '#3b444b'
   },
   darkColors: {
@@ -19,6 +20,7 @@ const theme = createTheme({
     primaryBackground: '#3b444b',
     secondaryBackground: '#36454f',
     primaryText: '#faebd7',
+    primaryButton: '#946b2d',
     icon: '#faebd7'
   },
   mode: 'dark',
