@@ -13,6 +13,7 @@ const AddButton: React.FunctionComponent<AddButtonComponentProps> = (props) => {
       <FAB
         icon={{ name: 'add', color: 'white' }}
         color="green"
+        size={'small'}
         onPress={() => props.onClick()}
       />
     </View>

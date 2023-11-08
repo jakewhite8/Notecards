@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ListItem,
@@ -15,6 +15,7 @@ import TypeScriptNotecards from '../helpers/TypeScriptNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
+import PrimaryButton from '../components/primaryButton';
 
 const styles = GlobalStyles;
 
@@ -35,14 +36,6 @@ function Home( { navigation }: HomeProps) {
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
 
-  const handleLogout = () => {
-    // Dispatch an action to update the user state
-    dispatch({ type: 'LOGOUT' });
-  };
-  const logJakeIn = () => {
-    dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
-  }
-
   const loadDetailsPage = (notecard: NotecardData) => {
     // Retrieve selected notecards - temporarily using TypeScriptNotecards
 
@@ -58,37 +51,34 @@ function Home( { navigation }: HomeProps) {
   }
 
   return (
-    <>
-      <View style={[styles.container, {backgroundColor: theme.colors.tertiary}]}>
-        {state.user ? (
-          <Text>Welcome, {state.user.name}!</Text>
-        ) : (
-          <Text>Please log in</Text>
-        )}
-        <View style={styles.buttonContainer}>
-          <Button title="LogIn" containerStyle={styles.button} onPress={logJakeIn} />
-          <Button title="Logout" containerStyle={styles.button} onPress={handleLogout} />
-        </View>
-        <Button title="Settings" containerStyle={styles.button} onPress={() => navigation.navigate('Settings')} />
-      </View>
-      <View style={styles.container}>
-        <Text>Current filter: {filterString}</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={{fontSize: 20, marginBottom: 20}}>{t('hello')}</Text>
-        <Button
+    <View style={styles.container}>
+      <View style={[styles.homePageWelcomeSection, {backgroundColor: theme.colors.secondaryBackground}]}>
+        <Text style={{
+          fontSize: 20,
+          marginBottom: 20,
+          color: theme.colors.primaryText}}>{t('hello')}</Text>
+        <PrimaryButton
           title={t('change')}
-          containerStyle={styles.button}
-          onPress={() =>
+          onPressFunction={() =>
             i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')
           }>
-        </Button>
+        </PrimaryButton>
+        <PrimaryButton
+          title="Settings"
+          onPressFunction={() => navigation.navigate('Settings')}>
+        </PrimaryButton>
       </View>
-      <View style={{ paddingVertical: 8 }}>
+      <ScrollView style={[styles.homePageNotecardSection, {
+        paddingVertical: 8,
+        backgroundColor: theme.colors.secondaryBackground }]}>
         <SearchBar
           value={filterString}
           onChangeText={setFilterString}
           placeholder="Filter by title"
+          containerStyle={{
+            backgroundColor:theme.colors.primaryBackground,
+            borderColor:theme.colors.primaryBackground,
+            elevation: 10}}
         />
         {notecards.map((notecard, i) => (
           <ListItem
@@ -109,16 +99,16 @@ function Home( { navigation }: HomeProps) {
           >
             <ListItem.Content>
               <ListItem.Title
-                style={{ color: 'white', fontWeight: 'bold' }}
+                style={{ color: theme.colors.primaryText, fontWeight: 'bold' }}
               >
                 {notecard.name}
               </ListItem.Title>
             </ListItem.Content>
-            <ListItem.Chevron color="white" />
+            <ListItem.Chevron color={theme.colors.primaryText} />
           </ListItem>
         ))}
-      </View>
-    </>
+      </ScrollView>
+    </View>
   )
 }
 

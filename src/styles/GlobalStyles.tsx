@@ -43,6 +43,17 @@ const GlobalStyles = StyleSheet.create({
   },
   cardIcon: {
     flex: 0.05
+  },
+  homePageWelcomeSection:{
+    flex: 0.33,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  homePageNotecardSection:{
+    flex: 0.66,
+    width: '100%',
+    marginBottom: 10
   }
 });
 
