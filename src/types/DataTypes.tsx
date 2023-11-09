@@ -14,6 +14,7 @@ type StackParamList = {
     name: string;
     card: NotecardData;
   };
+  DrawerNavigator: undefined;
   Home: undefined;
   Notecard: {
     name: string;
