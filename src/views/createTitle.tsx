@@ -57,6 +57,8 @@ function CreateTitle ({ navigation }: CreateProps) {
         placeholder="Name"
         style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
         onChangeText={(title) => setTitle(title)}
+        inputContainerStyle={{borderColor:theme.colors.primaryText}}
+        placeholderTextColor={theme.colors.secondaryText}
       />
     </View>
   )

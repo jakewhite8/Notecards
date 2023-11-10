@@ -12,6 +12,7 @@ const theme = createTheme({
     secondaryBackground: '#ffcd94',
     tertiaryBackground: '#65737e',
     primaryText: '#3b444b',
+    secondaryText: '#946b2d',
     primaryButton: '#f7a583',
     icon: '#3b444b'
   },
@@ -21,6 +22,7 @@ const theme = createTheme({
     secondaryBackground: '#36454f',
     tertiaryBackground: '#c0c5ce',
     primaryText: '#faebd7',
+    secondaryText: '#65737e',
     primaryButton: '#946b2d',
     icon: '#faebd7'
   },
