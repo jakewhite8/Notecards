@@ -4,20 +4,23 @@ import { StackParamList } from '../types/DataTypes';
 import { Text, View, TextInput, ScrollView } from 'react-native';
 import { Input as BaseInput } from '@rneui/base';
 import {
+  Button,
   Card,
   Input,
   InputProps,
-  Button
+  useTheme
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import Toast from 'react-native-toast-message';
+import PrimaryButton from '../components/primaryButton';
 
 type CreateCardProps = NativeStackScreenProps<StackParamList, 'CreateCard'>;
 
 function CreateCard ({ navigation, route }: CreateCardProps) {
   const notecardTitle = route.params.cardTitle
   const styles = GlobalStyles;
+  const { theme } = useTheme();
 
   interface WrappedInputProps extends InputProps {
     ref?: React.RefObject<TextInput & BaseInput>;
@@ -58,50 +61,61 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Create Card</Text>
-          <Text>{notecardTitle}</Text>
-          <Text>State Title</Text>
-          <Text>{state.newNotecardSet.title}</Text>
           <Card
-            containerStyle={styles.card}>
-            <Card.Title>Front of Notecard</Card.Title>
-            <Card.Divider />
-            <Input
-              multiline
-              {...(inputProps as WrappedInputProps)}
-              containerStyle={{ width: '90%' }}
-              style={styles.inputFieldsStyle}
-              onChangeText={setFrontNotecard}
-              value={frontNotecardString}
-            />
+            containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground, marginTop: 20}]}
+            wrapperStyle={styles.cardWrapper}>
+            <View style={styles.cardTitle}>
+              <Card.Title style={{color: theme.colors.secondaryText}}>Front of Notecard</Card.Title>
+              <Card.Divider />
+            </View>
+            <View style={styles.cardCreateBody}>
+              <Input
+                multiline
+                {...(inputProps as WrappedInputProps)}
+                containerStyle={{ width: '90%', height: '100%' }}
+                style={[styles.inputFieldsStyle, { color: theme.colors.primaryText }]}
+                onChangeText={setFrontNotecard}
+                placeholder="Insert the contents of the front of the notecard here"
+                placeholderTextColor={theme.colors.secondaryText}
+                inputContainerStyle={{ borderColor: theme.colors.primaryBackground, height: '100%' }}
+                value={frontNotecardString}
+              />
+            </View>
           </Card>
           <Card
-            containerStyle={styles.card}>
-            <Card.Title>Back of Notecard</Card.Title>
-            <Card.Divider />
-            <Input
-              multiline
-              value={backNotecardString}
-              {...(inputProps as WrappedInputProps)}
-              containerStyle={{ width: '90%' }}
-              style={styles.inputFieldsStyle}
-              onChangeText={setBackNotecard}
-            />
+            containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground}]}
+            wrapperStyle={styles.cardWrapper}>
+            <View style={styles.cardTitle}>
+              <Card.Title style={{color: theme.colors.secondaryText}}>Back of Notecard</Card.Title>
+              <Card.Divider />
+            </View>
+            <View style={styles.cardCreateBody}>
+              <Input
+                multiline
+                {...(inputProps as WrappedInputProps)}
+                containerStyle={{ width: '90%', height: '100%' }}
+                style={[styles.inputFieldsStyle, { color: theme.colors.primaryText }]}
+                onChangeText={setBackNotecard}
+                placeholder="Insert the contents of the back of the notecard here"
+                placeholderTextColor={theme.colors.secondaryText}
+                inputContainerStyle={{ borderColor: theme.colors.primaryBackground, height: '100%' }}
+                value={backNotecardString}
+              />
+            </View>
           </Card>
-          {frontNotecardString.length > 0 && (<Text>Front: {frontNotecardString}</Text>)}
-          {backNotecardString.length > 0 && (<Text>Back: {backNotecardString}</Text>)}
-          <Button
+          <PrimaryButton
             title="Review Set"
-            containerStyle={styles.button}
-            onPress={() => navigation.navigate('ReviewSet')}/>
-          <Button
+            onPressFunction={() => navigation.navigate('ReviewSet')}
+            >
+          </PrimaryButton>
+          <PrimaryButton
             title="Next Card"
-            containerStyle={styles.button}
-            loading={nextButtonLoading}
-            onPress={addCard} />
+            onPressFunction={addCard}
+            >
+          </PrimaryButton>
         </View>
         <Toast />
       </ScrollView>

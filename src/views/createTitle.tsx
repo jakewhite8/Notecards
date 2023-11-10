@@ -8,9 +8,9 @@ import {
   Input,
   InputProps,
   Icon,
+  useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
-import { useTheme } from '@rneui/themed';
 
 type CreateProps = NativeStackScreenProps<StackParamList, 'CreateTitle'>
 

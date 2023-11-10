@@ -8,7 +8,6 @@ const GlobalStyles = StyleSheet.create({
   },
   inputFieldsStyle: {
     borderWidth: 0,
-    color: '#000',
     width: '100%'
   },
   button: {
@@ -40,6 +39,10 @@ const GlobalStyles = StyleSheet.create({
   },
   cardBody: {
     flex: 0.9
+  },
+  cardCreateBody: {
+    flex: 0.95,
+    width: '100%'
   },
   cardIcon: {
     flex: 0.05
