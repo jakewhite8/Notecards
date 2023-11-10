@@ -8,18 +8,18 @@ import 'react-native-gesture-handler';
 const theme = createTheme({
   lightColors: {
     primary: '#e7e7e8',
-    tertiary: '#124789',
     primaryBackground: '#faebd7',
     secondaryBackground: '#ffcd94',
+    tertiaryBackground: '#65737e',
     primaryText: '#3b444b',
     primaryButton: '#f7a583',
     icon: '#3b444b'
   },
   darkColors: {
     primary: '#000',
-    tertiary: '#f1330a',
     primaryBackground: '#3b444b',
     secondaryBackground: '#36454f',
+    tertiaryBackground: '#c0c5ce',
     primaryText: '#faebd7',
     primaryButton: '#946b2d',
     icon: '#faebd7'

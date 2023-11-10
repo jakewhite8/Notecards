@@ -17,11 +17,19 @@ function DrawerNavigator() {
          headerStyle: {
            backgroundColor: theme.colors.primaryBackground,
          },
-         headerTintColor: '#fff',
+         headerTintColor: theme.colors.primaryText,
          headerTitleStyle: {
            fontWeight: 'bold',
            color: theme.colors.primaryText
          },
+         drawerStyle:{
+           backgroundColor: theme.colors.primaryBackground,
+           width: '50%'
+         },
+         drawerLabelStyle: {
+           color: theme.colors.primaryText,
+         },
+         drawerActiveTintColor: theme.colors.tertiaryBackground,
        }} >
       <Drawer.Screen
         name="Home"

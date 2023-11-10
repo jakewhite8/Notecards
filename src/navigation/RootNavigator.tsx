@@ -32,7 +32,7 @@ function RootNavigator() {
           headerStyle: {
             backgroundColor: theme.colors.primaryBackground,
           },
-          headerTintColor: '#fff',
+          headerTintColor: theme.colors.primaryText,
           headerTitleStyle: {
             fontWeight: 'bold',
             color: theme.colors.primaryText

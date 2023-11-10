@@ -63,10 +63,6 @@ function Home( { navigation }: HomeProps) {
             i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')
           }>
         </PrimaryButton>
-        <PrimaryButton
-          title="Settings"
-          onPressFunction={() => navigation.navigate('Settings')}>
-        </PrimaryButton>
       </View>
       <ScrollView style={[styles.homePageNotecardSection, {
         paddingVertical: 8,
