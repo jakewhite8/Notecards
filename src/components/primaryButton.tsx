@@ -12,6 +12,7 @@ type PrimaryButtonProps = {
   title: string;
   children: React.ReactNode | undefined;
   onPressFunction: () => void;
+  loading?: boolean;
 };
 
 const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props) => {
@@ -22,6 +23,7 @@ const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props) => {
       containerStyle={[styles.button, {backgroundColor: theme.colors.primaryBackground}]}
       onPress={props.onPressFunction}
       color={theme.colors.primaryButton}
+      loading={props.loading}
       raised={true}
       >
       {props.title ?

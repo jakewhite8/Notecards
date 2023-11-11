@@ -114,6 +114,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
           <PrimaryButton
             title="Next Card"
             onPressFunction={addCard}
+            loading={nextButtonLoading}
             >
           </PrimaryButton>
         </View>
