@@ -9,13 +9,13 @@ import GlobalStyles from '../styles/GlobalStyles';
 
 const styles = GlobalStyles;
 
-type NotecardDisplayComponentProps = {
+type NotecardViewComponentProps = {
   notecardSide: string;
   body: string;
   flipNotecardFunction: () => void;
 };
 
-const NotecardDisplay: React.FunctionComponent<NotecardDisplayComponentProps> = (props) => {
+const NotecardView: React.FunctionComponent<NotecardViewComponentProps> = (props) => {
   const { theme } = useTheme();
   
   return (
@@ -45,5 +45,5 @@ const NotecardDisplay: React.FunctionComponent<NotecardDisplayComponentProps> = 
     </TouchableOpacity>
   )
 }
-
-export default NotecardDisplay;
+// Change this to NotecardView
+export default NotecardView;

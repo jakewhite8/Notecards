@@ -7,7 +7,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
-import NotecardDisplay from '../components/notecardDisplay';
+import NotecardView from '../components/notecardView';
 import PrimaryButton from '../components/primaryButton';
 import { useState } from 'react';
 
@@ -62,12 +62,12 @@ function Notecard( {navigation, route }: NotecardProps) {
           </View>
           <ScrollView>
             { displayFrontNotecard ? 
-            <NotecardDisplay 
+            <NotecardView 
               notecardSide='Front'
               body={shuffledNotecards[count][0]}
               flipNotecardFunction={() => setDisplayFrontNotecard(!displayFrontNotecard)} />
             :
-            <NotecardDisplay 
+            <NotecardView 
               notecardSide='Back'
               body={shuffledNotecards[count][1]}
               flipNotecardFunction={() => setDisplayFrontNotecard(!displayFrontNotecard)} />
