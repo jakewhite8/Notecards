@@ -1,15 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const GlobalStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputFieldsStyle: {
-    borderWidth: 0,
-    width: '100%'
-  },
   button: {
     width: 150,
     marginHorizontal: 50,
@@ -47,6 +38,11 @@ const GlobalStyles = StyleSheet.create({
   cardIcon: {
     flex: 0.05
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   homePageWelcomeSection:{
     flex: 0.33,
     width: '100%',
@@ -57,7 +53,16 @@ const GlobalStyles = StyleSheet.create({
     flex: 0.66,
     width: '100%',
     marginBottom: 10
-  }
+  },
+  inputFieldsContainer: {
+    width: '90%',
+    height: '100%',
+  },
+  inputFieldsStyle: {
+    borderWidth: 0,
+    width: '100%',
+    height: '100%',
+  },
 });
 
 export default GlobalStyles
