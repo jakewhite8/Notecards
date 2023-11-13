@@ -6,11 +6,11 @@ import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 import {
   Button,
-  Card,
-  Dialog,
-  Icon
+  Icon,
+  useTheme
 } from '@rneui/themed';
-import NotecardDialog from '../components/notecardDialog'
+import NotecardDialog from '../components/notecardDialog';
+import NotecardEditable from '../components/notecardEditable';
 
 const styles = GlobalStyles
 
@@ -18,6 +18,7 @@ type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 
 function ReviewSet( { navigation }: ReviewSetProps) {
   const { state, dispatch } = useAppState();
+  const { theme } = useTheme();
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
   const [character, setCharacter] = useState('none')
   const [characterCount, setCharacterCount] = useState(0)
@@ -65,29 +66,14 @@ function ReviewSet( { navigation }: ReviewSetProps) {
         <View style={styles.container}>
           <Text>Character loaded:</Text>
           <Text>{character}</Text>
-          <Text>Review Set</Text>
-          <Text>Title: {title}</Text>
+          <Text style={{color: theme.colors.primaryText}}>Review Set</Text>
+          <Text style={{color: theme.colors.primaryText}}>Title: {title}</Text>
           {notecards.map((notecard, i) => (
             <View key={i}>
-              <Card
-                containerStyle={styles.card}>
-                <Card.Title>
-                  <Text>Card: {i + 1}</Text>
-                  <Icon
-                    name="edit"
-                    type="entypo"
-                    color="blue"
-                    size={20}
-                    onPress={() => toggleDialog(i)}
-                  />
-                </Card.Title>
-                <Card.Divider />
-                <Text>Front:</Text>
-                <Text>{notecard[0]}</Text>
-                <Card.Divider />
-                <Text>Back:</Text>
-                <Text>{notecard[1]}</Text>
-              </Card>
+              <NotecardEditable
+                cardNumber={i+1}
+                toggleDialogFunction={() => toggleDialog(i)}
+                notecard={notecard} />
               <NotecardDialog
                 notecard={notecard}
                 notecardIndex={i}
