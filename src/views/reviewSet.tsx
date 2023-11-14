@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
 import { 
   ScrollView,
-  StyleSheet,
   Text,
   View 
 } from 'react-native';
@@ -18,18 +17,6 @@ import NotecardEditable from '../components/notecardEditable';
 import PrimaryButton from '../components/primaryButton';
 
 const styles = GlobalStyles;
-const reviewSetStyles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    width: '100%',
-  },
-  buttonText: {
-    fontWeight: 'bold',
-    fontSize: 17
-  }
-})
 
 type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 
@@ -102,9 +89,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
           <PrimaryButton
             onPressFunction={() => getCharacter()}
             loading={submitLoading}>
-            <View style={reviewSetStyles.buttonContainer}>
+            <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
-                reviewSetStyles.buttonText,
+                styles.primaryButtonChildrenText,
                 {color: theme.colors.primaryText}]}>Submit</Text>
               <Icon
                 color={theme.colors.primaryText}
@@ -115,9 +102,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
           </PrimaryButton>
           <PrimaryButton
             onPressFunction={() => navigation.navigate('Home')}>
-            <View style={reviewSetStyles.buttonContainer}>
+            <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
-                reviewSetStyles.buttonText,
+                styles.primaryButtonChildrenText,
                 {color: theme.colors.primaryText}]}>Cancel</Text>
               <Icon
                 color={theme.colors.primaryText}
