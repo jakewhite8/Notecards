@@ -1,18 +1,35 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
-import { Text, View, ScrollView } from 'react-native';
+import { 
+  ScrollView,
+  StyleSheet,
+  Text,
+  View 
+} from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useState } from 'react';
 import {
-  Button,
   Icon,
   useTheme
 } from '@rneui/themed';
 import NotecardDialog from '../components/notecardDialog';
 import NotecardEditable from '../components/notecardEditable';
+import PrimaryButton from '../components/primaryButton';
 
-const styles = GlobalStyles
+const styles = GlobalStyles;
+const reviewSetStyles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 17
+  }
+})
 
 type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 
@@ -61,7 +78,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <ScrollView>
         <View style={styles.container}>
           <Text>Character loaded:</Text>
@@ -69,7 +86,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
           <Text style={{color: theme.colors.primaryText}}>Review Set</Text>
           <Text style={{color: theme.colors.primaryText}}>Title: {title}</Text>
           {notecards.map((notecard, i) => (
-            <View key={i}>
+            <ScrollView key={i}>
               <NotecardEditable
                 cardNumber={i+1}
                 toggleDialogFunction={() => toggleDialog(i)}
@@ -80,28 +97,35 @@ function ReviewSet( { navigation }: ReviewSetProps) {
                 isVisible={dialogVisibilities[i]}
                 toggleDialog={() => toggleDialog(i)}
                 updateNotecardsFunction={(updatedNotecard: [string, string]) => updateNotecards(i, updatedNotecard)}/>
-            </View>
+            </ScrollView>
           ))}
-          <Button
-            title="Submit"
-            containerStyle={styles.button}
-            loading={submitLoading}
-            onPress={() => getCharacter()}>
-            {'Submit '}
-            <Icon
-              type="antdesign"
-              size={25}
-              name="enter"/>
-          </Button>
-          <Button
-            containerStyle={styles.button}
-            onPress={() => navigation.navigate('Home')} >
-            {'Cancel '}
-            <Icon
-              type="foundation"
-              size={25}
-              name="prohibited"/>
-          </Button>
+          <PrimaryButton
+            onPressFunction={() => getCharacter()}
+            loading={submitLoading}>
+            <View style={reviewSetStyles.buttonContainer}>
+              <Text style={[
+                reviewSetStyles.buttonText,
+                {color: theme.colors.primaryText}]}>Submit</Text>
+              <Icon
+                color={theme.colors.primaryText}
+                type="antdesign"
+                size={25}
+                name="enter"/>
+            </View>
+          </PrimaryButton>
+          <PrimaryButton
+            onPressFunction={() => navigation.navigate('Home')}>
+            <View style={reviewSetStyles.buttonContainer}>
+              <Text style={[
+                reviewSetStyles.buttonText,
+                {color: theme.colors.primaryText}]}>Cancel</Text>
+              <Icon
+                color={theme.colors.primaryText}
+                type="foundation"
+                size={25}
+                name="prohibited"/>
+            </View>
+          </PrimaryButton>
         </View>
       </ScrollView>
     </View>

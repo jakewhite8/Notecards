@@ -9,8 +9,8 @@ import GlobalStyles from '../styles/GlobalStyles';
 const styles = GlobalStyles;
 
 type PrimaryButtonProps = {
-  title: string;
-  children: React.ReactNode | undefined;
+  title?: string;
+  children?: React.ReactNode | undefined;
   onPressFunction: () => void;
   loading?: boolean;
 };
