@@ -1,6 +1,6 @@
 import React from 'react';
 import { FAB } from '@rneui/themed';
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 
 type AddButtonComponentProps = {

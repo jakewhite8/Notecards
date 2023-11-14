@@ -63,6 +63,16 @@ const GlobalStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  primaryButtonChildrenContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
+  },
+  primaryButtonChildrenText: {
+    fontWeight: 'bold',
+    fontSize: 17
+  }
 });
 
 export default GlobalStyles
