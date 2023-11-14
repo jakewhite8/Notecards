@@ -9,7 +9,7 @@ type AddButtonComponentProps = {
 
 const AddButton: React.FunctionComponent<AddButtonComponentProps> = (props) => {
   return ( 
-    <View>
+    <View style={{marginRight: 10}}>
       <FAB
         icon={{ name: 'add', color: 'white' }}
         color="green"
