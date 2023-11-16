@@ -4,6 +4,7 @@ import { useTheme } from '@rneui/themed';
 import Home from '../views/home';
 import Settings from '../views/settings';
 import AddButton from '../components/addButton';
+import CustomDrawerContent from './CustomDrawerContent';
 
 function DrawerNavigator() {
 
@@ -12,6 +13,7 @@ function DrawerNavigator() {
 
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
        initialRouteName="Home"
        screenOptions={{
          headerStyle: {
@@ -27,6 +29,7 @@ function DrawerNavigator() {
            width: '50%'
          },
          drawerLabelStyle: {
+           fontWeight: 'bold',
            color: theme.colors.primaryText,
          },
          drawerActiveTintColor: theme.colors.tertiaryBackground,

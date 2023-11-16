@@ -43,6 +43,19 @@ const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  drawerSwitchContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 17,
+    paddingRight: 17
+  },
+  drawerSwitchText: {
+    fontWeight: 'bold',
+  },
+  drawerSwitch: {
+    flex: 0.5
+  },
   homePageWelcomeSection:{
     flex: 0.33,
     width: '100%',
