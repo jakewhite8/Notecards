@@ -14,26 +14,26 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
-       initialRouteName="Home"
-       screenOptions={{
-         headerStyle: {
-           backgroundColor: theme.colors.primaryBackground,
-         },
-         headerTintColor: theme.colors.primaryText,
-         headerTitleStyle: {
-           fontWeight: 'bold',
-           color: theme.colors.primaryText
-         },
-         drawerStyle:{
-           backgroundColor: theme.colors.primaryBackground,
-           width: '50%'
-         },
-         drawerLabelStyle: {
-           fontWeight: 'bold',
-           color: theme.colors.primaryText,
-         },
-         drawerActiveTintColor: theme.colors.tertiaryBackground,
-       }} >
+      initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.primaryBackground,
+        },
+        headerTintColor: theme.colors.primaryText,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: theme.colors.primaryText
+        },
+        drawerStyle:{
+          backgroundColor: theme.colors.primaryBackground,
+          width: '50%'
+        },
+        drawerLabelStyle: {
+          fontWeight: 'bold',
+          color: theme.colors.primaryText,
+        },
+        drawerActiveTintColor: theme.colors.tertiaryBackground,
+      }} >
       <Drawer.Screen
         name="Home"
         component={Home}
