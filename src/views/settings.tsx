@@ -8,6 +8,7 @@ import {
   useTheme,
 } from '@rneui/themed';
 import { useTranslation } from 'react-i18next';
+import PrimaryButton from '../components/primaryButton';
 
 type SettingProps = NativeStackScreenProps<StackParamList, 'Settings'>;
 
@@ -33,31 +34,38 @@ function Settings ({ navigation, route }: SettingProps) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
+    <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
+      <View style={styles.container}>
         {state.user ? (
           <Text>Welcome, {state.user.name}!</Text>
         ) : (
           <Text>Please log in</Text>
         )}
         <View style={styles.buttonContainer}>
-          <Button title="LogIn" containerStyle={styles.button} onPress={logJakeIn} />
-          <Button title="Logout" containerStyle={styles.button} onPress={handleLogout} />
+          <PrimaryButton
+            title="Log In"
+            onPressFunction={logJakeIn}>
+          </PrimaryButton>
+          <PrimaryButton
+            title="Logout"
+            onPressFunction={handleLogout}>
+          </PrimaryButton>
         </View>
       </View>
       <View style={styles.container}>
         <Text style={{fontSize: 20, marginBottom: 20}}>{t('hello')}</Text>
-        <Button
+        <PrimaryButton
           title={t('change')}
-          containerStyle={styles.button}
-          onPress={() =>
-            i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')
-          }>
-        </Button>
+          onPressFunction={() =>
+            i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')} >
+        </PrimaryButton>
       </View>
       <View style={styles.container}>
         <Text>Settings page</Text>
-        <Button title="Theme" containerStyle={styles.button} onPress={() => toggleTheme()} />
+        <PrimaryButton
+          title="Theme"
+          onPressFunction={() => toggleTheme()}>
+        </PrimaryButton>
       </View>
     </View>
   )
