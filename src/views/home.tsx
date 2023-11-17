@@ -47,7 +47,7 @@ function Home( { navigation }: HomeProps) {
         notecards: TypeScriptNotecards.notecards
       }
     })
-    navigation.navigate('Details', {name: `${notecard.name} Notecards`, card: notecard})
+    navigation.navigate('Details', {name: `${notecard.name} ${t('notecardSet')}`, card: notecard})
   }
 
   return (
@@ -70,7 +70,7 @@ function Home( { navigation }: HomeProps) {
         <SearchBar
           value={filterString}
           onChangeText={setFilterString}
-          placeholder="Filter by title"
+          placeholder={t('filterByTitle')}
           containerStyle={{
             backgroundColor:theme.colors.primaryBackground,
             borderColor:theme.colors.primaryBackground,

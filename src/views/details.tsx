@@ -4,6 +4,7 @@ import { Button, useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
+import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton'
 
 const styles = GlobalStyles;
@@ -17,6 +18,7 @@ type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 function Details( { navigation, route }: DetailsProps) {
   const { theme } = useTheme();
   const { state, dispatch } = useAppState();
+  const {t, i18n} = useTranslation();
 
   const notecardSet = state.currentNotecardSet
 
@@ -26,17 +28,13 @@ function Details( { navigation, route }: DetailsProps) {
   }
 
   const startNotecard = (notecardSet: NotecardSet) => {
-    let notecardPageTitle = `${notecardSet.title} Notecard`
-    if (notecardSet.notecards.length > 1) {
-      notecardPageTitle = notecardPageTitle + 's';
-    }
-    navigation.navigate('Notecard', {name: notecardPageTitle, cardId: route.params.card.cardId})
+    navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: route.params.card.cardId})
   }
 
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <PrimaryButton
-        title="Start"
+        title={t('start')}
         onPressFunction={() => startNotecard(notecardSet)} >
       </PrimaryButton>
     </View> 

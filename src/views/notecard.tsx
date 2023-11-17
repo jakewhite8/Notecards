@@ -10,6 +10,7 @@ import { useAppState } from '../context/GlobalState';
 import NotecardView from '../components/notecardView';
 import PrimaryButton from '../components/primaryButton';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const styles = GlobalStyles;
 
@@ -19,6 +20,7 @@ function Notecard( {navigation, route }: NotecardProps) {
   const [count, setCount] = useState(0)
   const [displayFrontNotecard, setDisplayFrontNotecard] = useState(true)
   const { state, dispatch } = useAppState();
+  const {t, i18n} = useTranslation();
   const notecards = state.currentNotecardSet.notecards
   const { theme } = useTheme();
 
@@ -58,7 +60,7 @@ function Notecard( {navigation, route }: NotecardProps) {
       <ScrollView>
         <View style={styles.container}>
           <View style={{padding: 10}}>
-            <Text style={{color: theme.colors.primaryText}}>Notecard {count + 1 }/{notecards.length}</Text>
+            <Text style={{color: theme.colors.primaryText}}>{t('notecard')} {count + 1 }/{notecards.length}</Text>
           </View>
           <ScrollView>
             { displayFrontNotecard ? 
@@ -76,25 +78,25 @@ function Notecard( {navigation, route }: NotecardProps) {
           <View style={styles.buttonContainer}>
             {count > 0 && (
               <PrimaryButton
-                title="Previous Card"
+                title={t('previousNotecard')}
                 onPressFunction={() => changeCard(count - 1)} >
               </PrimaryButton>
             )}
             {count < (notecards.length - 1) ? (
               <PrimaryButton
-                title="Next Card"
+                title={t('nextNotecard')}
                 onPressFunction={() => changeCard(count + 1)} >
               </PrimaryButton>
             ) : (
               <PrimaryButton
-                title="Restart"
+                title={t('restart')}
                 onPressFunction={() => reset()} >
               </PrimaryButton>
             )}
           </View>
           <View>
             <PrimaryButton
-              title="Home"
+              title={t('home')}
               onPressFunction={() => navigation.navigate('Home')} >
             </PrimaryButton>
           </View>

@@ -10,6 +10,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
+import { useTranslation } from 'react-i18next';
 
 const styles = GlobalStyles;
 const notecardEditableStyles = StyleSheet.create({
@@ -45,6 +46,7 @@ type NotecardEditableComponentProps = {
 
 const NotecardEditable: React.FunctionComponent<NotecardEditableComponentProps> = (props) => {
   const { theme } = useTheme()
+  const {t, i18n} = useTranslation();
   return (
     <Card
       containerStyle={[styles.card, {
@@ -55,7 +57,7 @@ const NotecardEditable: React.FunctionComponent<NotecardEditableComponentProps> 
         <View style={notecardEditableStyles.cardTitleIcon}>
         </View>
         <View style={notecardEditableStyles.cardTitleText}>
-          <Card.Title style={{color: theme.colors.primaryText}}>Card: {props.cardNumber}</Card.Title>
+          <Card.Title style={{color: theme.colors.primaryText}}>{t('notecard')}: {props.cardNumber}</Card.Title>
         </View>
         <View style={notecardEditableStyles.cardTitleIcon}>
           <Icon
@@ -69,12 +71,12 @@ const NotecardEditable: React.FunctionComponent<NotecardEditableComponentProps> 
       </View>
       <View style={notecardEditableStyles.cardBodyContainer}>
         <Card.Divider />
-        <Text style={[notecardEditableStyles.cardBodyText, {color: theme.colors.primaryText}]}>Front:</Text>
+        <Text style={[notecardEditableStyles.cardBodyText, {color: theme.colors.primaryText}]}>{t('front')}:</Text>
         <Text style={{color: theme.colors.primaryText}}>{props.notecard[0]}</Text>
       </View>
       <View style={notecardEditableStyles.cardBodyContainer}>
         <Card.Divider />
-        <Text style={[notecardEditableStyles.cardBodyText, {color: theme.colors.primaryText}]}>Back:</Text>
+        <Text style={[notecardEditableStyles.cardBodyText, {color: theme.colors.primaryText}]}>{t('back')}:</Text>
         <Text style={{color: theme.colors.primaryText}}>{props.notecard[1]}</Text>
       </View>
     </Card>

@@ -8,6 +8,7 @@ import { useTheme } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
 import PrimaryButton from '../components/primaryButton';
 import NotecardInput from '../components/notecardInput';
+import { useTranslation } from 'react-i18next';
 
 type CreateCardProps = NativeStackScreenProps<StackParamList, 'CreateCard'>;
 
@@ -15,6 +16,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
   const notecardTitle = route.params.cardTitle
   const styles = GlobalStyles;
   const { theme } = useTheme();
+  const {t, i18n} = useTranslation();
 
   const [frontNotecardString, setFrontNotecard] = useState('');
   const [backNotecardString, setBackNotecard] = useState('');
@@ -44,7 +46,7 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
 
     Toast.show({
       type: 'success',
-      text1: 'Notecard Added Successfully',
+      text1: t('notecardCreatedSuccessfully'),
       visibilityTime: 1500
     });
     setNextButtonLoading(false)
@@ -63,12 +65,12 @@ function CreateCard ({ navigation, route }: CreateCardProps) {
             cardSide="back"
             onChangeFunction={setBackNotecard} />
           <PrimaryButton
-            title="Review Set"
+            title={t('reviewSet')}
             onPressFunction={() => navigation.navigate('ReviewSet')}
             >
           </PrimaryButton>
           <PrimaryButton
-            title="Next Card"
+            title={t('nextNotecard')}
             onPressFunction={addCard}
             loading={nextButtonLoading}
             >

@@ -43,11 +43,11 @@ function Settings ({ navigation, route }: SettingProps) {
         )}
         <View style={styles.buttonContainer}>
           <PrimaryButton
-            title="Log In"
+            title={t('login')}
             onPressFunction={logJakeIn}>
           </PrimaryButton>
           <PrimaryButton
-            title="Logout"
+            title={t('logout')}
             onPressFunction={handleLogout}>
           </PrimaryButton>
         </View>
@@ -63,7 +63,7 @@ function Settings ({ navigation, route }: SettingProps) {
       <View style={styles.container}>
         <Text>Settings page</Text>
         <PrimaryButton
-          title="Theme"
+          title={t('theme')}
           onPressFunction={() => toggleTheme()}>
         </PrimaryButton>
       </View>

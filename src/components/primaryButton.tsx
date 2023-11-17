@@ -20,7 +20,7 @@ const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props) => {
   
   return (
     <Button 
-      containerStyle={[styles.button, {backgroundColor: theme.colors.primaryBackground}]}
+      containerStyle={styles.button}
       onPress={props.onPressFunction}
       color={theme.colors.primaryButton}
       loading={props.loading}

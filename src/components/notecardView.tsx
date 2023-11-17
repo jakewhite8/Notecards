@@ -5,6 +5,7 @@ import {
   Icon,
   useTheme
 } from '@rneui/themed';
+import { useTranslation } from 'react-i18next';
 import GlobalStyles from '../styles/GlobalStyles';
 
 const styles = GlobalStyles;
@@ -17,6 +18,7 @@ type NotecardViewComponentProps = {
 
 const NotecardView: React.FunctionComponent<NotecardViewComponentProps> = (props) => {
   const { theme } = useTheme();
+  const {t, i18n} = useTranslation();
   
   return (
     <TouchableOpacity
@@ -26,7 +28,7 @@ const NotecardView: React.FunctionComponent<NotecardViewComponentProps> = (props
         containerStyle={[styles.card, {backgroundColor: theme.colors.primaryBackground}]}
         wrapperStyle={styles.cardWrapper}>
         <View style={styles.cardTitle}>
-          <Card.Title style={{color: theme.colors.primaryText}}>{props.notecardSide}</Card.Title>
+          <Card.Title style={{color: theme.colors.primaryText}}>{props.notecardSide == 'Front' ? t('front') : t('back')}</Card.Title>
           <Card.Divider />
         </View>
         <View style={styles.cardBody}>

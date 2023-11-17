@@ -5,11 +5,13 @@ import Home from '../views/home';
 import Settings from '../views/settings';
 import AddButton from '../components/addButton';
 import CustomDrawerContent from './CustomDrawerContent';
+import { useTranslation } from 'react-i18next';
 
 function DrawerNavigator() {
 
   const Drawer = createDrawerNavigator<StackParamList>();
   const { theme, updateTheme } = useTheme();
+  const {t, i18n} = useTranslation();
 
   return (
     <Drawer.Navigator
@@ -38,7 +40,7 @@ function DrawerNavigator() {
         name="Home"
         component={Home}
         options={ ({ navigation }) => ({
-          title: 'Home',
+          title: t('home'),
           headerRight: () => (
             <AddButton 
               onClick={() => navigation.navigate('CreateTitle')}
@@ -49,7 +51,7 @@ function DrawerNavigator() {
         name="Settings"
         component={Settings}
         options={{
-          title: "Settings",
+          title: t('settings'),
         }} />
     </Drawer.Navigator>
   )

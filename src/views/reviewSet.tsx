@@ -15,6 +15,7 @@ import {
 import NotecardDialog from '../components/notecardDialog';
 import NotecardEditable from '../components/notecardEditable';
 import PrimaryButton from '../components/primaryButton';
+import { useTranslation } from 'react-i18next';
 
 const styles = GlobalStyles;
 
@@ -22,6 +23,7 @@ type ReviewSetProps = NativeStackScreenProps<StackParamList, 'ReviewSet'>;
 
 function ReviewSet( { navigation }: ReviewSetProps) {
   const { state, dispatch } = useAppState();
+  const {t, i18n} = useTranslation();
   const { theme } = useTheme();
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
   const [character, setCharacter] = useState('none')
@@ -70,8 +72,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
         <View style={styles.container}>
           <Text>Character loaded:</Text>
           <Text>{character}</Text>
-          <Text style={{color: theme.colors.primaryText}}>Review Set</Text>
-          <Text style={{color: theme.colors.primaryText}}>Title: {title}</Text>
+          <Text style={{color: theme.colors.primaryText}}>{t('title')}: {title}</Text>
           {notecards.map((notecard, i) => (
             <ScrollView key={i}>
               <NotecardEditable
@@ -92,7 +93,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
             <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
                 styles.primaryButtonChildrenText,
-                {color: theme.colors.primaryText}]}>Submit</Text>
+                {color: theme.colors.primaryText}]}>{t('submit')}</Text>
               <Icon
                 color={theme.colors.primaryText}
                 type="antdesign"
@@ -105,7 +106,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
             <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
                 styles.primaryButtonChildrenText,
-                {color: theme.colors.primaryText}]}>Cancel</Text>
+                {color: theme.colors.primaryText}]}>{t('cancel')}</Text>
               <Icon
                 color={theme.colors.primaryText}
                 type="foundation"

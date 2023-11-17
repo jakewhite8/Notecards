@@ -8,6 +8,7 @@ import ReviewSet from '../views/reviewSet';
 import { StackParamList } from '../types/DataTypes';
 import { useTheme } from '@rneui/themed';
 import DrawerNavigator from './DrawerNavigator';
+import { useTranslation } from 'react-i18next';
 
 function RootNavigator() {
   // Initalize the Navigator. Pass in the StackParamList as a genertic in order
@@ -21,6 +22,7 @@ function RootNavigator() {
   }
 
   const { theme, updateTheme } = useTheme();
+  const {t, i18n} = useTranslation();
 
   /*Navigation Container - manages our navigation tree
   and contains the navigation state*/
@@ -46,13 +48,13 @@ function RootNavigator() {
           name="CreateTitle"
           component={CreateTitle}
           options={{
-              title: "New Notecard",
+              title: t('newNotecard'),
             }} />
         <Stack.Screen
           name="CreateCard"
           component={CreateCard}
           options={{
-              title: "New Notecard",
+              title: t('newNotecard'),
             }} />
         <Stack.Screen
           name="Details"
@@ -70,7 +72,7 @@ function RootNavigator() {
           name="ReviewSet"
           component={ReviewSet}
           options={ ({ route }) => ({ 
-            title: "Review New Notecard Set",
+            title: t('reviewNewNotecardSet'),
           }) } />
       </Stack.Navigator>
     </NavigationContainer>

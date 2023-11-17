@@ -11,6 +11,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import { useAppState } from '../context/GlobalState';
+import { useTranslation } from 'react-i18next';
 
 type CreateProps = NativeStackScreenProps<StackParamList, 'CreateTitle'>
 
@@ -20,6 +21,7 @@ function CreateTitle ({ navigation }: CreateProps) {
   const [newTitle, setTitle] = useState('');
   const { state, dispatch } = useAppState();
   const { theme } = useTheme();
+  const {t, i18n} = useTranslation();
 
   interface WrappedInputProps extends InputProps {
     ref?: React.RefObject<TextInput & BaseInput>;
@@ -51,10 +53,10 @@ function CreateTitle ({ navigation }: CreateProps) {
             onPress={submitNotecardSetTitle}
           />
         }
-        label="New Notecard Set Title"
+        label={t('newNotecardSetTitle')}
         labelStyle={{color: theme.colors.primaryText}}
         containerStyle={{ width: '90%' }}
-        placeholder="Name"
+        placeholder={t('name')}
         style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
         onChangeText={(title) => setTitle(title)}
         inputContainerStyle={{borderColor:theme.colors.primaryText}}
