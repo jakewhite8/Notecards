@@ -31,6 +31,7 @@ function Home( { navigation }: HomeProps) {
   const { theme, updateTheme } = useTheme();
 
   const [filterString, setFilterString] = useState('');
+  const [activeNotecards, setActiveNotecards] = useState(notecards);
   const listItemProps = {};
 
   const { state, dispatch } = useAppState();
@@ -48,6 +49,15 @@ function Home( { navigation }: HomeProps) {
       }
     })
     navigation.navigate('Details', {name: `${notecard.name} ${t('notecardSet')}`, card: notecard})
+    setFilterString('')
+    setActiveNotecards(notecards)
+  }
+
+  const filterNotecards = ( value: string ) => {
+    setFilterString(value)
+    setActiveNotecards(
+      notecards.filter((notecard)=> notecard.name.toLowerCase().includes(value.toLowerCase()))
+    )
   }
 
   return (
@@ -69,14 +79,14 @@ function Home( { navigation }: HomeProps) {
         backgroundColor: theme.colors.secondaryBackground }]}>
         <SearchBar
           value={filterString}
-          onChangeText={setFilterString}
+          onChangeText={(value) => filterNotecards(value)}
           placeholder={t('filterByTitle')}
           containerStyle={{
             backgroundColor:theme.colors.primaryBackground,
             borderColor:theme.colors.primaryBackground,
             elevation: 10}}
         />
-        {notecards.map((notecard, i) => (
+        {activeNotecards.map((notecard, i) => (
           <ListItem
             {...(listItemProps as ListItemProps)}
             key={i}
