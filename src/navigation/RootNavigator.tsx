@@ -61,18 +61,27 @@ function RootNavigator() {
           component={Details}
           options={ ({ route }) => ({ 
             title: route.params.name,
+            headerTitleStyle: {
+              fontSize: i18n.language == 'en' ? 21 : 17
+            }
           }) } />
         <Stack.Screen
           name="Notecard"
           component={Notecard}
           options={ ({ route }) => ({ 
             title: route.params.name,
+            headerTitleStyle: {
+              fontSize: i18n.language == 'en' ? 21 : 17
+            }
           }) } />
         <Stack.Screen
           name="ReviewSet"
           component={ReviewSet}
           options={ ({ route }) => ({ 
             title: t('reviewNewNotecardSet'),
+            headerTitleStyle: {
+              fontSize: i18n.language == 'en' ? 21 : 17
+            }
           }) } />
       </Stack.Navigator>
     </NavigationContainer>
