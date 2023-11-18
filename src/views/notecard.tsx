@@ -77,21 +77,27 @@ function Notecard( {navigation, route }: NotecardProps) {
           </ScrollView>
           <View style={styles.buttonContainer}>
             {count > 0 && (
-              <PrimaryButton
-                title={t('previousNotecard')}
-                onPressFunction={() => changeCard(count - 1)} >
-              </PrimaryButton>
+              <View>
+                <PrimaryButton
+                  title={t('previousNotecard')}
+                  onPressFunction={() => changeCard(count - 1)} >
+                </PrimaryButton>
+              </View>
             )}
             {count < (notecards.length - 1) ? (
-              <PrimaryButton
-                title={t('nextNotecard')}
-                onPressFunction={() => changeCard(count + 1)} >
-              </PrimaryButton>
+              <View>
+                <PrimaryButton
+                  title={t('nextNotecard')}
+                  onPressFunction={() => changeCard(count + 1)} >
+                </PrimaryButton>
+              </View>
             ) : (
-              <PrimaryButton
-                title={t('restart')}
-                onPressFunction={() => reset()} >
-              </PrimaryButton>
+              <View>
+                <PrimaryButton
+                  title={t('restart')}
+                  onPressFunction={() => reset()} >
+                </PrimaryButton>
+              </View>
             )}
           </View>
           <View>
