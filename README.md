@@ -44,6 +44,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -87,6 +89,24 @@ Download the [Expo Application](Expo-url) on your mobile device
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- CONTACT -->
+## Contact
+
+Jake White - jake.white@colorado.edu
+
+Project Link: [https://github.com/jakewhite8/Notecards](https://github.com/jakewhite8/Notecards)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Resources I found helpful and would like to give credit to
+* [Img Shields](https://shields.io)
+* [Best-README-template](https://github.com/othneildrew/Best-README-Template/blob/master/README.md#readme-top)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/jakewhite8/Notecards.svg?style=for-the-badge
