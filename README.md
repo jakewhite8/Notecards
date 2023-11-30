@@ -45,6 +45,29 @@ The Notecards User Interface is built with TypeScript and React Native. It uses 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Run The App Locally
+### Prerequisites
+Download the [Expo Application](Expo-url) on your mobile device
+
+### Installation
+1. Clone the repo
+   ```sh
+   git clone https://github.com/jakewhite8/Notecards.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```   
+3. Start the application
+   ```sh
+   npm start
+   ```
+   Note the URL provided beginning with `exp` (ex: `exp://10.0.0.84:8081`)
+4. Open the Expo application on your mobile device. Enter the URL provided in the previous step and press connect. After a brief loading period (~30 seconds), the Home page of the Notecard application should be displayed
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/jakewhite8/Notecards.svg?style=for-the-badge
 [contributors-url]: https://github.com/jakewhite8/Notecards/graphs/contributors
@@ -56,3 +79,4 @@ The Notecards User Interface is built with TypeScript and React Native. It uses 
 [issues-url]: https://github.com/jakewhite8/Notecards/issues
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Expo-url]: https://expo.dev/
