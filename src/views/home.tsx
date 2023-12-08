@@ -62,18 +62,6 @@ function Home( { navigation }: HomeProps) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.homePageWelcomeSection, {backgroundColor: theme.colors.secondaryBackground}]}>
-        <Text style={{
-          fontSize: 20,
-          marginBottom: 20,
-          color: theme.colors.primaryText}}>{t('hello')}</Text>
-        <PrimaryButton
-          title={t('change')}
-          onPressFunction={() =>
-            i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')
-          }>
-        </PrimaryButton>
-      </View>
       <ScrollView style={[styles.homePageNotecardSection, {
         paddingVertical: 8,
         backgroundColor: theme.colors.secondaryBackground }]}>
