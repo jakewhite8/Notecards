@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import {
   Input,
   InputProps,
@@ -12,24 +12,24 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton'
-import Welcome from '../components/welcomeHeader'
 
 const styles = GlobalStyles;
 
-type LoginProps = NativeStackScreenProps<StackParamList, 'Login'>;
+type RegisterProps = NativeStackScreenProps<StackParamList, 'Register'>;
 
-function Login( { navigation, route }: LoginProps) {
+function Register( { navigation, route }: RegisterProps) {
   const { theme } = useTheme();
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
-  const [ userEmail, setUserEmail ] = useState('');
-  const [ userPassword, setUserPassword ] = useState('');
-  const [ userCredentialsError, setUserCredentialsError ] = useState(false);
-  const [ loginLoading, setLoginLoading ] = useState(false);
+  const [ newUserEmail, setNewUserEmail ] = useState('');
+  const [ newUserPassword, setNewUserPassword ] = useState('');
+  const [ newUserPasswordConfirm, setNewUserPasswordConfirm ] = useState('');
+  const [ newUserError, setNewUserError ] = useState(false);
+  const [ createAccountLoading, setCreateAccountLoading ] = useState(false);
 
-  const userEmailChange = (value: string) => {
-    setUserCredentialsError(false)
-    setUserEmail(value)
+  const newUserEmailChange = (value: string) => {
+    setNewUserError(false)
+    setNewUserEmail(value)
   }
 
   const validEmail = (email: string) => {
@@ -40,18 +40,18 @@ function Login( { navigation, route }: LoginProps) {
       );
   };
 
-  const login = () => {
-    setLoginLoading(true)
-    if (validEmail(userEmail)) {
-      dispatch({type: 'SET_USER', payload: {name: userEmail, id: 1}})
+  const createAccount = () => {
+    setCreateAccountLoading(true)
+    if (validEmail(newUserEmail) && newUserPassword == newUserPasswordConfirm && newUserPassword.length > 2) {
+      dispatch({type: 'SET_USER', payload: {name: newUserEmail, id: 1}})
       navigation.reset({
         index: 0,
         routes: [{ name: 'DrawerNavigator' }]
       });
     } else {
-      setUserCredentialsError(true)
+      setNewUserError(true)
     }
-    setLoginLoading(false)   
+    setCreateAccountLoading(false)   
   }
 
   const inputProps = {}
@@ -61,12 +61,11 @@ function Login( { navigation, route }: LoginProps) {
 
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
-      <Welcome />
       <View style={[styles.container, {width: '75%'}]}>
         <Input
           {...(inputProps as WrappedInputProps)}
           style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
-          onChangeText={(value) => userEmailChange(value)}
+          onChangeText={(value) => newUserEmailChange(value)}
           label={t('email')}
           labelStyle={{color: theme.colors.primaryText}}
           inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}
@@ -75,28 +74,30 @@ function Login( { navigation, route }: LoginProps) {
           secureTextEntry={true}
           {...(inputProps as WrappedInputProps)}
           style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
-          onChangeText={setUserPassword}
+          onChangeText={setNewUserPassword}
           label={t('password')}
           labelStyle={{color: theme.colors.primaryText}}
           inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}
+          />
+        <Input
+          secureTextEntry={true}
+          {...(inputProps as WrappedInputProps)}
+          style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
+          onChangeText={setNewUserPasswordConfirm}
+          label={t('passwordConfirm')}
+          labelStyle={{color: theme.colors.primaryText}}
+          inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}
           errorStyle={{ color: theme.colors.error }}
-          errorMessage={userCredentialsError ? t('invalidCredentials') : false}
+          errorMessage={newUserError ? t('createAccountError') : false}
           />
         <PrimaryButton
-          title={t('login')}
-          onPressFunction={login}
-          loading={loginLoading} >
+          title={t('createAccount')}
+          onPressFunction={createAccount}
+          loading={createAccountLoading} >
         </PrimaryButton>
-        <View style={{marginTop: 17}}>
-          <Text
-            style={{color: theme.colors.primaryText}}
-            onPress={ () => navigation.navigate('Register') }>
-            {t('createAccount')}
-          </Text>
-        </View>
       </View> 
     </View> 
   )
 }
 
-export default Login;
+export default Register;

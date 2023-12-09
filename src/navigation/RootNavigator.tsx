@@ -5,6 +5,7 @@ import CreateCard from '../views/createCard';
 import Details from '../views/details';
 import Login from '../views/login';
 import Notecard from '../views/notecard';
+import Register from '../views/register';
 import ReviewSet from '../views/reviewSet';
 import { StackParamList } from '../types/DataTypes';
 import { useTheme } from '@rneui/themed';
@@ -82,6 +83,12 @@ function RootNavigator() {
               fontSize: i18n.language == 'en' ? 21 : 17
             }
           }) } />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+              title: t('createAccount')
+            }} />
         <Stack.Screen
           name="ReviewSet"
           component={ReviewSet}

@@ -22,6 +22,7 @@ type StackParamList = {
     name: string;
     cardId: number;
   };
+  Register: undefined;
   ReviewSet: undefined;
   Settings: undefined;
 }
