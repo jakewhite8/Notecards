@@ -13,6 +13,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
+import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 const styles = GlobalStyles;
 
@@ -21,8 +22,10 @@ type CustomDrawerProps = DrawerContentComponentProps & NativeStackScreenProps<St
 function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
   const { theme, updateTheme } = useTheme();
   const {t, i18n} = useTranslation();
+  const { state, dispatch } = useAppState();
 
   const logout = () => {
+    dispatch({ type: 'LOGOUT' });
     navigation.reset({
       index: 0,
       routes: [{ name: 'Login' }],

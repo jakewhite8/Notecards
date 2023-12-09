@@ -16,6 +16,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton';
+import Welcome from '../components/welcomeHeader';
 
 const styles = GlobalStyles;
 
@@ -65,6 +66,7 @@ function Home( { navigation }: HomeProps) {
       <ScrollView style={[styles.homePageNotecardSection, {
         paddingVertical: 8,
         backgroundColor: theme.colors.secondaryBackground }]}>
+        <Welcome />
         <SearchBar
           value={filterString}
           onChangeText={(value) => filterNotecards(value)}
