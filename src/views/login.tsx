@@ -17,7 +17,10 @@ function Login( { navigation, route }: LoginProps) {
   const {t, i18n} = useTranslation();
 
   const login = () => {
-    navigation.navigate('Home')
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'DrawerNavigator' }]
+    });
   }
 
   return (

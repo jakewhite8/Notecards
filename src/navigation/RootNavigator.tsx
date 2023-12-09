@@ -71,6 +71,7 @@ function RootNavigator() {
           component={Login}
           options={{
               title: t('login'),
+              headerBackVisible: false,
             }} />
         <Stack.Screen
           name="Notecard"

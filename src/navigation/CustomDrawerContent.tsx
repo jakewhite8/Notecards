@@ -23,7 +23,10 @@ function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
   const {t, i18n} = useTranslation();
 
   const logout = () => {
-    navigation.navigate('Login')
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
   }
 
   return (
