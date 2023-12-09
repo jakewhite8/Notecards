@@ -1,3 +1,5 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackParamList } from '../types/DataTypes'
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -14,12 +16,19 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useTranslation } from 'react-i18next';
 const styles = GlobalStyles;
 
-function CustomDrawerContent(props: DrawerContentComponentProps) {
+type CustomDrawerProps = DrawerContentComponentProps & NativeStackScreenProps<StackParamList, 'CustomDrawer'>;
+
+function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
   const { theme, updateTheme } = useTheme();
   const {t, i18n} = useTranslation();
+
+  const logout = () => {
+    navigation.navigate('Login')
+  }
+
   return (
     <DrawerContentScrollView {...props}>
-      <View style={styles.drawerSwitchContainer}>
+      <View style={styles.drawerSectionContainer}>
         <View style={styles.drawerSwitch}>
           <Text style={[
             styles.drawerSwitchText,
@@ -36,8 +45,16 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           />
         </View>
       </View>
+      <View style={[styles.drawerSectionContainer, styles.drawerLogoutSection]}>
+        <Text
+          onPress={logout}
+          style={[
+            styles.drawerSwitchText,
+            {color: theme.colors.primaryText}]}
+          >{t("logout")}</Text>
+      </View>
       <Divider/>
-      <DrawerItemList {...props} />
+      <DrawerItemList {...props} navigation={navigation}/>
     </DrawerContentScrollView>
   );
 }

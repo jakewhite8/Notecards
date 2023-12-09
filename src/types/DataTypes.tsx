@@ -10,12 +10,14 @@ type StackParamList = {
   CreateCard: {
     cardTitle: string;
   }
+  CustomDrawer: undefined;
   Details: {
     name: string;
     card: NotecardData;
   };
   DrawerNavigator: undefined;
   Home: undefined;
+  Login: undefined;
   Notecard: {
     name: string;
     cardId: number;

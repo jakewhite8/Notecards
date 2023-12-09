@@ -43,7 +43,11 @@ const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  drawerSwitchContainer: {
+  drawerLogoutSection: {
+    marginBottom: 20,
+    marginTop: 15
+  },
+  drawerSectionContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -52,6 +56,7 @@ const GlobalStyles = StyleSheet.create({
   },
   drawerSwitchText: {
     fontWeight: 'bold',
+    width: '100%'
   },
   drawerSwitch: {
     flex: 0.5

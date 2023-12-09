@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateTitle from '../views/createTitle';
 import CreateCard from '../views/createCard';
 import Details from '../views/details';
+import Login from '../views/login';
 import Notecard from '../views/notecard';
 import ReviewSet from '../views/reviewSet';
 import { StackParamList } from '../types/DataTypes';
@@ -65,6 +66,12 @@ function RootNavigator() {
               fontSize: i18n.language == 'en' ? 21 : 17
             }
           }) } />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+              title: t('login'),
+            }} />
         <Stack.Screen
           name="Notecard"
           component={Notecard}
