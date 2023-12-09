@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
-import { Button, useTheme } from '@rneui/themed';
+import { View } from 'react-native';
+import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
