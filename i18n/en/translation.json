@@ -1,4 +1,5 @@
 {
+  activity: "Activity",
   back: "Back",
   cancel: "Cancel",
   change: "Change language",

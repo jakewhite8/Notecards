@@ -3,6 +3,7 @@ import { StackParamList } from '../types/DataTypes'
 import { useTheme } from '@rneui/themed';
 import Home from '../views/home';
 import Settings from '../views/settings';
+import Activity from '../views/activity';
 import AddButton from '../components/addButton';
 import CustomDrawerContent from './CustomDrawerContent';
 import { useTranslation } from 'react-i18next';
@@ -52,6 +53,12 @@ function DrawerNavigator() {
         component={Settings}
         options={{
           title: t('settings'),
+        }} />
+      <Drawer.Screen
+        name="Activity"
+        component={Activity}
+        options={{
+          title: t('activity'),
         }} />
     </Drawer.Navigator>
   )
