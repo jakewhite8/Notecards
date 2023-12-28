@@ -7,6 +7,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import Welcome from '../components/welcomeHeader'
+import AnalyticTextField from '../components/analyticTextField'
 
 const styles = GlobalStyles;
 
@@ -20,6 +21,7 @@ function Activity( { navigation, route }: ActivityProps) {
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <Welcome />
+      <AnalyticTextField value="hello" title="world"/>
     </View> 
   )
 }
