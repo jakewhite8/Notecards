@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useTheme } from '@rneui/themed';
+import { Card, useTheme } from '@rneui/themed';
 import GlobalStyles from '../styles/GlobalStyles';
 
 type AnalyticTextFieldComponentProps = {
   title: string;
-  value: string;
+  value: number;
 };
 
 const AnalyticTextField: React.FunctionComponent<AnalyticTextFieldComponentProps> = (props) => {
@@ -13,10 +13,15 @@ const AnalyticTextField: React.FunctionComponent<AnalyticTextFieldComponentProps
   const { theme } = useTheme();
 
   return(
-    <View>
-      <Text style={{color: theme.colors.primaryText}}>{props.title}</Text>
-      <Text style={{color: theme.colors.primaryText}}>{props.value}</Text>
-    </View>
+    <Card
+      containerStyle={{backgroundColor: theme.colors.primaryBackground}}>
+      <View>
+        <Card.Title style={{color: theme.colors.primaryText}}>{props.title}</Card.Title>
+      </View>
+      <View style={{alignItems:'center'}}>
+        <Text style={{color: theme.colors.primaryText}}>{props.value}</Text>
+      </View>
+    </Card>
   )
 }
 
