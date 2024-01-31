@@ -4,6 +4,8 @@ import RootNavigator from './src/navigation/RootNavigator';
 import { AppStateProvider } from './src/context/GlobalState';
 import './i18n/config';
 import 'react-native-gesture-handler';
+import applyGlobalPolyfills from "./src/helpers/textEncoding"
+applyGlobalPolyfills()
 
 const theme = createTheme({
   lightColors: {
