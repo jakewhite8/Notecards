@@ -13,15 +13,18 @@ import SampleActivityData from '../helpers/SampleActivityData';
 const styles = GlobalStyles;
 const sampleData = SampleActivityData;
 
-const token = '<influxdb_token>';
+const token = '6yJdxuHo-1oVqhVoXAEhdaUdfZzCZQsJfFERX-fCgMjBIycV0ZbEvmQR8Uk_6e1odqTyapxVC_CpFLzEpFqe1A==';
 const org = "Notecards";
 const bucket = "activity";
 const url = "https://us-east-1-1.aws.cloud2.influxdata.com/";
+const userId = 2;
 
+// Query all notecard activity data for the current user 
 let query = `from(bucket: "activity")
   |> range(start: -720h)
   |> filter(fn: (r) => r["_measurement"] == "notecard")
-  |> filter(fn: (r) => r["_field"] == "userId")`;
+  |> filter(fn: (r) => r["_field"] == "userId")
+  |> filter(fn: (r) => r["_value"] == ${userId})`;
 
 type ActivityProps = NativeStackScreenProps<StackParamList, 'Activity'>;
 
@@ -41,7 +44,7 @@ function Activity( { navigation, route }: ActivityProps) {
         next(row, tableMeta) {
 
           const o = tableMeta.toObject(row);
-         //push rows from query into an array object
+          //push rows from query into an array object
           res.push(o);
         },
         complete() {
