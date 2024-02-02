@@ -33,9 +33,11 @@ function Activity( { navigation, route }: ActivityProps) {
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
   const [influxData, setInfluxData] = useState([]);
+  const [influxLoading, setInfluxLoading] = useState(false)
 
   useEffect(() => {
     let res = [];
+    setInfluxLoading(true)
     const influxQuery = async () => {
       //create InfluxDB client
       const queryApi = await new InfluxDB({ url, token }).getQueryApi(org);
@@ -53,8 +55,10 @@ function Activity( { navigation, route }: ActivityProps) {
           console.log('res.length');
           console.log(res.length);
           setInfluxData(res)
+          setInfluxLoading(false)
         },
         error(error) {
+          setInfluxLoading(false)
           console.log("query failed- ", error);
         }
       });
@@ -67,13 +71,13 @@ function Activity( { navigation, route }: ActivityProps) {
     <View style={{backgroundColor: theme.colors.secondaryBackground, flex: 1}}>
         <View style={{ flexDirection:'row'} }>
           <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Total Cards Viewed" value={influxData.length}/>
+            <AnalyticTextField title="Total Cards Viewed" value={influxData.length} loading={influxLoading} />
           </View>
           <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Current View Streak" value={sampleData.currentViewStreak}/>
+            <AnalyticTextField title="Current View Streak" value={sampleData.currentViewStreak} loading={false} />
           </View>
           <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak}/>
+            <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak} loading={false} />
           </View>
         </View>
     </View> 
