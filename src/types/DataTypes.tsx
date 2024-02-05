@@ -18,6 +18,7 @@ type StackParamList = {
   };
   DrawerNavigator: undefined;
   Home: undefined;
+  Loading: undefined;
   Login: undefined;
   Notecard: {
     name: string;

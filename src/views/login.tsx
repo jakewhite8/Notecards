@@ -13,6 +13,7 @@ import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton'
 import Welcome from '../components/welcomeHeader'
+import * as SecureStore from 'expo-secure-store'
 
 const styles = GlobalStyles;
 
@@ -27,9 +28,14 @@ function Login( { navigation, route }: LoginProps) {
   const [ userCredentialsError, setUserCredentialsError ] = useState(false);
   const [ loginLoading, setLoginLoading ] = useState(false);
 
+  async function save(key: string, value: string) {
+    await SecureStore.setItemAsync(key, value)
+  }
+
   const userEmailChange = (value: string) => {
     setUserCredentialsError(false)
     setUserEmail(value)
+    save('currentUser', value)
   }
 
   const validEmail = (email: string) => {

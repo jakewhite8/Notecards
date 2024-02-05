@@ -14,6 +14,7 @@
   hello: "Hello world",
   home: "Home",
   invalidCredentials: "Invalid Email or Password",
+  loading: "Loading",
   login: "Login",
   logout: "Logout",
   name: "Name",

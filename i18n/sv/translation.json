@@ -14,6 +14,7 @@
   hello: "Hej världen",
   home: "Hem",
   invalidCredentials: "E-post eller lösenord ogiltigt",
+  loading: "Läser In",
   login: "Logga in",
   logout: "Logga ut",
   name: "namn",

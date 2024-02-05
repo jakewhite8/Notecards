@@ -15,6 +15,8 @@ import {
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
+import * as SecureStore from 'expo-secure-store'
+
 const styles = GlobalStyles;
 
 type CustomDrawerProps = DrawerContentComponentProps & NativeStackScreenProps<StackParamList, 'CustomDrawer'>;
@@ -24,7 +26,12 @@ function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
   const {t, i18n} = useTranslation();
   const { state, dispatch } = useAppState();
 
+  async function save(key: string, value: string) {
+    await SecureStore.setItemAsync(key, value)
+  }
+
   const logout = () => {
+    save('currentUser', '')
     dispatch({ type: 'LOGOUT' });
     navigation.reset({
       index: 0,
