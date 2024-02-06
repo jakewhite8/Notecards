@@ -19,14 +19,31 @@ import { useAppState } from '../context/GlobalState';
 function RootNavigator() {
   const [isLoading, setIsLoading] = useState(true)
   const { state, dispatch } = useAppState();
+  const { theme, updateTheme } = useTheme();
+  const {t, i18n} = useTranslation();
 
-  async function getValueFor(key: string) {
-    let result = await SecureStore.getItemAsync(key)
-    if (result) {
-      console.log(`key: ${key}, value: ${result}`)
-      dispatch({type: 'SET_USER', payload: {name: result, id: 1}})
-    } else {
-      console.log(`No values stored under the ${key} key`)
+  async function getStoredValues() {
+    // Retrieve User, Theme and Language information stored locally
+    let result = await Promise.all([
+      SecureStore.getItemAsync('currentUser'),
+      SecureStore.getItemAsync('theme'),
+      SecureStore.getItemAsync('language'),
+    ])
+
+    const storedValues = {
+      currentUser: result[0],
+      theme: result[1],
+      language: result[2],
+    }
+    
+    if (storedValues.currentUser) {
+      dispatch({type: 'SET_USER', payload: {name: storedValues.currentUser, id: 1}})
+      if (storedValues.theme) {
+        updateTheme({ mode: storedValues.theme })
+      }
+      if (storedValues.language) {
+        i18n.changeLanguage(storedValues.language)
+      }
     }
     setIsLoading(false)
   }
@@ -40,11 +57,8 @@ function RootNavigator() {
     linearGradientColors: ['#FF9800', '#F44336']
   }
 
-  const { theme, updateTheme } = useTheme();
-  const {t, i18n} = useTranslation();
-
   useEffect(() => {
-    getValueFor('currentUser')
+    getStoredValues()
   }, []);
 
   if (isLoading) {
@@ -151,9 +165,6 @@ function RootNavigator() {
       </>
     )
   }
-
-  console.log('state.user:')
-  console.log(state.user)
 
   /*Navigation Container - manages our navigation tree
   and contains the navigation state*/

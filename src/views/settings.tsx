@@ -9,6 +9,7 @@ import {
 } from '@rneui/themed';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton';
+import * as SecureStore from 'expo-secure-store';
 
 type SettingProps = NativeStackScreenProps<StackParamList, 'Settings'>;
 
@@ -17,13 +18,17 @@ const styles = GlobalStyles;
 function Settings ({ navigation, route }: SettingProps) {
   const { theme, updateTheme } = useTheme();
   const { state, dispatch } = useAppState();
+  const {t, i18n} = useTranslation();
+  
+  async function save(key: string, value: string) {
+    await SecureStore.setItemAsync(key, value)
+  }
 
   const toggleTheme = () => {
     const newMode = theme.mode == 'dark' ? 'light' : 'dark'
-    updateTheme({ mode: newMode })    
+    updateTheme({ mode: newMode })
+    save('theme', newMode)
   }
-
-  const {t, i18n} = useTranslation();
 
   const logJakeIn = () => {
     dispatch({type: 'SET_USER', payload: {name: 'jakewhite27', id: 1}})
@@ -32,6 +37,12 @@ function Settings ({ navigation, route }: SettingProps) {
     // Dispatch an action to update the user state
     dispatch({ type: 'LOGOUT' });
   };
+
+  const changeLanguage = () => {
+    const newLanguage = i18n.language === 'sv' ? 'en' : 'sv'
+    i18n.changeLanguage(newLanguage)
+    save('language', newLanguage)
+  }
 
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
@@ -56,8 +67,7 @@ function Settings ({ navigation, route }: SettingProps) {
         <Text style={{fontSize: 20, marginBottom: 20}}>{t('hello')}</Text>
         <PrimaryButton
           title={t('change')}
-          onPressFunction={() =>
-            i18n.changeLanguage(i18n.language === 'sv' ? 'en' : 'sv')} >
+          onPressFunction={changeLanguage} >
         </PrimaryButton>
       </View>
       <View style={styles.container}>

@@ -32,11 +32,21 @@ function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
 
   const logout = () => {
     save('currentUser', '')
+    save('theme', '')
+    save('language', '')
     dispatch({ type: 'LOGOUT' });
     navigation.reset({
       index: 0,
       routes: [{ name: 'Login' }],
     });
+  }
+
+  const changeTheme = () => {
+    const newTheme = theme.mode === 'dark' ? 'light' : 'dark';
+    updateTheme({
+      mode: newTheme,
+    })
+    save('theme', newTheme)
   }
 
   return (
@@ -50,11 +60,7 @@ function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
         <View style={styles.drawerSwitch}>
           <Switch
             value={theme.mode === 'dark'}
-            onValueChange={() => {
-              updateTheme((myTheme) => ({
-                mode: myTheme.mode === 'dark' ? 'light' : 'dark',
-              }));
-            }}
+            onValueChange={changeTheme}
           />
         </View>
       </View>
