@@ -35,4 +35,5 @@
   submit: "Submit",
   theme: "Theme",
   title: "Title",
+  username: "Username",
 }

@@ -35,4 +35,5 @@
   submit: "Skicka in",
   theme: "Tema",
   title: "Titel",
+  username: "Användarnamn",
 }

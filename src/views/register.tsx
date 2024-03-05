@@ -11,7 +11,9 @@ import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
-import PrimaryButton from '../components/primaryButton'
+import PrimaryButton from '../components/primaryButton';
+import AuthService from '../services/auth';
+import { AxiosResponse } from 'axios';
 
 const styles = GlobalStyles;
 
@@ -21,15 +23,17 @@ function Register( { navigation, route }: RegisterProps) {
   const { theme } = useTheme();
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
+  const [ newUserName, setNewUserName ] = useState('');
+  const [ newUserUsername, setNewUserUsername ] = useState('');
   const [ newUserEmail, setNewUserEmail ] = useState('');
   const [ newUserPassword, setNewUserPassword ] = useState('');
   const [ newUserPasswordConfirm, setNewUserPasswordConfirm ] = useState('');
   const [ newUserError, setNewUserError ] = useState(false);
   const [ createAccountLoading, setCreateAccountLoading ] = useState(false);
 
-  const newUserEmailChange = (value: string) => {
+  const removeErrorAndSetState = (value:string, changeStateFunction: (value: string) => void) => {
     setNewUserError(false)
-    setNewUserEmail(value)
+    changeStateFunction(value)
   }
 
   const validEmail = (email: string) => {
@@ -40,18 +44,44 @@ function Register( { navigation, route }: RegisterProps) {
       );
   };
 
+  const registerUser = async () => {
+    const newUser = {
+      "name": newUserName,
+      "username": newUserUsername,
+      "email": newUserEmail,
+      "password": newUserPassword
+    }
+    AuthService.register(newUser)
+      .then(function(response: AxiosResponse) {
+        console.log(`Response: ${JSON.stringify(response.data)}`);
+        // Set current User and navigate to Home page
+        // dispatch({type: 'SET_USER', payload: {name: newUserEmail, id: 1}})
+        // navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: 'DrawerNavigator' }]
+        // });
+        setCreateAccountLoading(false)
+      })
+      .catch(function(error) {
+        console.error('Error fetching data:', error);
+        setCreateAccountLoading(false) 
+      });
+  };
+
   const createAccount = () => {
     setCreateAccountLoading(true)
-    if (validEmail(newUserEmail) && newUserPassword == newUserPasswordConfirm && newUserPassword.length > 2) {
-      dispatch({type: 'SET_USER', payload: {name: newUserEmail, id: 1}})
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'DrawerNavigator' }]
-      });
+    if (
+        newUserName.length > 2 &&
+        newUserUsername.length > 2 &&
+        validEmail(newUserEmail) &&
+        newUserPassword == newUserPasswordConfirm &&
+        newUserPassword.length > 2
+        ) {
+      registerUser()
     } else {
       setNewUserError(true)
+      setCreateAccountLoading(false)
     }
-    setCreateAccountLoading(false)   
   }
 
   const inputProps = {}
@@ -65,7 +95,23 @@ function Register( { navigation, route }: RegisterProps) {
         <Input
           {...(inputProps as WrappedInputProps)}
           style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
-          onChangeText={(value) => newUserEmailChange(value)}
+          onChangeText={(value) => removeErrorAndSetState(value, setNewUserName)}
+          label={t('name')}
+          labelStyle={{color: theme.colors.primaryText}}
+          inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}
+          />
+        <Input
+          {...(inputProps as WrappedInputProps)}
+          style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
+          onChangeText={(value) => removeErrorAndSetState(value, setNewUserUsername)}
+          label={t('username')}
+          labelStyle={{color: theme.colors.primaryText}}
+          inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}
+          />
+        <Input
+          {...(inputProps as WrappedInputProps)}
+          style={[styles.inputFieldsStyle, {color: theme.colors.primaryText}]}
+          onChangeText={(value) => removeErrorAndSetState(value, setNewUserEmail)}
           label={t('email')}
           labelStyle={{color: theme.colors.primaryText}}
           inputContainerStyle={{borderColor:theme.colors.primaryText, width: '100%'}}

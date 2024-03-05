@@ -29,4 +29,11 @@ type StackParamList = {
   Settings: undefined;
 }
 
-export type { StackParamList, NotecardData };
+type NewUser = {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export type { StackParamList, NotecardData, NewUser };
