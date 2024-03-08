@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { NewUser } from '../types/DataTypes'
-const API_URL = 'http://10.0.0.84:8080'
-
+import { NewUser } from '../types/DataTypes';
+import server from './serverURL';
 
 class AuthService {
   register(user: NewUser) {
-    return axios.post(`${API_URL}/api/user/register`, user);
+    return axios.post(`${server.URL}/api/user/register`, user);
   }
 }
 

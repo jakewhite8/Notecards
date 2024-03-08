@@ -11,7 +11,9 @@ interface AppState {
 interface User {
   id: number;
   name: string;
-  // Other user properties
+  username: string;
+  email: string;
+  token: string;
 }
 
 interface NotecardSet {

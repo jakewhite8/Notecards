@@ -55,11 +55,18 @@ function Register( { navigation, route }: RegisterProps) {
       .then(function(response: AxiosResponse) {
         console.log(`Response: ${JSON.stringify(response.data)}`);
         // Set current User and navigate to Home page
-        // dispatch({type: 'SET_USER', payload: {name: newUserEmail, id: 1}})
-        // navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: 'DrawerNavigator' }]
-        // });
+        const { name, email, username, token, id } = response.data
+        dispatch({type: 'SET_USER', payload: {
+          id,
+          name,
+          email,
+          username,
+          token
+        }})
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'DrawerNavigator' }]
+        });
         setCreateAccountLoading(false)
       })
       .catch(function(error) {
