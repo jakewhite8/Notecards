@@ -29,6 +29,11 @@ type StackParamList = {
   Settings: undefined;
 }
 
+type LoginCredentials = {
+  email: string;
+  password: string;
+}
+
 type NewUser = {
   name: string;
   username: string;
@@ -36,4 +41,4 @@ type NewUser = {
   password: string;
 }
 
-export type { StackParamList, NotecardData, NewUser };
+export type { LoginCredentials, NewUser, NotecardData, StackParamList };

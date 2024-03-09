@@ -31,7 +31,7 @@ function CustomDrawerContent({ navigation, ...props }: CustomDrawerProps ) {
   }
 
   const logout = () => {
-    save('currentUser', '')
+    save('user', '')
     save('theme', '')
     save('language', '')
     dispatch({ type: 'LOGOUT' });

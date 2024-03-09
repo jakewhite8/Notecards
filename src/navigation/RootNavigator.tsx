@@ -25,19 +25,19 @@ function RootNavigator() {
   async function getStoredValues() {
     // Retrieve User, Theme and Language information stored locally
     let result = await Promise.all([
-      SecureStore.getItemAsync('currentUser'),
+      SecureStore.getItemAsync('user'),
       SecureStore.getItemAsync('theme'),
       SecureStore.getItemAsync('language'),
     ])
 
     const storedValues = {
-      currentUser: result[0],
+      user: result[0],
       theme: result[1],
       language: result[2],
     }
     
-    if (storedValues.currentUser) {
-      dispatch({type: 'SET_USER', payload: {name: storedValues.currentUser, id: 1}})
+    if (storedValues.user) {
+      dispatch({type: 'SET_USER', payload: JSON.parse(storedValues.user)})
       if (storedValues.theme) {
         updateTheme({ mode: storedValues.theme })
       }

@@ -14,6 +14,8 @@ import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton'
 import Welcome from '../components/welcomeHeader'
 import * as SecureStore from 'expo-secure-store'
+import AuthService from '../services/auth';
+import { AxiosResponse } from 'axios';
 
 const styles = GlobalStyles;
 
@@ -35,7 +37,6 @@ function Login( { navigation, route }: LoginProps) {
   const userEmailChange = (value: string) => {
     setUserCredentialsError(false)
     setUserEmail(value)
-    save('currentUser', value)
   }
 
   const validEmail = (email: string) => {
@@ -48,16 +49,39 @@ function Login( { navigation, route }: LoginProps) {
 
   const login = () => {
     setLoginLoading(true)
-    if (validEmail(userEmail)) {
-      dispatch({type: 'SET_USER', payload: {name: userEmail, id: 1}})
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'DrawerNavigator' }]
-      });
+    if (validEmail(userEmail) && userPassword.length > 2) {
+      const credentials = {
+        email: userEmail,
+        password: userPassword
+      }
+      AuthService.login(credentials)
+        .then((response: AxiosResponse) => {
+          const { id, name, username, email, token } = response.data
+          const user = {
+            id,
+            name,
+            username,
+            email,
+            token
+          }
+          dispatch({type: 'SET_USER', payload: user})
+          // Save User data locally
+          save('user', JSON.stringify(user))
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'DrawerNavigator' }]
+          });
+          setLoginLoading(false)
+        })
+        .catch((error) => {
+          console.error('Error loging in:', error);
+          setUserCredentialsError(true)
+          setLoginLoading(false)
+        })
     } else {
       setUserCredentialsError(true)
+      setLoginLoading(false)
     }
-    setLoginLoading(false)   
   }
 
   const inputProps = {}
