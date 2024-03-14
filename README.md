@@ -55,13 +55,13 @@
   <img src="https://github.com/jakewhite8/Notecards/assets/5599320/93179b1a-92c1-481d-8800-45df7d746ed9 alt="Home" width="300" height="600">
 </div>
 
-This is the User Interface of my Notecards Application. The application is used to create, display, and manage sets of Notecards
+This is the User Interface of the Notecards Application. The application is used to create, display, and manage sets of Notecards as well as to track a Users activity
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-The Notecards User Interface is built with TypeScript and React Native. It uses Expo to assist with the development and deployment of the React Native application. The User Interface uses the React Navigation library for routing and navigation. The React Native Elements library is used to provide components with consistent styles and functionality.
+The Notecards User Interface is built with TypeScript and React Native. It uses Expo to assist with the development and deployment of the mobile application. The User Interface uses the React Navigation library for routing. The React Native Elements library is used to provide components with consistent styles and functionality.
 
 * [![React][React.js]][React-url]
 
