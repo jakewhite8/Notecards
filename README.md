@@ -55,7 +55,7 @@
   <img src="https://github.com/jakewhite8/Notecards/assets/5599320/93179b1a-92c1-481d-8800-45df7d746ed9 alt="Home" width="300" height="600">
 </div>
 
-This is the User Interface of the Notecards Application. The application is used to create, display, and manage sets of Notecards as well as to track a Users activity
+This is the User Interface of the Notecards Application. The application is used to create, display, and manage sets of Notecards as well as to track a Users activity. The corresponding REST API is located in the [notecards-server repository](server-url)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -120,3 +120,4 @@ Resources I found helpful and would like to give credit to
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Expo-url]: https://expo.dev/
+[server-url]: https://github.com/jakewhite8/notecards-server
