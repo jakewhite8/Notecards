@@ -4,6 +4,11 @@ type NotecardData = {
   linearGradientColors: [string, string];
 };
 
+type NewNotecardSet = {
+  title: string;
+  notecards: Array<[string, string]>;
+}
+
 // Define a route and their params types
 type StackParamList = {
   Activity: undefined;
@@ -41,4 +46,4 @@ type NewUser = {
   password: string;
 }
 
-export type { LoginCredentials, NewUser, NotecardData, StackParamList };
+export type { LoginCredentials, NewNotecardSet, NewUser, NotecardData, StackParamList };

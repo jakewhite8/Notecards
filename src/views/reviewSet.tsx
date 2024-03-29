@@ -16,6 +16,8 @@ import NotecardDialog from '../components/notecardDialog';
 import NotecardEditable from '../components/notecardEditable';
 import PrimaryButton from '../components/primaryButton';
 import { useTranslation } from 'react-i18next';
+import NotecardService from '../services/notecard';
+import { AxiosResponse } from 'axios';
 
 const styles = GlobalStyles;
 
@@ -26,8 +28,6 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   const {t, i18n} = useTranslation();
   const { theme } = useTheme();
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
-  const [character, setCharacter] = useState('none')
-  const [characterCount, setCharacterCount] = useState(0)
   const [submitLoading, setSubmitLoading] = useState(false)
   const title = state.newNotecardSet.title;
 
@@ -51,18 +51,22 @@ function ReviewSet( { navigation }: ReviewSetProps) {
     })
   }
 
-  const getCharacter = async () => {
+  const submit = async () => {
     setSubmitLoading(true)
-    try {
-      const response = await         
-      fetch(`https://www.anapioficeandfire.com/api/characters?page=${characterCount}&pageSize=1`);
-      const json = await response.json();
-      setCharacterCount(characterCount + 1)
-      setCharacter(json[0].aliases);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitLoading(false);
+    const newNotecardSet = {
+      title,
+      notecards
+    }
+    if (newNotecardSet.title && newNotecardSet.notecards.length > 0) {
+      NotecardService.createNewSet(newNotecardSet)
+        .then((response: AxiosResponse) => {
+          console.log(`Create notecard set response: ${response}`)
+          setSubmitLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error creating new notecard set', error)
+          setSubmitLoading(false);
+        })
     }
   };
 
@@ -70,8 +74,6 @@ function ReviewSet( { navigation }: ReviewSetProps) {
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Character loaded:</Text>
-          <Text>{character}</Text>
           <Text style={{color: theme.colors.primaryText}}>{t('title')}: {title}</Text>
           {notecards.map((notecard, i) => (
             <ScrollView key={i}>
@@ -88,7 +90,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
             </ScrollView>
           ))}
           <PrimaryButton
-            onPressFunction={() => getCharacter()}
+            onPressFunction={() => submit()}
             loading={submitLoading}>
             <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
