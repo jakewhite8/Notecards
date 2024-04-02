@@ -30,6 +30,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
   const [submitLoading, setSubmitLoading] = useState(false)
   const title = state.newNotecardSet.title;
+  const user = state.user
 
   const [dialogVisibilities, setDialogVisibilities] = useState(Array(notecards.length).fill(false));
   const toggleDialog = (index: number) => {
@@ -58,7 +59,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
       notecards
     }
     if (newNotecardSet.title && newNotecardSet.notecards.length > 0) {
-      NotecardService.createNewSet(newNotecardSet)
+      NotecardService.createNewSet(newNotecardSet, user)
         .then((response: AxiosResponse) => {
           console.log(`Create notecard set response: ${response}`)
           setSubmitLoading(false);

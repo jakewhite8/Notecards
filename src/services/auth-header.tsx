@@ -1,11 +1,8 @@
-import { useAppState } from '../context/GlobalState';
 
-export default function authHeader() {
-  const { state } = useAppState();
-  const user = state.user
+export default function authHeader(token: string) {
 
-  if (user && user.token) {
-    return { 'Authorization': user.token };
+  if (token) {
+    return { 'Authorization': token };
   }
   return {};
 }

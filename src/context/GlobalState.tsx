@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import { User } from '../types/DataInterfaces'
 
 // Define the state shape using TypeScript interfaces
 interface AppState {
@@ -6,14 +7,6 @@ interface AppState {
   newNotecardSet: NotecardSet | {title: '', notecards: [] };
   currentNotecardSet: NotecardSet | {title: '', notecards: [] };
   // Other global state properties
-}
-
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  token: string;
 }
 
 interface NotecardSet {
