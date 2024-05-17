@@ -23,6 +23,8 @@
   newNotecardSetTitle: "New Notecard Set Title",
   notecard: "Notecard",
   notecardCreatedSuccessfully: "Notecard Created Successfully",
+  notecardCreatedUnsuccessfully: "Error Creating Notecard",
+  notecardCreatedUnsuccessfullyValidation: "Title or notecards not formatted properly",
   notecardSet: "Notecard Set",
   password: "Password",
   passwordConfirm: "Confirm Password",

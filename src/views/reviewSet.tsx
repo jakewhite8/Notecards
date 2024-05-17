@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import Toast from 'react-native-toast-message';
 import { StackParamList } from '../types/DataTypes';
 import { 
   ScrollView,
@@ -61,14 +62,30 @@ function ReviewSet( { navigation }: ReviewSetProps) {
     if (newNotecardSet.title && newNotecardSet.notecards.length > 0) {
       NotecardService.createNewSet(newNotecardSet, user)
         .then((response: AxiosResponse) => {
-          console.log(`Create notecard set response: ${response}`)
           setSubmitLoading(false);
+          navigation.navigate('Home')
         })
         .catch((error) => {
           console.error('Error creating new notecard set', error)
+          Toast.show({
+            type: 'error',
+            text1: t('notecardCreatedUnsuccessfully'),
+            visibilityTime: 1500
+          });
           setSubmitLoading(false);
         })
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: t('notecardCreatedUnsuccessfullyValidation'),
+        visibilityTime: 1500
+      });
+      setSubmitLoading(false)
     }
+  };
+
+  const cancel = () => {
+    navigation.navigate('Home')
   };
 
   return (
@@ -105,7 +122,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
             </View>
           </PrimaryButton>
           <PrimaryButton
-            onPressFunction={() => navigation.navigate('Home')}>
+            onPressFunction={() => cancel()}>
             <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
                 styles.primaryButtonChildrenText,
@@ -118,6 +135,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
             </View>
           </PrimaryButton>
         </View>
+        <Toast />
       </ScrollView>
     </View>
   )

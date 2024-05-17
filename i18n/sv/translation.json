@@ -23,6 +23,8 @@
   newNotecardSetTitle: "Ny anteckningskortstitel",
   notecard: "Anteckningskort",
   notecardCreatedSuccessfully: "Anteckningskort skapat framgångsrikt",
+  notecardCreatedUnsuccessfully: "Fel när anteckningskort skapades",
+  notecardCreatedUnsuccessfullyValidation: "Titel- eller anteckningskort är inte korrekt formaterade",
   notecardSet: "Anteckningskort samling",
   password: "Lösenord",
   passwordConfirm: "Bekräfta lösenord",
