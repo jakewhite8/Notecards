@@ -86,6 +86,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
 
   const cancel = () => {
     navigation.navigate('Home')
+    dispatch({
+      type: 'RESET_NEW_NOTECARDSET'
+    })
   };
 
   return (

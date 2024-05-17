@@ -19,6 +19,7 @@ type AppAction =
   | { type: 'SET_USER'; payload: User }
   | { type: 'LOGOUT' }
   | { type: 'UPDATE_NEW_NOTECARDSET'; payload: NotecardSet }
+  | { type: 'RESET_NEW_NOTECARDSET'; }
   | { type: 'UPDATE_CURRENT_NOTECARDSET'; payload: NotecardSet }
   // Add more action types as needed
 
@@ -53,6 +54,8 @@ const appStateReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, user: null };
     case 'UPDATE_NEW_NOTECARDSET':
       return {...state, newNotecardSet: action.payload };
+    case 'RESET_NEW_NOTECARDSET':
+      return {...state, newNotecardSet: {title: '', notecards: [] }};
     case 'UPDATE_CURRENT_NOTECARDSET':
       return {...state, currentNotecardSet: action.payload };
     // Handle other state updates
