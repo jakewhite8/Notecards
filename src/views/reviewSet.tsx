@@ -59,7 +59,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
       title,
       notecards
     }
-    if (newNotecardSet.title && newNotecardSet.notecards.length > 0) {
+    // Dont allow empty notecards
+    const notecardsfilled = newNotecardSet.notecards.filter((notecard) => notecard[0].length > 0)
+    if (newNotecardSet.title && newNotecardSet.notecards.length == notecardsfilled.length) {
       NotecardService.createNewSet(newNotecardSet, user)
         .then((response: AxiosResponse) => {
           setSubmitLoading(false);
