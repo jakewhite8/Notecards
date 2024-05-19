@@ -1,5 +1,5 @@
 type NotecardData = {
-  name: string;
+  title: string;
   cardId: number;
   linearGradientColors: [string, string];
 };

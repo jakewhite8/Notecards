@@ -57,11 +57,11 @@ function Home( { navigation }: HomeProps) {
     dispatch({
       type: 'UPDATE_CURRENT_NOTECARDSET',
       payload: {
-        title: notecard.name,
+        title: notecard.title,
         notecards: TypeScriptNotecards.notecards
       }
     })
-    navigation.navigate('Details', {name: `${notecard.name} ${t('notecardSet')}`, card: notecard})
+    navigation.navigate('Details', {name: `${notecard.title} ${t('notecardSet')}`, card: notecard})
     setFilterString('')
     setActiveNotecards(notecards)
   }
@@ -69,7 +69,7 @@ function Home( { navigation }: HomeProps) {
   const filterNotecards = ( value: string ) => {
     setFilterString(value)
     setActiveNotecards(
-      notecards.filter((notecard)=> notecard.name.toLowerCase().includes(value.toLowerCase()))
+      notecards.filter((notecard)=> notecard.title.toLowerCase().includes(value.toLowerCase()))
     )
   }
 
@@ -109,7 +109,7 @@ function Home( { navigation }: HomeProps) {
               <ListItem.Title
                 style={{ color: theme.colors.primaryText, fontWeight: 'bold' }}
               >
-                {notecard.name}
+                {notecard.title}
               </ListItem.Title>
             </ListItem.Content>
             <ListItem.Chevron color={theme.colors.primaryText} />
