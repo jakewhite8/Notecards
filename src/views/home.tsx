@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
@@ -17,6 +17,8 @@ import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton';
 import Welcome from '../components/welcomeHeader';
+import NotecardService from '../services/notecard';
+import { AxiosResponse } from 'axios';
 
 const styles = GlobalStyles;
 
@@ -37,6 +39,16 @@ function Home( { navigation }: HomeProps) {
 
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
+
+  useEffect(() => {
+    NotecardService.getNotecardSets(state.user)
+      .then((response: AxiosResponse) => {
+        console.log(`getNotecardSets response: ${JSON.stringify(response)}`)
+      })
+      .catch((error) => {
+        console.log(`getNotecardSets error: ${error}`)
+      })
+  })
 
   const loadDetailsPage = (notecard: NotecardData) => {
     // Retrieve selected notecards - temporarily using TypeScriptNotecards
