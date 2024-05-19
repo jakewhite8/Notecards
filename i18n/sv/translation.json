@@ -5,6 +5,7 @@
   change: "Byt språk",
   createAccount: "Skapa konto",
   createAccountError: "Fel vid skapande av konto",
+  createNotecard: "Skapa anteckningskort",
   darkMode: "Mörkt läge",
   email: "E-post",
   emailInvalid: "Ogiltig e-postadress",

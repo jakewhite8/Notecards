@@ -41,7 +41,6 @@ function Home( { navigation }: HomeProps) {
   useEffect(() => {
     NotecardService.getNotecardSets(state.user)
       .then((response: AxiosResponse) => {
-        console.log(`getNotecardSets response: ${JSON.stringify(response)}`)
         setNotecards(response.data.notecardSets)
         setActiveNotecards(response.data.notecardSets)
       })
@@ -117,7 +116,14 @@ function Home( { navigation }: HomeProps) {
           </ListItem>
         ))
         : 
-          <Text>No Notecards</Text>
+          <View style={styles.container}>
+            <Text style={{color: theme.colors.primaryText}}>No Notecards</Text>
+            <PrimaryButton
+              title={t('createNotecard')}
+              onPressFunction={() => navigation.navigate('CreateTitle')}
+              >
+            </PrimaryButton>
+          </View>
         }
       </ScrollView>
     </View>

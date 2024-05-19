@@ -5,6 +5,7 @@
   change: "Change language",
   createAccount: "Create Account",
   createAccountError: "Error Creating Account",
+  createNotecard: "Create Notecard",
   darkMode: "Dark Mode",
   email: "Email",
   emailInvalid: "Invalid Email",
