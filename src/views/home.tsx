@@ -10,7 +10,6 @@ import {
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
 import { StackParamList, NotecardData } from '../types/DataTypes';
-import SampleNotecards from '../helpers/SampleNotecards';
 import TypeScriptNotecards from '../helpers/TypeScriptNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
@@ -22,8 +21,6 @@ import { AxiosResponse } from 'axios';
 
 const styles = GlobalStyles;
 
-const notecards = SampleNotecards;
-
 // Used to type check the Screen components.
 // This allows us to type check route names and params used by
 // the navigate and push functions, etc.
@@ -34,7 +31,8 @@ function Home( { navigation }: HomeProps) {
   const { theme, updateTheme } = useTheme();
 
   const [filterString, setFilterString] = useState('');
-  const [activeNotecards, setActiveNotecards] = useState(notecards);
+  const [activeNotecards, setActiveNotecards] = useState([]);
+  const [notecards, setNotecards] = useState([]);
   const listItemProps = {};
 
   const { state, dispatch } = useAppState();
@@ -44,11 +42,13 @@ function Home( { navigation }: HomeProps) {
     NotecardService.getNotecardSets(state.user)
       .then((response: AxiosResponse) => {
         console.log(`getNotecardSets response: ${JSON.stringify(response)}`)
+        setNotecards(response.data.notecardSets)
+        setActiveNotecards(response.data.notecardSets)
       })
       .catch((error) => {
         console.log(`getNotecardSets error: ${error}`)
       })
-  })
+  }, [])
 
   const loadDetailsPage = (notecard: NotecardData) => {
     // Retrieve selected notecards - temporarily using TypeScriptNotecards
@@ -88,12 +88,13 @@ function Home( { navigation }: HomeProps) {
             borderColor:theme.colors.primaryBackground,
             elevation: 10}}
         />
-        {activeNotecards.map((notecard, i) => (
+        { activeNotecards && activeNotecards.length ?
+          activeNotecards.map((notecard, i) => (
           <ListItem
             {...(listItemProps as ListItemProps)}
             key={i}
             linearGradientProps={{
-              colors: notecard.linearGradientColors,
+              colors: notecard.linearGradientColors || ['#FF9800', '#F44336'],
               start: [1, 0],
               end: [0.2, 0],
             }}
@@ -114,7 +115,10 @@ function Home( { navigation }: HomeProps) {
             </ListItem.Content>
             <ListItem.Chevron color={theme.colors.primaryText} />
           </ListItem>
-        ))}
+        ))
+        : 
+          <Text>No Notecards</Text>
+        }
       </ScrollView>
     </View>
   )
