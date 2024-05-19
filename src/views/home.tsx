@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ListItem,
@@ -33,6 +33,7 @@ function Home( { navigation }: HomeProps) {
   const [filterString, setFilterString] = useState('');
   const [activeNotecards, setActiveNotecards] = useState([]);
   const [notecards, setNotecards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
   const listItemProps = {};
 
   const { state, dispatch } = useAppState();
@@ -43,9 +44,11 @@ function Home( { navigation }: HomeProps) {
       .then((response: AxiosResponse) => {
         setNotecards(response.data.notecardSets)
         setActiveNotecards(response.data.notecardSets)
+        setIsLoading(false)
       })
       .catch((error) => {
         console.log(`getNotecardSets error: ${error}`)
+        setIsLoading(false)
       })
   }, [])
 
@@ -69,6 +72,18 @@ function Home( { navigation }: HomeProps) {
     setFilterString(value)
     setActiveNotecards(
       notecards.filter((notecard)=> notecard.title.toLowerCase().includes(value.toLowerCase()))
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, {
+              backgroundColor: theme.colors.secondaryBackground 
+            }]}
+        >
+        <Text style={{color:theme.colors.primaryText}}>{t('loading')}</Text>
+        <ActivityIndicator size="large" color={theme.colors.primaryText}/>
+      </View>
     )
   }
 
