@@ -5,9 +5,11 @@ import server from './serverURL';
 import authHeader from '../services/auth-header'
 
 class NotecardService {
+  // Create new Notecard set
   createNewSet(newNotecardSet: NewNotecardSet, user: User) {
     return axios.post(`${server.URL}/api/secured/create_notecard_set`, newNotecardSet, { 'headers' : authHeader(user.token) })
   }
+  // Get all Notecard set information for the logged in User
   getNotecardSets(user: User) {
     return axios.get(`${server.URL}/api/secured/get_notecard_sets`, { 'headers' : authHeader(user.token) }) 
   }
