@@ -10,7 +10,6 @@ import {
 } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient'
 import { StackParamList, NotecardData } from '../types/DataTypes';
-import TypeScriptNotecards from '../helpers/TypeScriptNotecards';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +35,7 @@ function Home( { navigation }: HomeProps) {
   const [isLoading, setIsLoading] = useState(true)
   const listItemProps = {};
 
-  const { state, dispatch } = useAppState();
+  const { state } = useAppState();
   const {t, i18n} = useTranslation();
 
   useEffect(() => {
@@ -53,16 +52,6 @@ function Home( { navigation }: HomeProps) {
   }, [])
 
   const loadDetailsPage = (notecard: NotecardData) => {
-    // Retrieve selected notecards - temporarily using TypeScriptNotecards
-
-    // load selected notecard into Global State
-    dispatch({
-      type: 'UPDATE_CURRENT_NOTECARDSET',
-      payload: {
-        title: notecard.title,
-        notecards: TypeScriptNotecards.notecards
-      }
-    })
     navigation.navigate('Details', {name: `${notecard.title} ${t('notecardSet')}`, card: notecard})
     setFilterString('')
     setActiveNotecards(notecards)

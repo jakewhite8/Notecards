@@ -13,6 +13,10 @@ class NotecardService {
   getNotecardSets(user: User) {
     return axios.get(`${server.URL}/api/secured/get_notecard_sets`, { 'headers' : authHeader(user.token) }) 
   }
+  // Get all Notecards within the specified Notecard set
+  getNotecards(user: User, notecardId: number) {
+    return axios.get(`${server.URL}/api/secured/get_notecards/${notecardId}`, { 'headers' : authHeader(user.token) })
+  }
 }
 
 export default new NotecardService();

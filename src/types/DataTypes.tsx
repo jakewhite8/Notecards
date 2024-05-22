@@ -1,6 +1,6 @@
 type NotecardData = {
   title: string;
-  cardId: number;
+  ID: number;
   linearGradientColors: [string, string];
 };
 
