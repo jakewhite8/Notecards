@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ListItem,
@@ -15,6 +15,7 @@ import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton';
 import Welcome from '../components/welcomeHeader';
+import Loading from '../components/loading'
 import NotecardService from '../services/notecard';
 import { AxiosResponse } from 'axios';
 
@@ -65,15 +66,7 @@ function Home( { navigation }: HomeProps) {
   }
 
   if (isLoading) {
-    return (
-      <View style={[styles.container, {
-              backgroundColor: theme.colors.secondaryBackground 
-            }]}
-        >
-        <Text style={{color:theme.colors.primaryText}}>{t('loading')}</Text>
-        <ActivityIndicator size="large" color={theme.colors.primaryText}/>
-      </View>
-    )
+    return <Loading />
   }
 
   return (

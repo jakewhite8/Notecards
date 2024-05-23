@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
@@ -8,6 +8,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import PrimaryButton from '../components/primaryButton'
+import Loading from '../components/loading'
 import NotecardService from '../services/notecard';
 import { AxiosResponse } from 'axios';
 
@@ -22,7 +23,7 @@ type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
 function Details( { navigation, route }: DetailsProps) {
   const { theme } = useTheme();
   const { state, dispatch } = useAppState();
-  const {t, i18n} = useTranslation();
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true)
 
   const notecardSet = state.currentNotecardSet
@@ -66,15 +67,7 @@ function Details( { navigation, route }: DetailsProps) {
   }
 
   if (isLoading) {
-    return (
-      <View style={[
-          styles.container, 
-          { backgroundColor: theme.colors.secondaryBackground }
-        ]} >
-        <Text style={{color:theme.colors.primaryText}}>{t('loading')}</Text>
-        <ActivityIndicator size="large" color={theme.colors.primaryText}/>
-      </View>
-    )
+    return <Loading />
   }
 
   return (
