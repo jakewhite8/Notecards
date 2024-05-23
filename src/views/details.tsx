@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
 import GlobalStyles from '../styles/GlobalStyles';
@@ -47,6 +48,11 @@ function Details( { navigation, route }: DetailsProps) {
       .catch((error) => {
         console.log(`getNotecards error: ${error}`)
         setIsLoading(false)
+        Toast.show({
+          type: 'error',
+          text1: t('notecardLoadingError'),
+          visibilityTime: 1500
+        });
       })   
   }, [])
 
@@ -77,6 +83,7 @@ function Details( { navigation, route }: DetailsProps) {
         title={t('start')}
         onPressFunction={() => startNotecard(notecardSet)} >
       </PrimaryButton>
+      <Toast />
     </View> 
   )
 }

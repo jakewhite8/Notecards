@@ -26,6 +26,7 @@
   notecardCreatedSuccessfully: "Anteckningskort skapat framgångsrikt",
   notecardCreatedUnsuccessfully: "Fel när anteckningskort skapades",
   notecardCreatedUnsuccessfullyValidation: "Titel- eller anteckningskort är inte korrekt formaterade",
+  notecardLoadingError: "Fel vid inläsning av anteckningskort",
   notecardSet: "Anteckningskort samling",
   password: "Lösenord",
   passwordConfirm: "Bekräfta lösenord",

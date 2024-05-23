@@ -26,6 +26,7 @@
   notecardCreatedSuccessfully: "Notecard Created Successfully",
   notecardCreatedUnsuccessfully: "Error Creating Notecard",
   notecardCreatedUnsuccessfullyValidation: "Title or notecards not formatted properly",
+  notecardLoadingError: "Error Loading Notecards",
   notecardSet: "Notecard Set",
   password: "Password",
   passwordConfirm: "Confirm Password",
