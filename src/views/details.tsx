@@ -31,12 +31,15 @@ function Details( { navigation, route }: DetailsProps) {
     const notecard = route.params.card
     NotecardService.getNotecards(state.user, notecard["ID"])
       .then((response: AxiosResponse) => {
+        const notecards = response.data.notecards.map((notecard) => {
+          return [notecard.front, notecard.back]
+        })
         // Update current Notecard set
         dispatch({
           type: 'UPDATE_CURRENT_NOTECARDSET',
           payload: {
             title: notecard.title,
-            notecards: response.data.notecards
+            notecards: notecards
           }
         })
         setIsLoading(false)
@@ -53,7 +56,7 @@ function Details( { navigation, route }: DetailsProps) {
   }
 
   const startNotecard = (notecardSet: NotecardSet) => {
-    navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: route.params.card.cardId})
+    navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: route.params.card["ID"]})
   }
 
   if (isLoading) {
