@@ -14,6 +14,7 @@ import {
   useTheme
 } from '@rneui/themed';
 import NotecardDialog from '../components/notecardDialog';
+import ConfirmationDialog from '../components/confirmationDialog';
 import NotecardEditable from '../components/notecardEditable';
 import PrimaryButton from '../components/primaryButton';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +31,7 @@ function ReviewSet( { navigation }: ReviewSetProps) {
   const { theme } = useTheme();
   const [notecards, setNotecards] = useState(state.newNotecardSet.notecards)
   const [submitLoading, setSubmitLoading] = useState(false)
+  const [confirmationVisibility, setConfirmationVisibility] = useState(false)
   const title = state.newNotecardSet.title;
   const user = state.user
 
@@ -126,8 +128,15 @@ function ReviewSet( { navigation }: ReviewSetProps) {
                 name="enter"/>
             </View>
           </PrimaryButton>
+          <ConfirmationDialog
+            toggleDialog={() => setConfirmationVisibility(false)}
+            continue={() => cancel()}
+            confirmationTitle={t('confirmation')}
+            confirmationText={t('confirmationExitText')}
+            isVisible={confirmationVisibility}
+            />
           <PrimaryButton
-            onPressFunction={() => cancel()}>
+            onPressFunction={() => setConfirmationVisibility(true)}>
             <View style={styles.primaryButtonChildrenContainer}>
               <Text style={[
                 styles.primaryButtonChildrenText,
