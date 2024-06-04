@@ -50,10 +50,6 @@ function Activity( { navigation, route }: ActivityProps) {
           res.push(o);
         },
         complete() {
-          console.log('res');
-          console.log(res);
-          console.log('res.length');
-          console.log(res.length);
           setInfluxData(res)
           setInfluxLoading(false)
         },
