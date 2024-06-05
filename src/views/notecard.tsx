@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
@@ -9,7 +10,6 @@ import {
 import { useAppState } from '../context/GlobalState';
 import NotecardView from '../components/notecardView';
 import PrimaryButton from '../components/primaryButton';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const styles = GlobalStyles;
@@ -18,6 +18,8 @@ type NotecardProps = NativeStackScreenProps<StackParamList, 'Notecard'>;
 
 function Notecard( {navigation, route }: NotecardProps) {
   const [count, setCount] = useState(0)
+  const [viewCount, setViewCount] = useState(1)
+  const viewCountRef = useRef(viewCount)
   const [displayFrontNotecard, setDisplayFrontNotecard] = useState(true)
   const { state, dispatch } = useAppState();
   const {t, i18n} = useTranslation();
@@ -53,7 +55,20 @@ function Notecard( {navigation, route }: NotecardProps) {
   const changeCard = (card: number) => {
     setDisplayFrontNotecard(true)
     setCount(card)
+    setViewCount(viewCount + 1)
   }
+
+  useEffect(() => {
+    viewCountRef.current = viewCount
+  }, [viewCount])
+
+  useEffect(() => {
+    // Unmount Function
+    return () => {
+      // Update Influx database
+      console.log(`Notecards viewed: ${viewCountRef.current}`)
+    }
+  }, [])
 
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
