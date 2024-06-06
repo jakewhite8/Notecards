@@ -9,22 +9,10 @@ import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import AnalyticTextField from '../components/analyticTextField';
 import SampleActivityData from '../helpers/SampleActivityData';
+import influxDB from '../services/influxDB';
 
 const styles = GlobalStyles;
 const sampleData = SampleActivityData;
-
-const token = '6yJdxuHo-1oVqhVoXAEhdaUdfZzCZQsJfFERX-fCgMjBIycV0ZbEvmQR8Uk_6e1odqTyapxVC_CpFLzEpFqe1A==';
-const org = "Notecards";
-const bucket = "activity";
-const url = "https://us-east-1-1.aws.cloud2.influxdata.com/";
-const userId = 2;
-
-// Query all notecard activity data for the current user 
-let query = `from(bucket: "activity")
-  |> range(start: -720h)
-  |> filter(fn: (r) => r["_measurement"] == "notecard")
-  |> filter(fn: (r) => r["_field"] == "userId")
-  |> filter(fn: (r) => r["_value"] == ${userId})`;
 
 type ActivityProps = NativeStackScreenProps<StackParamList, 'Activity'>;
 
@@ -39,6 +27,19 @@ function Activity( { navigation, route }: ActivityProps) {
     let res = [];
     setInfluxLoading(true)
     const influxQuery = async () => {
+      const token = influxDB.TOKEN;
+      const org = influxDB.ORG
+      const bucket = influxDB.BUCKET
+      const url = influxDB.URL
+      const userId = state.user.id;
+
+      // Query notecard activity data for the current user
+      // from the past 30 days
+      let query = `from(bucket: "activity")
+        |> range(start: -720h)
+        |> filter(fn: (r) => r["_measurement"] == "notecard")
+        |> filter(fn: (r) => r["_field"] == "userId")
+        |> filter(fn: (r) => r["_value"] == ${userId})`;
       //create InfluxDB client
       const queryApi = await new InfluxDB({ url, token }).getQueryApi(org);
       //make query
