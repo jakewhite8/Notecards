@@ -11,6 +11,8 @@ import { useAppState } from '../context/GlobalState';
 import NotecardView from '../components/notecardView';
 import PrimaryButton from '../components/primaryButton';
 import { useTranslation } from 'react-i18next';
+import influxCredentials from '../services/influxDB';
+import {InfluxDB, Point} from '@influxdata/influxdb-client'
 
 const styles = GlobalStyles;
 
@@ -58,6 +60,22 @@ function Notecard( {navigation, route }: NotecardProps) {
     setViewCount(viewCount + 1)
   }
 
+  const updateInfluxDbViewCount = (viewCount: number) => {
+    const token = influxCredentials.TOKEN;
+    const org = influxCredentials.ORG
+    const bucket = influxCredentials.BUCKET
+    const url = influxCredentials.URL
+    const userId = state.user.id;
+
+    const influxDB = new InfluxDB({url, token})
+    const writeApi = influxDB.getWriteApi(org, bucket)
+    const point = new Point('notecard')
+      .floatField('notecardCount', viewCount)
+      .floatField('userId', userId)
+    writeApi.writePoint(point)
+    writeApi.close()
+  }
+
   useEffect(() => {
     viewCountRef.current = viewCount
   }, [viewCount])
@@ -65,8 +83,7 @@ function Notecard( {navigation, route }: NotecardProps) {
   useEffect(() => {
     // Unmount Function
     return () => {
-      // Update Influx database
-      console.log(`Notecards viewed: ${viewCountRef.current}`)
+      updateInfluxDbViewCount(viewCountRef.current)
     }
   }, [])
 
