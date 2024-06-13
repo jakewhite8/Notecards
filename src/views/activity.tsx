@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { InfluxDB, FluxTableMetaData } from "@influxdata/influxdb-client";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Table, Row, Rows } from 'react-native-reanimated-table';
+import { Table, TableWrapper, Row, Rows, Col } from 'react-native-reanimated-table';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
@@ -16,9 +16,12 @@ const styles = GlobalStyles;
 const sampleData = SampleActivityData;
 
 const stylesTable = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { margin: 6 }
+  container: { flex: 1, padding: 16, paddingTop: 30 },
+  head: {  height: 40  },
+  wrapper: { flexDirection: 'row' },
+  title: { flex: 1, backgroundColor: '#f6f8fa' },
+  row: {  height: 28  },
+  text: { textAlign: 'center' }
 });
 
 type ActivityProps = NativeStackScreenProps<StackParamList, 'Activity'>;
@@ -78,12 +81,17 @@ function Activity( { navigation, route }: ActivityProps) {
     return 0
   }
 
-  const tableHead = ['Head', 'Head2', 'Head3', 'Head4']
+  const tableTitle = ['Jan', '', '', '', 'Feb', '', '', '']
+  const tableHead = ['', '', 'Mon', '', 'Wed', '', 'Fri', '']
   const tableData = [
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd'],
-        ['1', '2', '3', '456\n789'],
-        ['a', 'b', 'c', 'd']
+        ['1', '', '3', '', 'b', 'c', 'c'],
+        ['a', '', 'c', '', 'b', 'c', 'c'],
+        ['1', '', '3', '', 'b', 'c', 'x'],
+        ['', '', '', '', '', '', ''],
+        ['a', '', 'c', '', 'b', 'c', 'c'],
+        ['1', '', '3', '', 'b', 'c', 'c'],
+        ['a', '', 'c', '', 'b', 'c', 'c'],
+        ['1', '', '3', '', 'b', 'c', 'x'],
       ]
 
   return (
@@ -100,10 +108,13 @@ function Activity( { navigation, route }: ActivityProps) {
           </View>
         </View>
         <View style={{ flexDirection:'row'} }>
-          <View style={stylesTable.container}>
-            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-              <Row data={tableHead} style={stylesTable.head} textStyle={stylesTable.text}/>
-              <Rows data={tableData} textStyle={stylesTable.text}/>
+          <View style={[stylesTable.container, {backgroundColor: theme.colors.secondaryBackground}]}>
+            <Table borderStyle={{borderWidth: 1, borderColor: '#c8e1ff'}}>
+              <Row data={tableHead} style={[stylesTable.head, {backgroundColor: theme.colors.secondaryBackground}]} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
+              <TableWrapper style={[stylesTable.wrapper, {backgroundColor: theme.colors.secondaryBackground}]}>
+                <Col data={tableTitle} style={[stylesTable.title, {backgroundColor: theme.colors.secondaryBackground}]} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
+                <Rows data={tableData} flexArr={[1, 1, 1, 1, 1, 1, 1]} style={stylesTable.row} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
+              </TableWrapper>
             </Table>
           </View>
         </View>
