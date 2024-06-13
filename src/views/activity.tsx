@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { InfluxDB, FluxTableMetaData } from "@influxdata/influxdb-client";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View } from 'react-native';
+import { Table, Row, Rows } from 'react-native-reanimated-table';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
@@ -13,6 +14,12 @@ import influxDB from '../services/influxDB';
 
 const styles = GlobalStyles;
 const sampleData = SampleActivityData;
+
+const stylesTable = StyleSheet.create({
+  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+  head: { height: 40, backgroundColor: '#f1f8ff' },
+  text: { margin: 6 }
+});
 
 type ActivityProps = NativeStackScreenProps<StackParamList, 'Activity'>;
 
@@ -71,6 +78,14 @@ function Activity( { navigation, route }: ActivityProps) {
     return 0
   }
 
+  const tableHead = ['Head', 'Head2', 'Head3', 'Head4']
+  const tableData = [
+        ['1', '2', '3', '4'],
+        ['a', 'b', 'c', 'd'],
+        ['1', '2', '3', '456\n789'],
+        ['a', 'b', 'c', 'd']
+      ]
+
   return (
     <View style={{backgroundColor: theme.colors.secondaryBackground, flex: 1}}>
         <View style={{ flexDirection:'row'} }>
@@ -82,6 +97,14 @@ function Activity( { navigation, route }: ActivityProps) {
           </View>
           <View style={{flex: 0.33}}>
             <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak} loading={false} />
+          </View>
+        </View>
+        <View style={{ flexDirection:'row'} }>
+          <View style={stylesTable.container}>
+            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+              <Row data={tableHead} style={stylesTable.head} textStyle={stylesTable.text}/>
+              <Rows data={tableData} textStyle={stylesTable.text}/>
+            </Table>
           </View>
         </View>
     </View> 
