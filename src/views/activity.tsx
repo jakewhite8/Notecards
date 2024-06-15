@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { InfluxDB, FluxTableMetaData } from "@influxdata/influxdb-client";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-reanimated-table';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
@@ -11,18 +10,10 @@ import { useTranslation } from 'react-i18next';
 import AnalyticTextField from '../components/analyticTextField';
 import SampleActivityData from '../helpers/SampleActivityData';
 import influxDB from '../services/influxDB';
+import { CalendarList } from 'react-native-calendars';
 
 const styles = GlobalStyles;
 const sampleData = SampleActivityData;
-
-const stylesTable = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30 },
-  head: {  height: 40  },
-  wrapper: { flexDirection: 'row' },
-  title: { flex: 1, backgroundColor: '#f6f8fa' },
-  row: {  height: 28  },
-  text: { textAlign: 'center' }
-});
 
 type ActivityProps = NativeStackScreenProps<StackParamList, 'Activity'>;
 
@@ -32,6 +23,8 @@ function Activity( { navigation, route }: ActivityProps) {
   const {t, i18n} = useTranslation();
   const [influxData, setInfluxData] = useState([]);
   const [influxLoading, setInfluxLoading] = useState(false)
+  const [calendarRange, setCalendarRange] = useState(1)
+  const [marked, setMarked] = useState({})
 
   useEffect(() => {
     let res = [];
@@ -68,6 +61,12 @@ function Activity( { navigation, route }: ActivityProps) {
         complete: () => {
           setInfluxData(res)
           setInfluxLoading(false)
+          setCalendarRange(4)
+          setMarked({
+            '2024-06-02': {marked: true},
+            '2024-06-03': {marked: true},
+            '2024-05-29': {marked: true}
+          })
         },
       })
     }
@@ -81,43 +80,52 @@ function Activity( { navigation, route }: ActivityProps) {
     return 0
   }
 
-  const tableTitle = ['Jan', '', '', '', 'Feb', '', '', '']
-  const tableHead = ['', '', 'Mon', '', 'Wed', '', 'Fri', '']
-  const tableData = [
-        ['1', '', '3', '', 'b', 'c', 'c'],
-        ['a', '', 'c', '', 'b', 'c', 'c'],
-        ['1', '', '3', '', 'b', 'c', 'x'],
-        ['', '', '', '', '', '', ''],
-        ['a', '', 'c', '', 'b', 'c', 'c'],
-        ['1', '', '3', '', 'b', 'c', 'c'],
-        ['a', '', 'c', '', 'b', 'c', 'c'],
-        ['1', '', '3', '', 'b', 'c', 'x'],
-      ]
-
   return (
     <View style={{backgroundColor: theme.colors.secondaryBackground, flex: 1}}>
-        <View style={{ flexDirection:'row'} }>
-          <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Total Cards Viewed" value={calculateNotecardsViewed(influxData)} loading={influxLoading} />
-          </View>
-          <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Current View Streak" value={sampleData.currentViewStreak} loading={false} />
-          </View>
-          <View style={{flex: 0.33}}>
-            <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak} loading={false} />
-          </View>
+      <View style={{ flexDirection:'row'} }>
+        <View style={{flex: 0.33}}>
+          <AnalyticTextField title="Total Cards Viewed" value={calculateNotecardsViewed(influxData)} loading={influxLoading} />
         </View>
-        <View style={{ flexDirection:'row'} }>
-          <View style={[stylesTable.container, {backgroundColor: theme.colors.secondaryBackground}]}>
-            <Table borderStyle={{borderWidth: 1, borderColor: '#c8e1ff'}}>
-              <Row data={tableHead} style={[stylesTable.head, {backgroundColor: theme.colors.secondaryBackground}]} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
-              <TableWrapper style={[stylesTable.wrapper, {backgroundColor: theme.colors.secondaryBackground}]}>
-                <Col data={tableTitle} style={[stylesTable.title, {backgroundColor: theme.colors.secondaryBackground}]} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
-                <Rows data={tableData} flexArr={[1, 1, 1, 1, 1, 1, 1]} style={stylesTable.row} textStyle={[stylesTable.text, {color: theme.colors.primaryText}]}/>
-              </TableWrapper>
-            </Table>
-          </View>
+        <View style={{flex: 0.33}}>
+          <AnalyticTextField title="Current View Streak" value={sampleData.currentViewStreak} loading={false} />
         </View>
+        <View style={{flex: 0.33}}>
+          <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak} loading={false} />
+        </View>
+      </View>
+      <View style={{
+        flexDirection:'row',
+      }}>
+          <CalendarList
+            futureScrollRange={0}
+            pastScrollRange={4}
+            displayLoadingIndicator={influxLoading}
+            markedDates={marked}
+            dayComponent={({date, state, marking}) => {
+              return (
+                <View style={{
+                  backgroundColor: marking ? 'green' : theme.colors.primaryBackground,
+                  borderWidth: 5,
+                  borderRadius: 5,
+                }}>
+                  <Text>{'     '}</Text>
+                </View>
+              );
+            }}
+            hideDayNames={true}
+            style={{
+              marginTop: 20,
+              marginBottom: 20,
+            }}
+            theme={{
+              calendarBackground: theme.colors.primaryBackground,
+              monthTextColor: theme.colors.primaryText,
+              indicatorColor: theme.colors.primaryText,
+              textMonthFontWeight: 'bold',
+              textMonthFontSize: 16,
+            }}
+          />
+      </View>
     </View> 
   )
 }
