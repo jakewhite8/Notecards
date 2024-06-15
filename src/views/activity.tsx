@@ -95,11 +95,16 @@ function Activity( { navigation, route }: ActivityProps) {
       </View>
       <View style={{
         flexDirection:'row',
+        justifyContent: 'center',
       }}>
+        <View style={{
+          flex: 1,
+        }}>
           <CalendarList
             futureScrollRange={0}
-            pastScrollRange={4}
+            pastScrollRange={calendarRange}
             displayLoadingIndicator={influxLoading}
+            showScrollIndicator={true}
             markedDates={marked}
             dayComponent={({date, state, marking}) => {
               return (
@@ -121,10 +126,12 @@ function Activity( { navigation, route }: ActivityProps) {
               calendarBackground: theme.colors.primaryBackground,
               monthTextColor: theme.colors.primaryText,
               indicatorColor: theme.colors.primaryText,
-              textMonthFontWeight: 'bold',
               textMonthFontSize: 16,
             }}
+            horizontal={true}
+            calendarWidth={320}
           />
+        </View>
       </View>
     </View> 
   )
