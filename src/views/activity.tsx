@@ -8,6 +8,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
 import AnalyticTextField from '../components/analyticTextField';
+import Loading from '../components/loading';
 import SampleActivityData from '../helpers/SampleActivityData';
 import influxDB from '../services/influxDB';
 import { CalendarList } from 'react-native-calendars';
@@ -97,6 +98,9 @@ function Activity( { navigation, route }: ActivityProps) {
         flexDirection:'row',
         justifyContent: 'center',
       }}>
+      { influxLoading
+         ? <Loading />
+         : 
         <View style={{
           flex: 1,
         }}>
@@ -132,6 +136,7 @@ function Activity( { navigation, route }: ActivityProps) {
             calendarWidth={320}
           />
         </View>
+      }
       </View>
     </View> 
   )
