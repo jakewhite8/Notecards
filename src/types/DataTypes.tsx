@@ -4,6 +4,17 @@ type NotecardData = {
   linearGradientColors: [string, string];
 };
 
+type NotecardActivityObject = {
+  _measurement: string,
+  _start: string,
+  _stop: string,
+  _time: string,
+  notecardCount: number,
+  result: string,
+  table: number,
+  userId: number
+}
+
 type NewNotecardSet = {
   title: string;
   notecards: Array<[string, string]>;
@@ -46,4 +57,4 @@ type NewUser = {
   password: string;
 }
 
-export type { LoginCredentials, NewNotecardSet, NewUser, NotecardData, StackParamList };
+export type { LoginCredentials, NewNotecardSet, NewUser, NotecardActivityObject, NotecardData, StackParamList };

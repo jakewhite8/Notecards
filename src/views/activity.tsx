@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { InfluxDB, FluxTableMetaData } from "@influxdata/influxdb-client";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
-import { StackParamList } from '../types/DataTypes';
+import { NotecardActivityObject, StackParamList } from '../types/DataTypes';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
@@ -38,6 +38,30 @@ function Activity( { navigation, route }: ActivityProps) {
       const url = influxDB.URL
       const userId = state.user.id;
 
+      const formatNativeCalendarsDateString = (dateString) => {
+        const date = new Date(dateString);
+        // Extract the year, month, and day
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); 
+        const day = String(date.getDate()).padStart(2, '0');
+        // Format the date as YYYY-MM-DD
+        return `${year}-${month}-${day}`;
+      }
+
+      // Function used to create the object that is provided to the react-native-calendar
+      // that displays the days a User viewed notecards
+      const createMarkedObject = (activityArray: Array<NotecardActivityObject>) => {
+        interface MarkedObject { 
+          [date: string] : { marked: boolean; }
+        }
+        let markedObject: MarkedObject = {}
+        for (let i = 0; i < activityArray.length; i++) {
+          let notecardActivityDate = activityArray[i]._time
+          markedObject[formatNativeCalendarsDateString(notecardActivityDate)] = {marked: true}
+        }
+        return markedObject
+      }
+
       // Query notecard activity data for the current user
       // from the past 30 days
       // One table with userId and notecardCount combined where userId = state.user.id
@@ -63,11 +87,7 @@ function Activity( { navigation, route }: ActivityProps) {
           setInfluxData(res)
           setInfluxLoading(false)
           setCalendarRange(4)
-          setMarked({
-            '2024-06-02': {marked: true},
-            '2024-06-03': {marked: true},
-            '2024-05-29': {marked: true}
-          })
+          if (res.length) { setMarked(createMarkedObject(res)) }
         },
       })
     }
