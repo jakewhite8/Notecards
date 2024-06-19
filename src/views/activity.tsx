@@ -72,22 +72,22 @@ function Activity( { navigation, route }: ActivityProps) {
               |> filter(fn: (r) => r.userId == ${userId})`;
 
       const queryApi = new InfluxDB({url, token}).getQueryApi(org)
-      let res = []
+      let influxResponse: Array<NotecardActivityObject> = []
       queryApi.queryRows(query, {
         next: (row: string[], tableMeta: FluxTableMetaData) => {
           // create an object for each row
           const o = tableMeta.toObject(row)
-          res.push(o)
+          influxResponse.push(o)
         },
         error: (error: Error) => {
           setInfluxLoading(false)
           console.log("query failed- ", error);
         },
         complete: () => {
-          setInfluxData(res)
+          setInfluxData(influxResponse)
           setInfluxLoading(false)
           setCalendarRange(4)
-          if (res.length) { setMarked(createMarkedObject(res)) }
+          if (influxResponse.length) { setMarked(createMarkedObject(influxResponse)) }
         },
       })
     }
