@@ -24,7 +24,7 @@ function Activity( { navigation, route }: ActivityProps) {
   const {t, i18n} = useTranslation();
   const [influxData, setInfluxData] = useState([]);
   const [influxLoading, setInfluxLoading] = useState(false)
-  const [calendarRange, setCalendarRange] = useState(1)
+  const [calendarRange, setCalendarRange] = useState(0)
   const [marked, setMarked] = useState({})
 
   useEffect(() => {
@@ -62,6 +62,13 @@ function Activity( { navigation, route }: ActivityProps) {
         return markedObject
       }
 
+      const calculateCalenderMonthRange = (firstDate: Date) => {
+        const today = new Date()
+        const yearsDifference = today.getFullYear() - firstDate.getFullYear();
+        const monthsDifference = today.getMonth() - firstDate.getMonth();
+        return yearsDifference * 12 + monthsDifference;
+      }
+
       // Query notecard activity data for the current user
       // from the past 30 days
       // One table with userId and notecardCount combined where userId = state.user.id
@@ -69,7 +76,8 @@ function Activity( { navigation, route }: ActivityProps) {
               |> range(start: -720h)
               |> filter(fn: (r) => r._measurement == "notecard")
               |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-              |> filter(fn: (r) => r.userId == ${userId})`;
+              |> filter(fn: (r) => r.userId == ${userId})
+              |> sort(columns: ["_time"], desc: false)`;
 
       const queryApi = new InfluxDB({url, token}).getQueryApi(org)
       let influxResponse: Array<NotecardActivityObject> = []
@@ -85,9 +93,11 @@ function Activity( { navigation, route }: ActivityProps) {
         },
         complete: () => {
           setInfluxData(influxResponse)
+          if (influxResponse.length) { 
+            setMarked(createMarkedObject(influxResponse))
+            setCalendarRange(calculateCalenderMonthRange(new Date(influxResponse[0]._time)))
+          }
           setInfluxLoading(false)
-          setCalendarRange(4)
-          if (influxResponse.length) { setMarked(createMarkedObject(influxResponse)) }
         },
       })
     }
