@@ -1,5 +1,8 @@
 {
   activity: "Aktivitet",
+  activityCurrentViewStreak: "Aktuell visningsrekord i följd",
+  activityLongestViewStreak: "Längsta visningsrekord",
+  activityTotalNotecardsViewed: "Totalt antal sedda anteckningskort",
   back: "Tillbaka",
   cancel: "Annullera",
   change: "Byt språk",

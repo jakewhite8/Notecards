@@ -1,5 +1,8 @@
 {
   activity: "Activity",
+  activityCurrentViewStreak: "Current View Streak",
+  activityLongestViewStreak: "Longest View Streak",
+  activityTotalNotecardsViewed: "Total Notecards Viewed",
   back: "Back",
   cancel: "Cancel",
   change: "Change language",

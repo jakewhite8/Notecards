@@ -64,14 +64,12 @@ function Settings ({ navigation, route }: SettingProps) {
         </View>
       </View>
       <View style={styles.container}>
-        <Text style={{fontSize: 20, marginBottom: 20}}>{t('hello')}</Text>
         <PrimaryButton
           title={t('change')}
           onPressFunction={changeLanguage} >
         </PrimaryButton>
       </View>
       <View style={styles.container}>
-        <Text>Settings page</Text>
         <PrimaryButton
           title={t('theme')}
           onPressFunction={() => toggleTheme()}>

@@ -115,13 +115,13 @@ function Activity( { navigation, route }: ActivityProps) {
     <View style={{backgroundColor: theme.colors.secondaryBackground, flex: 1}}>
       <View style={{ flexDirection:'row'} }>
         <View style={{flex: 0.33}}>
-          <AnalyticTextField title="Total Cards Viewed" value={calculateNotecardsViewed(influxData)} loading={influxLoading} />
+          <AnalyticTextField title={t('activityTotalNotecardsViewed')} value={calculateNotecardsViewed(influxData)} loading={influxLoading} />
         </View>
         <View style={{flex: 0.33}}>
-          <AnalyticTextField title="Current View Streak" value={sampleData.currentViewStreak} loading={false} />
+          <AnalyticTextField title={t('activityCurrentViewStreak')} value={sampleData.currentViewStreak} loading={false} />
         </View>
         <View style={{flex: 0.33}}>
-          <AnalyticTextField title="Longest View Streak" value={sampleData.longestViewSteak} loading={false} />
+          <AnalyticTextField title={t('activityLongestViewStreak')} value={sampleData.longestViewSteak} loading={false} />
         </View>
       </View>
       <View style={{
