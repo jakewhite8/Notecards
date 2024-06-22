@@ -15,6 +15,8 @@ import DrawerNavigator from './DrawerNavigator';
 import { useTranslation } from 'react-i18next';
 import * as SecureStore from 'expo-secure-store';
 import { useAppState } from '../context/GlobalState';
+import AuthService from '../services/auth';
+import { AxiosResponse } from 'axios';
 
 function RootNavigator() {
   const [isLoading, setIsLoading] = useState(true)
@@ -37,13 +39,28 @@ function RootNavigator() {
     }
     
     if (storedValues.user) {
-      dispatch({type: 'SET_USER', payload: JSON.parse(storedValues.user)})
-      if (storedValues.theme) {
-        updateTheme({ mode: storedValues.theme })
-      }
-      if (storedValues.language) {
-        i18n.changeLanguage(storedValues.language)
-      }
+      // Confirm validity of token
+      const token = JSON.parse(storedValues.user).token
+      await AuthService.validToken(token)
+        .then(function(response: AxiosResponse) {
+          // Token is still valid. Set User, Theme and Language in global state
+          dispatch({type: 'SET_USER', payload: JSON.parse(storedValues.user)})
+          if (storedValues.theme) {
+            updateTheme({ mode: storedValues.theme })
+          }
+          if (storedValues.language) {
+            i18n.changeLanguage(storedValues.language)
+          }
+          setIsLoading(false)
+        })
+        .catch(function(error){
+          // Token is no longer valid. Reset User, Theme and Language values
+          SecureStore.setItemAsync('user', '')
+          SecureStore.setItemAsync('theme', '')
+          SecureStore.setItemAsync('language', '')
+          console.log(`Token error: ${error}`)
+          setIsLoading(false)
+        })
     }
     setIsLoading(false)
   }
