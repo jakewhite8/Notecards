@@ -69,6 +69,8 @@ function Home( { navigation }: HomeProps) {
     return <Loading />
   }
 
+  const linearGradientArray = [['#FF9800', '#F44336'], ['#3F51B5', '#2196F3'], ['#FFD600', '#FF9800'], ['#4CAF50', '#8BC34A']]
+
   return (
     <View style={styles.container}>
       <ScrollView style={[styles.homePageNotecardSection, {
@@ -90,7 +92,7 @@ function Home( { navigation }: HomeProps) {
             {...(listItemProps as ListItemProps)}
             key={i}
             linearGradientProps={{
-              colors: notecard.linearGradientColors || ['#FF9800', '#F44336'],
+              colors: linearGradientArray[i%linearGradientArray.length],
               start: [1, 0],
               end: [0.2, 0],
             }}
