@@ -11,6 +11,8 @@ import PrimaryButton from '../components/primaryButton'
 import Loading from '../components/loading'
 import NotecardService from '../services/notecard';
 import { AxiosResponse } from 'axios';
+import ConfirmationDialog from '../components/confirmationDialog';
+import DeleteButton from '../components/deleteButton';
 
 const styles = GlobalStyles;
 
@@ -25,10 +27,16 @@ function Details( { navigation, route }: DetailsProps) {
   const { state, dispatch } = useAppState();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true)
+  const [confirmationVisibility, setConfirmationVisibility] = useState(false)
 
   const notecardSet = state.currentNotecardSet
 
   useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <DeleteButton onClick={() => setConfirmationVisibility(true)} />
+      ),
+    });
     // Get the Notecards that belong to the selected Notecard set
     const notecard = route.params.card
     NotecardService.getNotecards(state.user, notecard["ID"])
@@ -54,8 +62,8 @@ function Details( { navigation, route }: DetailsProps) {
           text1: t('notecardLoadingError'),
           visibilityTime: 1500
         });
-      })   
-  }, [])
+      })
+  }, [navigation])
 
   interface NotecardSet {
     title: string;
@@ -70,6 +78,11 @@ function Details( { navigation, route }: DetailsProps) {
     return <Loading />
   }
 
+  const deleteNotecard = () => {
+    console.log('delete')
+    console.log(JSON.stringify(route.params.card))
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: theme.colors.secondaryBackground}]}>
       <PrimaryButton
@@ -77,6 +90,13 @@ function Details( { navigation, route }: DetailsProps) {
         onPressFunction={() => startNotecard(notecardSet)} >
       </PrimaryButton>
       <Toast />
+      <ConfirmationDialog
+        toggleDialog={() => setConfirmationVisibility(false)}
+        continue={() => deleteNotecard()}
+        confirmationTitle={t('confirmation')}
+        confirmationText={t('confirmationDeleteNotecardSet')}
+        isVisible={confirmationVisibility}
+        />
     </View> 
   )
 }

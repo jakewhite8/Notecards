@@ -7,6 +7,7 @@
   cancel: "Annullera",
   change: "Byt språk",
   confirmation: "Bekräftelse",
+  confirmationDeleteNotecardSet: "Ta bort hela Notecard-uppsättningen?",
   confirmationExitText: "Anteckningskort kommer att gå förlorade",
   continue: "Fortsätta",
   createAccount: "Skapa konto",

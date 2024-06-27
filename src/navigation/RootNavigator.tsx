@@ -17,6 +17,7 @@ import * as SecureStore from 'expo-secure-store';
 import { useAppState } from '../context/GlobalState';
 import AuthService from '../services/auth';
 import { AxiosResponse } from 'axios';
+import DeleteButton from '../components/deleteButton';
 
 function RootNavigator() {
   const [isLoading, setIsLoading] = useState(true)
@@ -152,7 +153,10 @@ function RootNavigator() {
               title: route.params.name,
               headerTitleStyle: {
                 fontSize: i18n.language == 'en' ? 21 : 17
-              }
+              },
+              headerRight: () => (
+                <DeleteButton />
+              )
             }) } />
           <Stack.Screen
             name="Notecard"
