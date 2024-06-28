@@ -4,12 +4,18 @@ import { User } from '../types/DataInterfaces'
 // Define the state shape using TypeScript interfaces
 interface AppState {
   user: User | null;
-  newNotecardSet: NotecardSet | {title: '', notecards: [] };
-  currentNotecardSet: NotecardSet | {title: '', notecards: [] };
+  newNotecardSet: NewNotecardSet | {title: '', notecards: [] };
+  currentNotecardSet: NotecardSet | {title: '', id: null, notecards: [] };
   // Other global state properties
 }
 
 interface NotecardSet {
+  title: string;
+  id: number | null;
+  notecards: Array<[string, string]>;
+}
+
+interface NewNotecardSet {
   title: string;
   notecards: Array<[string, string]>;
 }
@@ -40,6 +46,7 @@ const initialState: AppState = {
   },
   currentNotecardSet: {
     title: '',
+    id: null,
     notecards: []
   }
   // Initialize other global state properties

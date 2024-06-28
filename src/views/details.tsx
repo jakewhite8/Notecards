@@ -49,6 +49,7 @@ function Details( { navigation, route }: DetailsProps) {
           type: 'UPDATE_CURRENT_NOTECARDSET',
           payload: {
             title: notecard.title,
+            id: notecard["ID"],
             notecards: notecards
           }
         })
@@ -67,11 +68,12 @@ function Details( { navigation, route }: DetailsProps) {
 
   interface NotecardSet {
     title: string;
+    id: number | null;
     notecards: Array<[string, string]>;
   }
 
   const startNotecard = (notecardSet: NotecardSet) => {
-    navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: route.params.card["ID"]})
+    navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: notecardSet.id})
   }
 
   if (isLoading) {
