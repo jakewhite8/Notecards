@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { User } from '../types/DataInterfaces'
+import { NewNotecardSet } from '../types/DataTypes'
 
 // Define the state shape using TypeScript interfaces
 interface AppState {
@@ -12,11 +13,6 @@ interface AppState {
 interface NotecardSet {
   title: string;
   id: number | null;
-  notecards: Array<[string, string]>;
-}
-
-interface NewNotecardSet {
-  title: string;
   notecards: Array<[string, string]>;
 }
 
