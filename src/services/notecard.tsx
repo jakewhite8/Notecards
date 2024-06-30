@@ -9,6 +9,10 @@ class NotecardService {
   createNewSet(newNotecardSet: NewNotecardSet, user: User) {
     return axios.post(`${server.URL}/api/secured/create_notecard_set`, newNotecardSet, { 'headers' : authHeader(user.token) })
   }
+  // Send Notecard Set Id to sever to be deleted
+  deleteNotecard(user: User, notecardId: number) {
+    return axios.delete(`${server.URL}/api/secured/delete_notecard_set/${notecardId}`, { 'headers' : authHeader(user.token) })
+  }
   // Get all Notecard set information for the logged in User
   getNotecardSets(user: User) {
     return axios.get(`${server.URL}/api/secured/get_notecard_sets`, { 'headers' : authHeader(user.token) }) 

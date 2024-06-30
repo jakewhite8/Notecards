@@ -81,8 +81,22 @@ function Details( { navigation, route }: DetailsProps) {
   }
 
   const deleteNotecard = () => {
-    console.log('delete')
-    console.log(JSON.stringify(route.params.card))
+    setConfirmationVisibility(false)
+    setIsLoading(true)
+    NotecardService.deleteNotecard(state.user, state.currentNotecardSet.id)
+      .then((response: AxiosResponse) => {
+        setIsLoading(false)
+        navigation.navigate('Home')
+      })
+      .catch((error) => {
+        console.log(`deleteNotecard error: ${error}`)
+        setIsLoading(false)
+        Toast.show({
+          type: 'error',
+          text1: 'Delete Error',
+          visibilityTime: 1500
+        });
+      })
   };
 
   return (
