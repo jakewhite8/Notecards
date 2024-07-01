@@ -68,6 +68,9 @@ function ReviewSet( { navigation }: ReviewSetProps) {
         .then((response: AxiosResponse) => {
           setSubmitLoading(false);
           navigation.navigate('Home')
+          dispatch({
+            type: 'RESET_NEW_NOTECARDSET'
+          })
         })
         .catch((error) => {
           console.error('Error creating new notecard set', error)
