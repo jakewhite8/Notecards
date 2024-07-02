@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
-import { User } from '../types/DataInterfaces'
+import { NotecardSet, User } from '../types/DataInterfaces'
 import { NewNotecardSet } from '../types/DataTypes'
 
 // Define the state shape using TypeScript interfaces
@@ -8,12 +8,6 @@ interface AppState {
   newNotecardSet: NewNotecardSet | {title: '', notecards: [] };
   currentNotecardSet: NotecardSet | {title: '', id: null, notecards: [] };
   // Other global state properties
-}
-
-interface NotecardSet {
-  title: string;
-  id: number | null;
-  notecards: Array<[string, string]>;
 }
 
 // Define the action types and their payloads

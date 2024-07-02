@@ -6,4 +6,10 @@ interface User {
   token: string;
 }
 
-export type { User };
+interface NotecardSet {
+  title: string;
+  id: number | null;
+  notecards: Array<[string, string]>;
+}
+
+export type { NotecardSet, User };

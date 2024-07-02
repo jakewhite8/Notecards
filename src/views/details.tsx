@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useTheme } from '@rneui/themed';
 import { StackParamList } from '../types/DataTypes'
+import { NotecardSet } from '../types/DataInterfaces'
 import GlobalStyles from '../styles/GlobalStyles';
 import { useAppState } from '../context/GlobalState';
 import { useTranslation } from 'react-i18next';
@@ -65,12 +66,6 @@ function Details( { navigation, route }: DetailsProps) {
         });
       })
   }, [navigation])
-
-  interface NotecardSet {
-    title: string;
-    id: number | null;
-    notecards: Array<[string, string]>;
-  }
 
   const startNotecard = (notecardSet: NotecardSet) => {
     navigation.navigate('Notecard', {name: `${notecardSet.title} ${t('notecardSet')}`, cardId: notecardSet.id})
