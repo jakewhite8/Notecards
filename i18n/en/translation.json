@@ -16,7 +16,7 @@
   darkMode: "Dark Mode",
   email: "Email",
   emailInvalid: "Invalid Email",
-  filterByTitle: "Filter By title",
+  filterByTitle: "Filter By Title",
   front: "Front",
   frontOfNotecard: "Front of Notecard",
   hello: "Hello world",
