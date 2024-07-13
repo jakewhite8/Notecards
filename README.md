@@ -24,6 +24,8 @@
     <a href="https://github.com/jakewhite8/Notecards/issues">Report Bug</a>
     ·
     <a href="https://github.com/jakewhite8/Notecards/issues">Request Feature</a>
+    ·
+    <a href="https://github.com/jakewhite8/Notecards/wiki">Documentation</a>
   </p>
 </div>
 
