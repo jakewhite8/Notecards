@@ -62,7 +62,7 @@ function Activity( { navigation, route }: ActivityProps) {
         return markedObject
       }
 
-      const calculateCalenderMonthRange = (firstDate: Date) => {
+      const calculateCalendarMonthRange = (firstDate: Date) => {
         const today = new Date()
         const yearsDifference = today.getFullYear() - firstDate.getFullYear();
         const monthsDifference = today.getMonth() - firstDate.getMonth();
@@ -95,7 +95,7 @@ function Activity( { navigation, route }: ActivityProps) {
           setInfluxData(influxResponse)
           if (influxResponse.length) { 
             setMarked(createMarkedObject(influxResponse))
-            setCalendarRange(calculateCalenderMonthRange(new Date(influxResponse[0]._time)))
+            setCalendarRange(calculateCalendarMonthRange(new Date(influxResponse[0]._time)))
           }
           setInfluxLoading(false)
         },
